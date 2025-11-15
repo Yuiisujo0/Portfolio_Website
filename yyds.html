@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jean Cheah — Portfolio</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/frames.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+  <!-- FULLSCREEN LOADER -->
+  <div id="loader" class="loader" role="status" aria-label="Loading">
+    <div id="canvasContainer" class="canvas-container" aria-hidden="true"></div>
+    <div id="loaderCounter" class="loader-counter">0%</div>
+  </div>
+
+  <!-- MAIN CONTENT (hidden until loader exits) -->
+  <main id="mainContent" class="site hidden" role="main">
+
+    <!-- Fixed header navbar -->
+    <header class="navbar" aria-hidden="false">
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#home" class="nav-link active">HOME</a>
+        <a href="#about" class="nav-link">ABOUT</a>
+        <a href="#project" class="nav-link">PROJECT</a>
+        <a href="#contact" class="nav-link">CONTACT</a>
+      </nav>
+    </header>
+
+    <!-- Split Reveal mask animation -->
+    <div id="splitReveal" class="split-reveal" aria-hidden="true"></div>
+
+    <!-- Home Hero Section: frame wrapper around the img -->
+    <section class="hero-home" id="home" aria-label="Home">
+      <!-- top-left motto now inside hero -->
+      <div class="top-left-motto">
+        A mind exploring realities through code, design, and motion.<br>
+        This is my evolving digital space.
+      </div>
+
+      <div class="hero-portrait-wrap">
+        <div class="frame">
+          <!-- hero portrait used for reveal (kept for animation logic) -->
+          <img src="assets/portrait.png" alt="Jean Cheah Portrait" class="hero-portrait" id="mainPortrait" />
+        </div>
+
+        <div class="main-motto" aria-label="Site Motto">
+          <span>EXPLORE.</span>
+          <span>CREATE.</span>
+          <span>REIMAGINE.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION (three-panel layout) -->
+    <section id="about" class="about-section" aria-label="About">
+      <h2 class="about-title">ABOUT ME</h2>
+
+      <div class="about-grid">
+        <div class="left-col">
+          <div class="left-frame small-frame">
+            <img src="assets/deanlist.png" alt="You and the Dean" class="small-image" />
+          </div>
+          <p class="about-bio">
+            Between reality & imagination lies my workspace. A place where I code into art, and stories into interaction.
+            I'm Jean - a Multimedia student from Kuching, Sarawak. Learning to design, animate, and build the worlds I imagine.
+          </p>
+        </div>
+
+        <div class="center-col" id="aboutCenter">
+          <!-- This medium framed portrait is revealed after the hero animation -->
+          <div class="frame medium-frame">
+            <img src="assets/portrait.png" alt="Jean (medium portrait)" id="aboutPortrait" class="about-portrait" />
+          </div>
+        </div>
+
+        <div class="right-col">
+          <div class="frame tall-frame">
+            <img src="assets/kuching.png" alt="Kuching, Sarawak" class="kuching-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Example: project cards section -->
+    <section id="project" class="section hidden">
+      <h2>Selected Projects</h2>
+      <div class="cards">
+        <article class="card"><h3>Project A</h3><p>Short description.</p></article>
+        <article class="card"><h3>Project B</h3><p>Short description.</p></article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer hidden">
+      <p>Made by Jean • Exported as plain HTML/CSS/JS</p>
+    </footer>
+  </main>
+
+  <!-- Libraries (CDN) -->
+  <script src="js/lib/three.min.js"></script>
+  <script src="js/lib/gsap.min.js"></script>
+
+  <!-- Application scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

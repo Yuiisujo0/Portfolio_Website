@@ -1,0 +1,98 @@
+/* frames.css
+   - make .frame full-bleed inside hero and keep frame variants for About
+*/
+
+.frame {
+  width: 360px;
+  max-width: 88vw;
+  box-sizing: border-box;
+  padding: 6px;
+  border-radius: 28px 28px 22px 42px;
+  background: #fff;
+  border: 3px solid #e8e3f3;
+  box-shadow: 0 8px 24px rgba(20,20,50,0.13);
+  overflow: hidden;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 84%, 92% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 84%, 92% 100%, 0% 100%);
+  position: relative;
+  z-index: 6;
+}
+
+/* HERO: make the frame full-bleed and rely on the single <img> inside it */
+.hero-portrait-wrap > .frame {
+  position: absolute;
+  inset: 0;             /* top:0; right:0; bottom:0; left:0; */
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
+  clip-path: none; /* optional: remove dent for fullscreen hero; set to original if you want the dent */
+  z-index: 40;
+}
+
+/* Small frame used in left column (DEAN picture) */
+.small-frame {
+  width: 300px;
+  height: 220px;
+  padding: 6px;
+  border-radius: 18px;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  background: #fff;
+}
+
+/* Medium frame used for portrait in About (square) */
+.medium-frame {
+  width: 320px;
+  height: 320px;
+  padding: 6px;
+  border-radius: 22px 22px 18px 30px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14px 40px rgba(20,20,50,0.08);
+  background: #fff;
+}
+
+/* Tall frame used for right column (Kuching) */
+.tall-frame {
+  width: 320px;
+  height: 90vh;
+  max-height: 1100px;
+  padding: 6px;
+  border-radius: 22px 22px 18px 30px;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(20,20,50,0.08);
+  background: #fff;
+  align-self: end; /* anchor bottom */
+}
+
+/* Images inside frames fill their frames */
+.frame img,
+.small-frame img,
+.medium-frame img,
+.tall-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: inherit;
+}
+
+/* clone-frame used during transition */
+.clone-frame {
+  pointer-events: none;
+  will-change: left, top, width, height, transform;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.12);
+}
