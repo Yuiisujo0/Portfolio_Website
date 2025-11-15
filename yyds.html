@@ -41,7 +41,7 @@
 
     <!-- Home Hero Section: frame wrapper around the img -->
     <section class="hero-home" id="home" aria-label="Home">
-      <!-- top-left motto now inside hero -->
+      <!-- moved top-left-motto into the hero section so it stays with this section only -->
       <div class="top-left-motto">
         A mind exploring realities through code, design, and motion.<br>
         This is my evolving digital space.
@@ -49,7 +49,7 @@
 
       <div class="hero-portrait-wrap">
         <div class="frame">
-          <!-- hero portrait used for reveal (kept for animation logic) -->
+          <!-- IMPORTANT: ensure this path matches your site: assets/portrait.png -->
           <img src="assets/portrait.png" alt="Jean Cheah Portrait" class="hero-portrait" id="mainPortrait" />
         </div>
 
@@ -57,36 +57,6 @@
           <span>EXPLORE.</span>
           <span>CREATE.</span>
           <span>REIMAGINE.</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT SECTION (three-panel layout) -->
-    <section id="about" class="about-section" aria-label="About">
-      <h2 class="about-title">ABOUT ME</h2>
-
-      <div class="about-grid">
-        <div class="left-col">
-          <div class="left-frame small-frame">
-            <img src="assets/deanlist.png" alt="You and the Dean" class="small-image" />
-          </div>
-          <p class="about-bio">
-            Between reality & imagination lies my workspace. A place where I code into art, and stories into interaction.
-            I'm Jean - a Multimedia student from Kuching, Sarawak. Learning to design, animate, and build the worlds I imagine.
-          </p>
-        </div>
-
-        <div class="center-col" id="aboutCenter">
-          <!-- This medium framed portrait is revealed after the hero animation -->
-          <div class="frame medium-frame">
-            <img src="assets/portrait.png" alt="Jean (medium portrait)" id="aboutPortrait" class="about-portrait" />
-          </div>
-        </div>
-
-        <div class="right-col">
-          <div class="frame tall-frame">
-            <img src="assets/kuching.png" alt="Kuching, Sarawak" class="kuching-image" />
-          </div>
         </div>
       </div>
     </section>

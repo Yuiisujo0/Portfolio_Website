@@ -1,44 +1,19 @@
-/* home.css
-   Combined hero reveal + about section styles.
-   - Uses the single hero <img id="mainPortrait"> as the full-bleed visual
-   - Restores split reveal, site visibility helpers, and reveal classes
-   - Keeps About three-panel layout anchored to bottom baseline
-*/
+/* hero / reveal styles (updated for full-bleed portrait and typographic tweaks) */
 
-/* NAV / variables */
+/* NAVBAR */
 :root {
-  --nav-height: 72px;
-  --hero-bg-pos: 58%;    /* vertical focus for hero image (object-position) */
-  --about-gutter: 8vw;
-  --transition-ease: cubic-bezier(.7,0,.3,1);
+  --nav-height: 72px; /* override if you want different nav height */
+  --hero-bg-pos: 58%; /* vertical position of the hero background (higher = image moves up; lower = image moves down) */
 }
 
-/* Page base */
+/* Ensure page fills viewport */
 html, body {
   height: 100%;
   min-height: 100%;
   margin: 0;
-  background: #f6f0fb; /* soft fallback */
-  color: #111;
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  box-sizing: border-box;
+  background: #f6f0fb; /* fallback to a soft color similar to the image so top never looks empty */
 }
 
-/* Loader (simple visible area while loading) */
-.loader {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9998;
-  background: linear-gradient(180deg, #f7f2fb 0%, #f6f0fb 100%);
-}
-.canvas-container { width: 160px; height: 160px; background: transparent; }
-
-/* NAVBAR */
 .navbar {
   position: fixed;
   top: 0;
@@ -53,22 +28,30 @@ html, body {
   background: transparent;
   box-sizing: border-box;
 }
+
+/* Center the navigation items */
 .nav {
   display: flex;
   gap: 46px;
-  justify-content: center;
+  justify-content: center; /* links centered */
   align-items: center;
-  width: 100%;
   height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+/* Make nav links black for better legibility as requested */
 .nav-link {
   position: relative;
   padding: calc((var(--nav-height) - 20px)/2) 0;
   font-weight: 600;
   opacity: 0.95;
-  color: #000;
+  color: #000; /* black */
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
+
+/* Active underline also black */
 .nav-link.active::after {
   content: '';
   position: absolute;
@@ -76,48 +59,54 @@ html, body {
   right: 0;
   height: 4px;
   bottom: 6px;
-  background: #000;
+  background: #000; /* black underline */
   border-radius: 2px;
 }
 
-/* SPLIT-REVEAL (initial site wipe) */
-.split-reveal {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  background: #f7f7f7;
-  clip-path: inset(0 50vw 0 50vw); /* thin vertical center line */
-  transition: opacity .6s, clip-path .9s var(--transition-ease);
+/* TOP-LEFT DESCRIPTIVE MOTTO
+   - moved into the hero section in the HTML so it only appears in the hero
+   - positioned absolutely within .hero-home so it doesn't act like the fixed navbar */
+.hero-home .top-left-motto {
+  position: absolute;
+  top: calc(var(--nav-height) + 12px); /* sits under the header nav, inside hero */
+  left: 50px;
+  z-index: 61; /* above background (10/40) but below main motto (60)? keep above background and below main visual if needed */
+  opacity: 0.98;
+  font-family: 'Montserrat', sans-serif; /* now matches main motto */
+  font-weight: 500; 
+  max-width: 360px;
+  color: #fff; /* white text to match motto */
+  line-height: 1.35;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  pointer-events: none;
 }
-.split-reveal.hidden { opacity: 0; pointer-events: none; }
 
-/* SITE visibility helpers */
-.site.hidden { opacity: 0; pointer-events: none; }
-.site { opacity: 1; transition: opacity .6s; }
-
-/* HERO */
+/* HERO viewport */
 .hero-home {
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: relative;   /* contains the pseudo-element background and absolute top-left-motto */
   overflow: hidden;
   background: transparent;
-  -webkit-tap-highlight-color: transparent;
 }
 
-/* IMPORTANT: use the single <img id="mainPortrait"> inside .frame as the hero visual.
-   We DO NOT use ::before background-image here to avoid duplicate visuals.
-   If you previously used ::before background-image, remove it or ensure it's empty.
-*/
+/* Full-bleed background using pseudo-element.
+   This does not rely on the .frame element; it fills the viewport and is positioned slightly lower
+   so the portrait subject appears lower on the screen. */
 .hero-home::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 8;
-  pointer-events: none;
+  z-index: 10; /* below the portrait/frame container (z-index:40) */
+  background-image: url("../assets/portrait.png"); /* <-- use your high-res artwork here */
+  background-repeat: no-repeat;
+  background-size: cover; /* cover the viewport, avoiding empty bands */
+  background-position: center var(--hero-bg-pos); /* shift the image down; tweak --hero-bg-pos as needed */
+  background-color: #f6f0fb; /* fallback so nothing is white while image loads */
+  transform: translateZ(0); /* promote to its own layer for smoother rendering */
 }
 
 /* wrapper provides perspective and centers content */
@@ -129,61 +118,32 @@ html, body {
   align-items: center;
   justify-content: center;
   perspective: 1200px;
-  z-index: 40;
+  z-index: 40; /* sits above the background pseudo-element */
 }
 
-/* The hero frame is expected to fill the viewport (frames.css handles this when used inside hero) */
-
-/* HERO IMAGE — the single source used for full-bleed */
+/* The image itself (inside .frame) — initial state (edge-on + start-scale),
+   kept for the reveal animation logic. It sits above the background. */
 .hero-portrait {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center var(--hero-bg-pos);
-  border-radius: inherit;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+  transition: transform 1.1s cubic-bezier(.7,0,.3,1), opacity 0.7s;
   will-change: transform, opacity;
   opacity: 0;
   transform-origin: center center;
+  /* rotateY + initial scale set by frames.css variable --portrait-start-scale */
   transform: rotateY(90deg) scale(var(--portrait-start-scale, 0.98));
-  transition: transform 1.1s var(--transition-ease), opacity .7s ease;
   position: relative;
   z-index: 42;
-}
-/* class added by JS to reveal the hero portrait (used by home.js) */
-.hero-portrait.revealed {
-  opacity: 1;
-  transform: rotateY(0deg) scale(1);
+  /* width/height are handled by .frame .hero-portrait in frames.css */
 }
 
-/* TOP-LEFT MOTTO (inside hero) */
-.hero-home .top-left-motto {
-  position: absolute;
-  top: calc(var(--nav-height) + 12px);
-  left: 50px;
-  z-index: 61;
-  opacity: 0.98;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  max-width: 360px;
-  color: #fff;
-  line-height: 1.35;
-  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
-  pointer-events: none;
-  transition: transform .9s var(--transition-ease), opacity .9s var(--transition-ease);
-}
-
-/* BIG stacked motto — default hidden, shown by JS or by removing opacity 0 */
+/* BIG stacked motto — Kanit SemiBold 800 */
 .main-motto {
   position: absolute;
   left: 65%;
   transform: translateX(-50%) scaleY(1.15);
-  top: 40%;
+  top: 40%; /* slightly higher so it doesn't sit at the very bottom */
   width: 100%;
   text-align: center;
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Kanit', sans-serif; /* Kanit SemiBold requested */
   font-weight: 750;
   font-size: clamp(60px, 12vw, 150px);
   color: #fff8ff;
@@ -194,122 +154,52 @@ html, body {
   user-select: none;
   z-index: 60;
   opacity: 0;
-  transition: opacity .6s ease, transform .9s var(--transition-ease);
+  transition: opacity 0.6s;
 }
 .main-motto span { display: block; }
+.main-motto span:nth-child(1) { transform: translateX(0); }
+.main-motto span:nth-child(2) { transform: translateX(12vw); }
+.main-motto span:nth-child(3) { transform: translateX(-25vw); }
 
-/* helper to fade/zoom away (used by JS when scrolling to about) */
-.fade-away {
-  opacity: 0 !important;
-  transform: translateY(-10px) scale(.95) !important;
-}
-
-/* --- ABOUT SECTION --- */
-.about-section {
-  background: #fff;
-  color: #111;
-  padding: 140px var(--about-gutter);
-  min-height: 100vh;
-  position: relative;
-  box-sizing: border-box;
-}
-.about-title {
-  position: absolute;
-  top: 36px;
-  left: calc(var(--about-gutter));
-  font-family: 'Kanit', sans-serif;
-  font-size: clamp(36px, 6vw, 96px);
-  font-weight: 800;
-  margin: 0;
-  z-index: 5;
-  letter-spacing: -0.02em;
-}
-
-/* Grid layout, anchor to bottom baseline */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 340px 34vw;
-  gap: 48px;
-  align-items: end; /* anchors center & right to bottom baseline */
-  width: 100%;
-  margin-top: 40px;
-}
-
-/* Left column */
-.left-col { max-width: 620px; align-self: start; }
-.small-frame { display:inline-block; }
-
-/* bio */
-.about-bio {
-  margin-top: 18px;
-  font-size: clamp(15px, 1.25vw, 18px);
-  line-height: 1.6;
-  color: #222;
-  max-width: 520px;
-}
-
-/* Center column (medium portrait anchored bottom) */
-.center-col {
-  display:flex;
-  align-items:flex-end; /* ensures medium-frame sits at bottom of grid cell */
-  justify-content:center;
-  min-height:420px;
-}
-.medium-frame {
-  width: 320px;
-  height: 320px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.about-portrait {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: inherit;
-  opacity: 0;
-  transform: scale(.98);
-  transition: opacity 500ms ease, transform 500ms ease;
-  z-index: 2;
-}
-.about-portrait.visible { opacity: 1; transform: scale(1); }
-
-/* Right column (Kuching) anchored bottom */
-.right-col {
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-}
-.tall-frame { width:100%; max-width:100%; height:90vh; }
-.kuching-image { width:100%; height:100%; object-fit:cover; border-radius: inherit; }
-
-/* clone-frame (runtime style) */
-.clone-frame {
-  position: fixed;
-  z-index: 9999;
-  border-radius: 22px;
-  overflow: hidden;
-  transition: left .9s var(--transition-ease), top .9s var(--transition-ease), width .9s var(--transition-ease), height .9s var(--transition-ease), transform .9s var(--transition-ease);
-}
-
-/* ensure hero switches to white background cleanly */
-.hero-home.to-about { background: #fff; }
-
-/* site-wide utility */
-.hidden { display: none !important; }
-
-/* Responsive */
+/* Ensure offsets apply smoothly on smaller screens (use smaller vw offsets) */
 @media (max-width: 1100px) {
-  .main-motto { font-size: clamp(36px, 11vw, 92px); left: 50%; }
-  .hero-home .top-left-motto { left: 24px; top: calc(var(--nav-height) + 8px); max-width: 82vw; font-size: 13px; }
-  .about-grid { grid-template-columns: 1fr 300px 34vw; gap: 24px; }
-  .about-title { font-size: clamp(28px, 7vw, 56px); left: 4vw; }
+  .main-motto span:nth-child(2) { transform: translateX(4vw); }
+  .main-motto span:nth-child(3) { transform: translateX(-4vw); }
+  .main-motto { top: 32%; font-size: clamp(36px, 11vw, 92px); }
 }
-@media (max-width: 700px) {
-  .about-grid { grid-template-columns: 1fr; grid-auto-rows: auto; align-items: start; }
-  .center-col { order: 2; margin: 40px 0; align-items: center; }
-  .right-col { order: 3; align-items: center; }
-  .left-col { order: 1; }
-  .about-title { position: relative; top: 0; left: 0; margin-bottom: 18px; }
-  .main-motto { display:none; } /* hide very large text on small screens */
+
+/* On phones reduce offsets and move motto slightly higher to avoid touching bottom */
+@media (max-width: 599px) {
+  .main-motto { top: 22%; font-size: clamp(24px, 16vw, 44px); }
+  .main-motto span:nth-child(2) { transform: translateX(2vw); }
+  .main-motto span:nth-child(3) { transform: translateX(-2vw); }
+
+  /* ensure the top-left motto stays visible but not too large on small screens */
+  .hero-home .top-left-motto {
+    left: 12px;
+    top: calc(var(--nav-height) + 8px);
+    max-width: 82vw;
+    font-size: 13px;
+  }
+}
+
+/* split overlay (high z-index while animating) */
+.split-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: #f7f7f7;
+  clip-path: inset(0 50vw 0 50vw); /* thin vertical center line */
+  transition: opacity .6s, clip-path .9s;
+}
+.split-reveal.hidden { opacity: 0; pointer-events: none; }
+
+/* site visibility */
+.site.hidden { opacity: 0; pointer-events: none; }
+.site { opacity: 1; transition: opacity .6s; }
+
+/* Slight adjustments for very large displays */
+@media (min-width: 1600px) {
+  .main-motto { top: 28%; font-size: clamp(72px, 12vw, 200px); }
+  .hero-home .top-left-motto { left: 48px; top: calc(var(--nav-height) + 20px); }
 }
