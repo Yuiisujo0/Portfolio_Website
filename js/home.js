@@ -95,12 +95,4 @@
     debugLog('No loader element found; proceeding immediately');
     setTimeout(runSplitSequence, 120);
   }
-
-  // Expose a helper for debugging via console
-  window.__home_debug = {
-    showPortraitAndMotto,
-    runSplitSequence,
-    portraitEl: portrait,
-    splitEl: split
-  };
 })();
