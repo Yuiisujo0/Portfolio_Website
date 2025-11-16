@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinematic Scroll Animation v2 - Responsive</title>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: sans-serif;
+    overflow-x: hidden;
+    background-color: #333;
+  }
+
+  .section {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section1 { 
+    background-color: #333;
+    height: 100vh;
+  }
+
+  .section2 { 
+    background-color: #fff;
+    min-height: 150vh; /* Default for desktop */
+  }
+
+  .section3 { 
+    background-color: #111; 
+    height: 100vh;
+    position: relative;
+  }
+
+  /* Responsive heights for Section 2 */
+  @media (max-width: 1024px) { /* Tablet */
+    .section2 { min-height: 180vh; }
+  }
+  @media (max-width: 600px) { /* Phone */
+    .section2 { min-height: 200vh; }
+  }
+
+  /* Main Image */
+  #pic1 {
+    position: fixed;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 10;
+    will-change: transform, top, left;
+  }
+
+  /* Kuching */
+  #kuching1 {
+    position: fixed;
+    left: 100%;
+    width: 27vw;
+    opacity: 0;
+    transform: translateX(-50%);
+    z-index: 9;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Deanlist */
+  #deanlist {
+    position: fixed;
+    top: 250px;
+    left: 120px;
+    width: 230px;
+    opacity: 0;
+    transform: translateY(20px);
+    z-index: 8;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+  /* Vertical PROJECT text */
+  #projectText {
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-size: 90px;
+    font-weight: bold;
+    color: white;
+    opacity: 0;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    letter-spacing: 20px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="section section1"></div>
+
+<div class="section section2">
+  <img src="deanlist.png" id="deanlist" alt="Deanlist">
+</div>
+
+<div class="section section3">
+  <div id="projectText">PROJECT</div>
+</div>
+
+<img src="pic1.png" id="pic1" alt="Main">
+<img src="kuching1.png" id="kuching1" alt="Kuching">
+
+<script>
+const pic1 = document.getElementById("pic1");
+const kuching1 = document.getElementById("kuching1");
+const deanlist = document.getElementById("deanlist");
+const projectText = document.getElementById("projectText");
+
+const section1 = document.querySelector(".section1");
+const section2 = document.querySelector(".section2");
+const section3 = document.querySelector(".section3");
+
+function updateSectionHeight() {
+  section1.style.height = `${window.innerHeight}px`;
+  section3.style.height = `${window.innerHeight}px`;
+  // Section 2 height now handled by CSS (responsive)
+}
+window.addEventListener("resize", updateSectionHeight);
+updateSectionHeight();
+
+/* ----------------------------
+   MAIN IMAGE LOADED
+----------------------------- */
+pic1.addEventListener("load", () => {
+
+  const naturalWidth = pic1.naturalWidth;
+  const naturalHeight = pic1.naturalHeight;
+
+  const scaleCoverX = window.innerWidth / naturalWidth;
+  const scaleCoverY = window.innerHeight / naturalHeight;
+  const scaleCover = Math.max(scaleCoverX, scaleCoverY);
+
+  const scaleFinal = 0.25;          // end of section 2
+  const finalZoomScale = 0.35;      // section 3 target
+  const topStart = 65;
+  const topFinal2 = 70;             // end of section 2
+  const topCenter3 = 50;            // section 3 center
+
+  pic1.style.transform = `translate(-50%, -50%) scale(${scaleCover})`;
+
+  window.addEventListener("scroll", () => {
+
+    const scrollY = window.scrollY;
+
+    const sec2Rect = section2.getBoundingClientRect();
+    const sec3Rect = section3.getBoundingClientRect();
+
+    /* -----------------------------
+       SECTION 1 → 2 ZOOM OUT
+    ----------------------------- */
+    const h2 = section2.offsetHeight;
+    const progress = Math.min(scrollY / h2, 1);
+    const scale = scaleCover - (scaleCover - scaleFinal) * progress;
+    const currentTop = topStart + (topFinal2 - topStart) * progress;
+    pic1.style.top = `${currentTop}%`;
+    pic1.style.transform = `translate(-50%, -50%) scale(${scale})`;
+
+    /* -----------------------------
+       SECTION 3 ZOOM IN smoothly
+    ----------------------------- */
+    if (sec3Rect.top < window.innerHeight) {
+      const p = 1 - (sec3Rect.top / window.innerHeight);
+      const eased = p * p * (3 - 2 * p); // smoothstep easing
+
+      const zoom = scaleFinal + (finalZoomScale - scaleFinal) * eased;
+      const topMove = topFinal2 + (topCenter3 - topFinal2) * eased;
+
+      pic1.style.top = `${topMove}%`;
+      pic1.style.transform = `translate(-50%, -50%) scale(${zoom})`;
+    }
+
+    /* -----------------------------
+       KUCHING in Section 2 only
+    ----------------------------- */
+    let kuchingProgress = Math.min(Math.max(progress - 0.3, 0) / 0.4, 1);
+    let section3Overlap = 1 - (sec3Rect.top / window.innerHeight);
+    let fadeOut = Math.max(1 - (section3Overlap - 0.3) / 0.4, 0);
+    let finalOpacity = Math.min(kuchingProgress, fadeOut);
+
+    if (finalOpacity > 0) {
+      kuching1.style.opacity = finalOpacity;
+      kuching1.style.left = `${50 + 30 * kuchingProgress}%`;
+
+      const rect = pic1.getBoundingClientRect();
+      kuching1.style.top = `${rect.bottom - kuching1.offsetHeight}px`;
+    } else {
+      kuching1.style.opacity = "0";
+    }
+
+    /* DEANLIST fade — visible only inside section 2 */
+    const sec2Bottom = sec2Rect.bottom;
+
+    if (sec2Rect.top <= window.innerHeight * 0.8 && sec2Bottom > 0) {
+    deanlist.style.opacity = "1";
+    deanlist.style.transform = "translateY(0)";
+    } else {
+    deanlist.style.opacity = "0";
+    deanlist.style.transform = "translateY(20px)";
+    }
+
+    /* -----------------------------
+       PROJECT text fade
+    ----------------------------- */
+    if (sec3Rect.top < window.innerHeight * 0.8) {
+      projectText.style.opacity = "1";
+      projectText.style.transform = "translateY(-50%) rotate(90deg)";
+    } else {
+      projectText.style.opacity = "0";
+      projectText.style.transform = "translateY(-50%) rotate(90deg) translateX(-50px)";
+    }
+
+  });
+
+});
+</script>
+
+</body>
+</html>
