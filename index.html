@@ -1,226 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cinematic Scroll Animation v2 - Responsive</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinematic Scroll Animation v3 - Flip</title>
 
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-  body {
-    font-family: sans-serif;
-    overflow-x: hidden;
-    background-color: #333;
-  }
-
-  .section {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .section1 { 
-    background-color: #333;
-    height: 100vh;
-  }
-
-  .section2 { 
-    background-color: #fff;
-    min-height: 150vh; /* Default for desktop */
-  }
-
-  .section3 { 
-    background-color: #111; 
-    height: 100vh;
-    position: relative;
-  }
-
-  /* Responsive heights for Section 2 */
-  @media (max-width: 1024px) { /* Tablet */
-    .section2 { min-height: 180vh; }
-  }
-  @media (max-width: 600px) { /* Phone */
-    .section2 { min-height: 200vh; }
-  }
-
-  /* Main Image */
-  #pic1 {
-    position: fixed;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    z-index: 10;
-    will-change: transform, top, left;
-  }
-
-  /* Kuching */
-  #kuching1 {
-    position: fixed;
-    left: 100%;
-    width: 27vw;
-    opacity: 0;
-    transform: translateX(-50%);
-    z-index: 9;
-    transition: opacity 0.3s ease;
-  }
-
-  /* Deanlist */
-  #deanlist {
-    position: fixed;
-    top: 250px;
-    left: 120px;
-    width: 230px;
-    opacity: 0;
-    transform: translateY(20px);
-    z-index: 8;
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-  /* Vertical PROJECT text */
-  #projectText {
-    position: absolute;
-    left: 80px;
-    top: 50%;
-    transform: translateY(-50%) rotate(90deg);
-    font-size: 90px;
-    font-weight: bold;
-    color: white;
-    opacity: 0;
-    transition: opacity 1s ease-out, transform 1s ease-out;
-    letter-spacing: 20px;
-  }
-</style>
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+  <!-- Fixed header navbar -->
+  <header class="navbar" aria-hidden="false">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#home" class="nav-link active">HOME</a>
+      <a href="#about" class="nav-link">ABOUT ME</a>
+      <a href="#project" class="nav-link">PROJECT</a>
+      <a href="#contact" class="nav-link">CONTACT</a>
+      <span class="nav-underline"></span>
+    </nav>
+  </header>
 
-<div class="section section1"></div>
+  <!-- Sections -->
+  <div id="home" class="section section1">
+    <div class="hero-home">
+      <div class="top-left-motto">
+        A mind exploring realities through code, design, and motion.<br>
+        This is my evolving digital space.
+      </div>
 
-<div class="section section2">
-  <img src="deanlist.png" id="deanlist" alt="Deanlist">
-</div>
+      <div class="main-motto" aria-label="Site Motto">
+        <span>EXPLORE.</span>
+        <span>CREATE.</span>
+        <span>REIMAGINE.</span>
+      </div>
+    </div>
+  </div>
 
-<div class="section section3">
-  <div id="projectText">PROJECT</div>
-</div>
+  <div id="about" class="section section2">
+    <!-- ABOUT ME TITLE -->
+    <h1 class="about-title">ABOUT ME</h1>
 
-<img src="pic1.png" id="pic1" alt="Main">
-<img src="kuching1.png" id="kuching1" alt="Kuching">
+    <!-- DEANLIST IMAGE -->
+    <img src="assets/images/deanlist.png" id="deanlist" alt="Deanlist">
 
-<script>
-const pic1 = document.getElementById("pic1");
-const kuching1 = document.getElementById("kuching1");
-const deanlist = document.getElementById("deanlist");
-const projectText = document.getElementById("projectText");
+    <!-- DESCRIPTION TEXT -->
+    <p class="about-description">
+      Between reality & imagination lies my workspace.<br>
+      A place where I code into art, and stories into interaction.<br>
+      I'm Angel Bong — a Multimedia Computing student from Kuching, Sarawak.<br>
+      Learning to design, animate, and build the worlds I imagine.
+    </p>
+  </div>
 
-const section1 = document.querySelector(".section1");
-const section2 = document.querySelector(".section2");
-const section3 = document.querySelector(".section3");
+  <div id="project" class="section section3">
+    <div id="projectText">PROJECT</div>
+    <img id="icon1" src="assets/images/icon1.jpg.webp" alt="Icon 1">
+    <video id="webAnimation" src="assets/animation/WebAnimation1.mp4" autoplay muted loop playsinline></video>
+  </div>
 
-function updateSectionHeight() {
-  section1.style.height = `${window.innerHeight}px`;
-  section3.style.height = `${window.innerHeight}px`;
-  // Section 2 height now handled by CSS (responsive)
-}
-window.addEventListener("resize", updateSectionHeight);
-updateSectionHeight();
+  <!-- Section 4: Carousel + Right Panel (integrated from your carosel.html) -->
+  <div id="more" class="section section4">
+    <div id="container">
+      <div id="carousel" aria-label="Project carousel" role="region" tabindex="0">
+        <div class="slide"><div class="shadow-left"></div><div class="shadow-right"></div>1</div>
+        <div class="slide"><div class="shadow-left"></div><div class="shadow-right"></div>2</div>
+        <div class="slide"><div class="shadow-left"></div><div class="shadow-right"></div>3</div>
+        <div class="slide"><div class="shadow-left"></div><div class="shadow-right"></div>4</div>
+        <div class="slide"><div class="shadow-left"></div><div class="shadow-right"></div>5</div>
+      </div>
 
-/* ----------------------------
-   MAIN IMAGE LOADED
------------------------------ */
-pic1.addEventListener("load", () => {
+      <div id="right-panel" aria-live="polite">
+        <h1 id="project-name"></h1>
 
-  const naturalWidth = pic1.naturalWidth;
-  const naturalHeight = pic1.naturalHeight;
+        <div id="image-row">
+          <img id="img1" alt="">
+          <img id="img2" alt="">
+          <img id="img3" alt="">
+        </div>
 
-  const scaleCoverX = window.innerWidth / naturalWidth;
-  const scaleCoverY = window.innerHeight / naturalHeight;
-  const scaleCover = Math.max(scaleCoverX, scaleCoverY);
+        <h2>PROJECT OVERVIEW</h2>
+        <p id="project-overview"></p>
 
-  const scaleFinal = 0.25;          // end of section 2
-  const finalZoomScale = 0.35;      // section 3 target
-  const topStart = 65;
-  const topFinal2 = 70;             // end of section 2
-  const topCenter3 = 50;            // section 3 center
+        <h2>TYPE OF WORK</h2>
+        <p id="type-of-work"></p>
+      </div>
+    </div>
+  </div>
 
-  pic1.style.transform = `translate(-50%, -50%) scale(${scaleCover})`;
+  <!-- Contact section (unchanged) -->
+  <div id="contact" class="section section5">
+    <h2 class="contact-title">Contact</h2>
+    <p class="contact-desc">
+      Add your contact info or a contact form here. This is now a separate section so section4 remains as project continuation.
+    </p>
 
-  window.addEventListener("scroll", () => {
+    <form class="contact-form" action="#" method="POST" novalidate>
+      <label>
+        <span class="sr-only">Name</span>
+        <input name="name" type="text" placeholder="Your name">
+      </label>
+      <label>
+        <span class="sr-only">Email</span>
+        <input name="email" type="email" placeholder="Your email">
+      </label>
+      <label>
+        <span class="sr-only">Message</span>
+        <textarea name="message" rows="4" placeholder="Message"></textarea>
+      </label>
+      <button type="submit" class="btn-send">Send</button>
+    </form>
+  </div>
 
-    const scrollY = window.scrollY;
+  <!-- Images (fixed) -->
+  <img src="assets/images/pic1.png" id="pic1" alt="Main">
+  <img src="assets/images/purple1.jpg" id="pic1Back" alt="Back">
+  <img src="assets/images/kuching1.png" id="kuching1" alt="Kuching">
 
-    const sec2Rect = section2.getBoundingClientRect();
-    const sec3Rect = section3.getBoundingClientRect();
-
-    /* -----------------------------
-       SECTION 1 → 2 ZOOM OUT
-    ----------------------------- */
-    const h2 = section2.offsetHeight;
-    const progress = Math.min(scrollY / h2, 1);
-    const scale = scaleCover - (scaleCover - scaleFinal) * progress;
-    const currentTop = topStart + (topFinal2 - topStart) * progress;
-    pic1.style.top = `${currentTop}%`;
-    pic1.style.transform = `translate(-50%, -50%) scale(${scale})`;
-
-    /* -----------------------------
-       SECTION 3 ZOOM IN smoothly
-    ----------------------------- */
-    if (sec3Rect.top < window.innerHeight) {
-      const p = 1 - (sec3Rect.top / window.innerHeight);
-      const eased = p * p * (3 - 2 * p); // smoothstep easing
-
-      const zoom = scaleFinal + (finalZoomScale - scaleFinal) * eased;
-      const topMove = topFinal2 + (topCenter3 - topFinal2) * eased;
-
-      pic1.style.top = `${topMove}%`;
-      pic1.style.transform = `translate(-50%, -50%) scale(${zoom})`;
-    }
-
-    /* -----------------------------
-       KUCHING in Section 2 only
-    ----------------------------- */
-    let kuchingProgress = Math.min(Math.max(progress - 0.3, 0) / 0.4, 1);
-    let section3Overlap = 1 - (sec3Rect.top / window.innerHeight);
-    let fadeOut = Math.max(1 - (section3Overlap - 0.3) / 0.4, 0);
-    let finalOpacity = Math.min(kuchingProgress, fadeOut);
-
-    if (finalOpacity > 0) {
-      kuching1.style.opacity = finalOpacity;
-      kuching1.style.left = `${50 + 30 * kuchingProgress}%`;
-
-      const rect = pic1.getBoundingClientRect();
-      kuching1.style.top = `${rect.bottom - kuching1.offsetHeight}px`;
-    } else {
-      kuching1.style.opacity = "0";
-    }
-
-    /* DEANLIST fade — visible only inside section 2 */
-    const sec2Bottom = sec2Rect.bottom;
-
-    if (sec2Rect.top <= window.innerHeight * 0.8 && sec2Bottom > 0) {
-    deanlist.style.opacity = "1";
-    deanlist.style.transform = "translateY(0)";
-    } else {
-    deanlist.style.opacity = "0";
-    deanlist.style.transform = "translateY(20px)";
-    }
-
-    /* -----------------------------
-       PROJECT text fade
-    ----------------------------- */
-    if (sec3Rect.top < window.innerHeight * 0.8) {
-      projectText.style.opacity = "1";
-      projectText.style.transform = "translateY(-50%) rotate(90deg)";
-    } else {
-      projectText.style.opacity = "0";
-      projectText.style.transform = "translateY(-50%) rotate(90deg) translateX(-50px)";
-    }
-
-  });
-
-});
-</script>
-
+  <!-- Scripts -->
+  <script src="js/main.js" defer></script>
+  <script src="js/carousel.js" defer></script>
 </body>
 </html>

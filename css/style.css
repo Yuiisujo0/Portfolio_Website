@@ -1,80 +1,483 @@
-/* Basic reset */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#f7f7f7;font-family:'Montserrat',system-ui,sans-serif;color:#111}
-a{color:inherit;text-decoration:none}
+/* Reset and base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Prevent horizontal gap from 100vw + scrollbar */
-html, body {
+body {
+  font-family: 'Noto Sans ', sans-serif;
   overflow-x: hidden;
+  background-color: #333;
 }
 
-/* ---------- Loader (fullscreen) ---------- */
-.loader{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#f7f7f7;
-  z-index:9999;
-  pointer-events:auto;
-  overflow:hidden;
+/* NAVBAR */
+:root { --nav-height: 72px; }
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  padding: 0 28px;
+  background: transparent;
+  box-sizing: border-box;
 }
 
-/* Canvas container holds the Three.js canvas */
-.canvas-container{
-  width:100%;
-  height:100dvh;
-  display:block;
+.nav {
+  display: flex;
+  gap: 46px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative; /* important for underline positioning */
 }
 
-/* Big numeric counter centered near bottom of view (like inspiration) */
-.loader-counter{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:90px;
-  font-family:'Bungee', sans-serif;
-  font-size:72px;
-  letter-spacing:-4px;
-  line-height:0.85;
-  color:#111;
-  pointer-events:none;
-  opacity:0;
+.nav-link {
+  position: relative;
+  padding: calc((var(--nav-height) - 20px)/2) 0;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  opacity: 0.95;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s;
 }
 
-/* Fade-out class applied after exit */
-.loader.hidden{
-  opacity:0;
-  visibility:hidden;
-  transition:opacity .8s ease, visibility .8s ease;
+.nav-link:hover { opacity: 1; }
+
+/* Sliding underline element */
+.nav-underline {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background-color: #b7b4b4;
+  border-radius: 2px;
+  transition: left 0.3s ease, width 0.3s ease;
+  z-index: 10;
 }
 
-/* ---------- Main content (initially hidden) ---------- */
-.site{
-  opacity:1;
-  min-height:100vh;
-  padding:0; /* main layout handled in home.css */
-  transition:opacity .6s ease;
-  pointer-events:auto;
-  background:transparent;
+/* Sections */
+.section {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
-.site.hidden{ opacity:0; pointer-events:none }
 
-/* Keep older classes harmless if referenced */
-.header{ display:flex;justify-content:space-between;align-items:center;margin-bottom:48px;opacity:0;pointer-events:none }
-.hero{ text-align:center; margin-top:60px; padding:60px 12px; opacity:0; pointer-events:none }
+.section1 { background-color: #fff; height: 100vh; }
+.section2 { background-color: #fff; min-height: 150vh; }
+.section3 { background-color: #fff; position: relative; }
 
-/* Work */
-.section{ margin-top:40px; opacity:0; pointer-events:none }
-.cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-top:16px }
-.card{ background:white; padding:18px; border-radius:8px; box-shadow:0 6px 18px rgba(16,24,40,0.06) }
+/* section4 - "More" (project continuation)
+   Increased min-height to give the carousel more vertical space */
+.section4 { background-color: #f5f5f5; min-height: 130vh; padding: 80px 40px; color:#222; }
 
-/* Footer */
-.footer{ margin:48px 0 80px; text-align:center; opacity:0; pointer-events:none }
+/* section5 - contact */
+.section5 { background-color: #ffffff; min-height: 100vh; padding: 80px 40px; color:#222; }
 
-/* Responsive tweaks */
-@media (max-width:900px){
-  .loader-counter{ font-size:40px; bottom:22px }
-  .hero-title{ font-size:28px }
+@media (max-width: 1024px) { .section2 { min-height: 180vh; } }
+@media (max-width: 600px) { .section2 { min-height: 200vh; } }
+
+/* HERO CONTAINER FOR MOTTO */
+.hero-home {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  z-index: 40;
+}
+
+/* TOP-LEFT MOTTO */
+.hero-home .top-left-motto {
+  position: absolute;
+  top: calc(var(--nav-height) + 12px);
+  left: 50px;
+  z-index: 61;
+  opacity: 0.98;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  max-width: 360px;
+  color: #2f2f2f;
+  line-height: 1.35;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* MAIN MOTTO BIG STACKED TEXT */
+.main-motto {
+  position: absolute;
+  left: 65%;
+  transform: translateX(-50%) scaleY(1.15);
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 750;
+  font-size: clamp(60px, 12vw, 150px);
+  color: #fff8ff;
+  letter-spacing: 0.012em;
+  line-height: 0.75;
+  text-shadow: 0 8px 40px rgba(0,0,0,0.45);
+  pointer-events: none;
+  user-select: none;
+  z-index: 60;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.main-motto span { display: block; }
+
+.main-motto span:nth-child(1) { transform: translateX(2vw); }
+.main-motto span:nth-child(2) { transform: translateX(11vw); }
+.main-motto span:nth-child(3) { transform: translateX(-21vw); }
+
+/* RESPONSIVE MOTTO ADJUSTMENTS */
+@media (max-width: 1100px) {
+  .main-motto span:nth-child(2) { transform: translateX(4vw); }
+  .main-motto span:nth-child(3) { transform: translateX(-4vw); }
+  .main-motto { top: 32%; font-size: clamp(36px, 11vw, 92px); }
+}
+
+@media (max-width: 599px) {
+  .main-motto { top: 22%; font-size: clamp(24px, 16vw, 44px); }
+  .main-motto span:nth-child(2) { transform: translateX(2vw); }
+  .main-motto span:nth-child(3) { transform: translateX(-2vw); }
+
+  .hero-home .top-left-motto {
+    left: 12px;
+    top: calc(var(--nav-height) + 8px);
+    max-width: 82vw;
+    font-size: 13px;
+  }
+}
+
+/* ABOUT ME Title */
+.about-title {
+  position: fixed;
+  top: 65px;
+  left: 80px;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 800;
+  font-size: 90px;
+  color: #b7b4b4;
+  z-index: 20;
+  letter-spacing: 3px;
+  opacity: 0;
+  transform: translateY(-120px);
+  transition: opacity 0.45s ease-out, transform 0.45s cubic-bezier(.1,1.1,.1,1);
+}
+
+/* when animated into view */
+.about-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* DESCRIPTION TEXT BELOW DEANLIST */
+.about-description {
+  position: fixed;
+  top: 470px;
+  left: 80px;
+  max-width: 600px;
+  font-size: 20px;
+  line-height: 1.55;
+  color: #000;
+  font-weight: 500;
+  z-index: 20;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+}
+
+/* fade-in */
+.about-description.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .about-title {
+    font-size: 60px;
+    left: 40px;
+  }
+  .about-description {
+    right: 5vw;
+    max-width: 85vw;
+    bottom: 12vh;
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-title {
+    font-size: 42px;
+    top: 0px;
+    left: 20px;
+  }
+}
+
+/* Images (fixed) */
+#pic1, #pic1Back {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate3d(-50%,-50%,0) scale(1);
+  z-index: 10;
+  will-change: transform, top, left, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: opacity .12s linear; /* fast fade */
+  opacity: 1;
+}
+
+#pic1Back {
+  z-index: 9;
+  transform: translate3d(-50%,-50%,0) scale(1) rotateY(180deg);
+}
+
+#kuching1 {
+  position: fixed;
+  left: 100%;
+  width: 27vw;
+  opacity: 0;
+  transform: translateX(-45%);
+  z-index: 9;
+  transition: opacity 0.3s ease;
+}
+
+/* deanlist */
+#deanlist {
+  position: fixed;
+  top: 200px;
+  left: 80px;
+  width: 230px;
+  opacity: 0;
+  transform: translateY(20px);
+  z-index: 8;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* icon */
+#icon1 {
+  position: absolute;
+  width: 170px;
+  bottom: 11%;
+  right: 8%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+#icon1.visible {
+  opacity: 1;
+  transform: translateY(-200%);
+}
+
+/* Section 3 helper */
+#projectText {
+  position: absolute;
+  left: 171px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg) scaleY(1.0);
+  font-family: 'Kanit', sans-serif;
+  font-weight: 700;
+  font-size: 110px;
+  color: rgb(178, 178, 178);
+  opacity: 0;
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  letter-spacing: 17px;
+}
+
+#projectText.visible {
+  opacity: 1;
+  transform: translate(-20%, -160%) rotate(-90deg) scaleY(1.5);
+}
+
+#webAnimation {
+  position: absolute;
+  top: 76px;
+  right: 60px;
+  width: 320px;
+  max-width: 40vw;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  z-index: 25;
+}
+
+#webAnimation.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* small helper: keep same responsive motto spacing */
+@media (max-width: 1100px) {
+  .main-motto span:nth-child(2) { transform: translateX(4vw); }
+  .main-motto span:nth-child(3) { transform: translateX(-4vw); }
+  .main-motto { top: 32%; font-size: clamp(36px, 11vw, 92px); }
+}
+@media (max-width: 599px) {
+  .main-motto { top: 22%; font-size: clamp(24px, 16vw, 44px); }
+  .main-motto span:nth-child(2) { transform: translateX(2vw); }
+  .main-motto span:nth-child(3) { transform: translateX(-2vw); }
+  .hero-home .top-left-motto { left: 12px; top: calc(var(--nav-height) + 8px); max-width: 82vw; font-size: 13px; }
+}
+
+/* ---- QUICK FADE / HIDE CLASSES ---- */
+.quick-fade {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity .08s linear !important;
+}
+
+.hidden-after-fade {
+  visibility: hidden !important;
+}
+
+/* Small additions for the new "more" and "contact" content */
+.more-title { font-family:'Kanit',sans-serif;font-size:48px;margin-bottom:24px;color:#333; }
+.more-desc { max-width:700px;color:#444;font-size:18px;line-height:1.6; }
+
+.contact-title { font-family:'Kanit',sans-serif;font-size:42px;margin-bottom:18px;color:#222; }
+.contact-desc { max-width:700px;color:#444;font-size:18px;line-height:1.6;margin-bottom:18px; }
+
+.contact-form { display:flex; flex-direction:column; gap:12px; max-width:540px; }
+.contact-form input, .contact-form textarea { padding:10px; border:1px solid #ccc; border-radius:6px; font-size:16px; }
+.btn-send { background:#222;color:#fff;padding:10px 16px;border-radius:6px;border:none;cursor:pointer; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+
+/* container */
+#more #container {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  padding-top: 40px;       /* move content down a bit so it's not squeezed at top */
+  box-sizing: border-box;
+  align-items: stretch;
+  min-height: 650px;      /* gives the section some vertical room on desktop */
+}
+
+/* LEFT CAROUSEL */
+#more #carousel {
+  flex: 1;
+  perspective: 1500px;
+  overflow: visible;      /* allow slides to translate in 3D */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  min-height: 620px;      /* desktop height for the carousel area */
+}
+
+#more #carousel.dragging { cursor: grabbing; }
+
+/* SLIDES */
+#more .slide {
+  position: absolute;
+  width: 80%;
+  max-width: 600px;       /* allow slightly wider slides on large screens */
+  aspect-ratio: 5/3;
+  background: #555;
+  border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transition: transform 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+}
+
+/* subtle overlay shadows used for directional shading */
+#more .shadow-left,
+#more .shadow-right {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  pointer-events: none;
+  background: rgba(0,0,0,0.2);
+  opacity: 0;
+  transition: opacity 0.18s linear;
+}
+
+/* RIGHT PANEL (scoped to section4) */
+#more #right-panel {
+  flex: 2;
+  background: #222;
+  border-radius: 20px;
+  padding: 20px;
+  color: #fff;
+  min-height: 620px;     /* match carousel min-height so columns align on desktop */
+  height: auto;          /* lets panel grow if content is taller */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  transition: background 0.3s;
+}
+
+/* image row inside panel */
+#more #image-row {
+  display: flex;
+  gap: 12px;
+}
+
+#more #image-row img {
+  width: 32%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #333;
+}
+
+/* ---------- Responsive: stack and reduce heights on smaller screens ---------- */
+@media (max-width: 900px) {
+  #more #container {
+    flex-direction: column;
+    padding-top: 20px;
+    min-height: auto;
+    gap: 16px;
+  }
+
+  #more #carousel {
+    width: 100%;
+    min-height: 360px;   /* shorter carousel on small screens */
+    height: 360px;
+  }
+
+  #more #right-panel {
+    width: 100%;
+    min-height: auto;
+    padding: 16px;
+  }
+
+  #more .slide {
+    width: 90%;
+    max-width: 520px;
+    aspect-ratio: 5/3;
+    font-size: 1rem;
+  }
+
+  #more #image-row img {
+    height: 120px;
+    width: 32%;
+  }
+}
+
+/* extra small phones */
+@media (max-width: 420px) {
+  #more .slide { width: 94%; max-width: none; }
+  #more #image-row img { height: 100px; }
 }
