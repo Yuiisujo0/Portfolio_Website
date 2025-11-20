@@ -76,9 +76,6 @@ body {
    Increased min-height to give the carousel more vertical space */
 .section4 { background-color: #f5f5f5; min-height: 130vh; padding: 80px 40px; color:#222; }
 
-/* section5 - contact */
-.section5 { background-color: #ffffff; min-height: 100vh; padding: 80px 40px; color:#222; }
-
 @media (max-width: 1024px) { .section2 { min-height: 180vh; } }
 @media (max-width: 600px) { .section2 { min-height: 200vh; } }
 
@@ -480,4 +477,119 @@ body {
 @media (max-width: 420px) {
   #more .slide { width: 94%; max-width: none; }
   #more #image-row img { height: 100px; }
+}
+
+/* Section 5 — Contact (flex-based, robust layout) */
+#contact,
+.section5.contact-section,
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* keeps big name at the bottom naturally */
+  min-height: 100vh;
+  padding: 80px 40px; /* top/right/left; bottom space managed by layout */
+  box-sizing: border-box;
+  background: #fff;
+  color: #222;
+}
+
+/* top row that contains the right-side contact block */
+.contact-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  /* ensure it starts below fixed navbar */
+  margin-top: calc(var(--nav-height, 72px) + 8px);
+}
+
+/* contact block aligned to the right */
+.contact-right {
+  max-width: 420px;
+  text-align: right;
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+/* phone/email */
+.contact-link {
+  color: #111;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: clamp(20px, 3vw, 36px); /* larger responsive */
+  line-height: 1.02;
+}
+.contact-link:hover,
+.contact-link:focus { text-decoration: underline; color: #000; outline: none; }
+
+/* social links right row */
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+.social-link {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+}
+.social-link:hover, .social-link:focus { background:#000; }
+
+/* spacer grows to push the bottom block to the footer area */
+.contact-spacer { flex: 1 1 auto; }
+
+/* bottom area: big name centered and naturally above footer */
+.contact-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 36px; /* spacing above footer */
+}
+
+/* one single large line for the full name (wraps on small screens) */
+.big-name {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  transform: scaleY(1.25); /* 1.0 = normal, 1.25 = taller */
+  transform-origin: center; /* optional: preserves symmetry */
+  color: #222;
+  line-height: 0.92;
+  white-space: nowrap;
+  font-size: clamp(48px, 10vw, 140px);
+  letter-spacing: 1px;
+}
+
+/* footer (must be after #contact in HTML) */
+.site-footer {
+  background: #fff;
+  color: #666;
+  text-align: center;
+  font-size: 14px;
+  padding: 18px 8px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .contact-top { margin-top: 12px; justify-content: center; }
+  .contact-right { align-items: center; text-align: center; max-width: 100%; }
+  .contact-link { font-size: clamp(16px, 4vw, 22px); }
+  .socials { justify-content: center; }
+
+  /* allow name to wrap on phones and reduce scale */
+  .big-name { white-space: normal; font-size: clamp(28px, 10vw, 72px); }
+
+  /* reduce bottom padding */
+  .contact-bottom { padding-bottom: 20px; }
+}
+
+@media (max-width: 420px) {
+  .big-name { font-size: clamp(24px, 12vw, 46px); }
+  .social-link { font-size: 12px; padding: 6px 8px; }
 }
