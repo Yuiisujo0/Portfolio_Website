@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const webAnimation = document.getElementById("webAnimation");
 
+  
   let vw = window.innerWidth, vh = window.innerHeight;
 
   function updateSectionHeight() {
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pic1) {
       const n = nat(pic1);
       const sx = window.innerWidth / n.w, sy = window.innerHeight / n.h;
-      scaleCover = Math.max(sx, sy);
+      scaleCover = Math.max(sx, sy) ;
     }
   });
 
@@ -208,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const progress = Math.min(scrollY / (sec2H * 0.7), 1);
     const scaleTarget = scaleCover - (scaleCover - scaleFinal) * progress;
     const currentTopTarget = topStart + (topFinal2 - topStart) * progress;
-    const shiftXTarget = progress * 5;
+    const shiftXTarget = progress * 10;
 
     let applyTop = currentTopTarget;
     let applyScale = scaleTarget;
@@ -222,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const eased = p * p * (3 - 2 * p); // smoothstep
       const zoom = scaleFinal + (finalZoomScale - scaleFinal) * eased;
       const topMove = topFinal2 + (topCenter3 - topFinal2) * eased;
-      const shiftX3 = 5 * (1 - eased);
+      const shiftX3 = 10 * (1 - eased) +3;
       const rot = eased * 180;
 
       applyScale = zoom;
@@ -306,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pic1.addEventListener("load", () => {
       const n = nat(pic1);
       const sx = window.innerWidth / n.w, sy = window.innerHeight / n.h;
-      scaleCover = Math.max(sx, sy);
+      scaleCover = Math.max(sx, sy)* 1.05;
       latestScrollY = window.scrollY;
       if (!ticking) { ticking = true; requestAnimationFrame(processScroll); }
     });

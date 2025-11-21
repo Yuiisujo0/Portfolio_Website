@@ -12,8 +12,19 @@
 
   <!-- External stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/loader.css">
 </head>
 <body>
+
+    <!-- FULLSCREEN LOADER -->
+  <div id="loader" class="loader" role="status" aria-label="Loading">
+    <div id="canvasContainer" class="canvas-container" aria-hidden="true"></div>
+    <div id="loaderCounter" class="loader-counter">0%</div>
+  </div>
+
+  <!-- MAIN CONTENT (hidden until loader exits) -->
+  <main id="mainContent" class="site hidden" role="main">
+
   <!-- Fixed header navbar -->
   <header class="navbar" aria-hidden="false">
     <nav class="nav" aria-label="Main navigation">
@@ -25,6 +36,9 @@
     </nav>
   </header>
 
+  <!-- Split Reveal mask animation -->
+    <div id="splitReveal" class="split-reveal" aria-hidden="true"></div>
+  
   <!-- Sections -->
   <div id="home" class="section section1">
     <div class="hero-home">
@@ -121,8 +135,17 @@
   <img src="assets/images/purple1.jpg" id="pic1Back" alt="Back">
   <img src="assets/images/kuching1.png" id="kuching1" alt="Kuching">
 
+  <!-- Right-side persistent border + logo (uses assets/images/border_1.png and assets/images/logo1.svg) -->
+  <div id="right-stationary" aria-hidden="false">
+    <img src="assets/images/border_1.png" id="right-border" alt="Decorative right border">
+    <a href="#home" id="right-logo-link" aria-label="Go to home">
+      <img src="assets/images/logo2.png" id="right-logo" alt="Site logo">
+    </a>
+  </div>
+
   <!-- Scripts -->
   <script src="js/main.js" defer></script>
   <script src="js/carousel.js" defer></script>
+  <script src="js/loader.js" defer></script>
 </body>
 </html>

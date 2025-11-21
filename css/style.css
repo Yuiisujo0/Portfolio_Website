@@ -223,7 +223,7 @@ body {
 #pic1, #pic1Back {
   position: fixed;
   top: 55%;
-  left: 50%;
+  left: 47%;
   transform: translate3d(-50%,-50%,0) scale(1);
   z-index: 10;
   will-change: transform, top, left, opacity;
@@ -236,6 +236,52 @@ body {
 #pic1Back {
   z-index: 9;
   transform: translate3d(-50%,-50%,0) scale(1) rotateY(180deg);
+}
+
+/* Right-side persistent border (full viewport) */
+#right-stationary {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Stretch the image to match exactly the viewport size (no cropping) */
+#right-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;   /* stretch horizontally */
+  height: 100vh;  /* stretch vertically (same as screen height) */
+  object-fit: fill;   /* <-- ensures the whole image is visible */
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Logo link */
+#right-logo-link {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  pointer-events: auto;
+}
+
+/* Logo visual */
+#right-logo {
+  width: 64px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.45));
+  background: transparent;
+}
+
+/* Hide on mobile */
+@media (max-width: 900px) {
+  #right-stationary { display: none; }
 }
 
 #kuching1 {
