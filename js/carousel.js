@@ -25,34 +25,39 @@ document.addEventListener('DOMContentLoaded', () => {
   // INFO FOR EACH SLIDE - make sure these image files exist in assets/images/
   const slideInfo = [
     {
-        name: "Project One",
-        images: ["assets/images/p1-1.jpg", "assets/images/p1-2.jpg", "assets/images/p1-3.jpg"],
-        overview: "This is the overview for project one.",
-        typeOfWork: "UI/UX, Frontend Development"
+        name: "Autonomous Rapid Transit (ART) Mobile App [Map]",
+        images: ["assets/images/section4/uiux/uiux1.png", "assets/images/section4/uiux/uiux1.png", "assets/images/section4/uiux/uiux1.png"],
+        overview: "· Designed an ART mobile app prototype applying UI/UX design methods.\n\n· Improved the initial concept into a more functional and user-friendly interface using Figma and iterative prototyping",
+        typeOfWork: "UI/UX, Frontend Development",
+        backgroundImage: "assets/images/section4/uiux/background_05.png" // Add background image for the right panel
     },
     {
-        name: "Project Two",
-        images: ["assets/images/p2-1.jpg", "assets/images/p2-2.jpg", "assets/images/p2-3.jpg"],
-        overview: "This is the overview for project two.",
-        typeOfWork: "Branding, Graphic Design"
+        name: "ZoomRentals Database System Using MySQL",
+        images: ["assets/images/section4/database/database1.png", "assets/images/section4/database/database2.png", "assets/images/section4/database/database3.png"],
+        overview: "· Draw the Crow’s Foot Entity Relationship Diagram (ERD) to represent the structure and relationship among the entities virtually.\n\n· Developed a MySQL database and managed data using command-line operations to support the system requirements.",
+        typeOfWork: "MySQL, Database",
+        backgroundImage: "assets/images/section4/database/background_04.png" // Add background image for the right panel
     },
     {
-        name: "Project Three",
-        images: ["assets/images/p3-1.jpg", "assets/images/p3-2.jpg", "assets/images/p3-3.jpg"],
-        overview: "This is the overview for project three.",
-        typeOfWork: "Creative Coding, Interactive Art"
+        name: "DICE COMPETITION",
+        images: ["assets/images/section4/dice/dice_1.png", "assets/images/section4/dice/dice_2.png"],
+        overview: "· Designed an interactive user interface prototype in Figma, focusing on intuitive navigation and visual consistency.\n\n· Developed and implemented the application’s user interface (UI) in Unity, collaborating with team members on AR features.\n\n· Silver Award in AR/VR category of Digital Innovation Creativepreneur (DICE) 3.0 at Persada Johor International Convention Centre, Johor Bahru",
+        typeOfWork: "Creative Coding, Interactive Art",
+        backgroundImage: "assets/images/section4/dice/background_03.png" // Add background image for the right panel
     },
     {
-        name: "Project Four",
-        images: ["assets/images/p4-1.jpg", "assets/images/p4-2.jpg", "assets/images/p4-3.jpg"],
-        overview: "This is the overview for project four.",
-        typeOfWork: "E-commerce Development"
+        name: "Mental Health Quiz Application",
+        images: ["assets/images/section4/java/java1.png", "assets/images/section4/java/java2.png", "assets/images/section4/java/java3.png"],
+        overview: "· Created the home page + quiz part for the application, include multiple-choice, true/false and fill-in the blank questions.\n\n· Designed and developed a Java-based application using object-oriented programming principles with a user-friendly interface.",
+        typeOfWork: "Leaning Module, Quiz",
+        backgroundImage: "assets/images/section4/java/background_06.png" // Add background image for the right panel
     },
     {
-        name: "Project Five",
-        images: ["assets/images/p5-1.jpg", "assets/images/p5-2.jpg", "assets/images/p5-3.jpg"],
-        overview: "This is the overview for project five.",
-        typeOfWork: "Mobile UI, App Redesign"
+        name: "Autonomous Rapid Transit (ART) Mobile App [Booking]",
+        images: ["assets/images/section4/art/art1.png", "assets/images/section4/art/art2.png", "assets/images/section4/art/art3.png"],
+        overview: "· Designed an ART mobile app prototype applying Human Computer Interaction (HCI) principles using Figma.\n\n· Turning the initial concept into a more functional and user-friendly interface using Figma.",
+        typeOfWork: "Mobile UI, App Redesign",
+        backgroundImage: "assets/images/section4/art/background_07.png" // Add background image for the right panel
     }
   ];
 
@@ -95,8 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeIndex = Math.round(progress);
     const info = slideInfo[activeIndex];
 
-    // update background color (guards for out-of-range)
-    rightPanel.style.background = colors[activeIndex] || "#222";
+    // update background color and image for the right panel
+    rightPanel.style.background = `url('${info.backgroundImage}') no-repeat center center, ${colors[activeIndex] || "#222"}`;
+    rightPanel.style.backgroundSize = 'cover';  // Ensures the image covers the panel
 
     // update panel content (guard existence)
     const nameEl = document.getElementById("project-name");
@@ -104,19 +110,80 @@ document.addEventListener('DOMContentLoaded', () => {
     const img2 = document.getElementById("img2");
     const img3 = document.getElementById("img3");
     const overviewEl = document.getElementById("project-overview");
+    const projectDescriptionEl = document.getElementById("project-description");
     const typeEl = document.getElementById("type-of-work");
 
     if (info) {
       if (nameEl) nameEl.textContent = info.name;
       if (img1) { img1.src = info.images[0]; img1.alt = info.name + " image 1"; }
       if (img2) { img2.src = info.images[1]; img2.alt = info.name + " image 2"; }
-      if (img3) { img3.src = info.images[2]; img3.alt = info.name + " image 3"; }
+      
+      // Conditionally show img3 based on the number of images
+      if (img3) {
+        if (info.images.length > 2) {
+          img3.src = info.images[2];
+          img3.alt = info.name + " image 3";
+          img3.style.display = 'block'; // Ensure img3 is visible if there are 3 images
+        } else {
+          img3.style.display = 'none'; // Hide img3 if there are only 2 images
+        }
+      }
+
+      // Populate project description (scrollable content)
+      if (projectDescriptionEl) {
+        // Replace the newlines with <br> tags for HTML rendering
+        projectDescriptionEl.innerHTML = info.overview.replace(/\n/g, "<br>");
+      }
+
       if (overviewEl) overviewEl.textContent = info.overview;
       if (typeEl) typeEl.textContent = info.typeOfWork;
     }
   }
 
   render();
+
+  // Modal Elements
+  const modal = document.getElementById("image-modal");
+  const modalImage = document.getElementById("modal-image");
+  const closeModal = document.querySelector(".close");
+
+  // Function to open modal with enlarged image
+  function openModal(imageSrc) {
+    modal.style.display = "flex"; // Show the modal
+    modalImage.src = imageSrc;   // Set the source of the image in the modal
+    modalImage.style.transform = "scale(1)"; // Reset zoom when opening modal
+  }
+
+  // Function to close modal (when user clicks outside or on the close button)
+  function closeModalHandler() {
+    modal.style.display = "none"; // Hide the modal
+    modalImage.style.transform = "scale(1)"; // Reset zoom when modal is closed
+  }
+
+  // Event listeners for image clicks (enlarge image)
+  const allImages = document.querySelectorAll("#image-row img");
+  allImages.forEach(img => {
+    img.addEventListener("click", () => {
+      openModal(img.src); // Open modal with clicked image
+    });
+  });
+
+  // Event listener to close modal when user clicks the X button
+  closeModal.addEventListener("click", closeModalHandler);
+
+  // Event listener to close modal when user clicks outside of the image
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeModalHandler(); // Close modal when clicking outside the image
+    }
+  });
+
+  // Zoom effect when image in modal is clicked
+  modalImage.addEventListener("click", () => {
+    // Toggle zoom in and out
+    const currentScale = modalImage.style.transform === "scale(1)" ? 1.5 : 1;
+    modalImage.style.transform = `scale(${currentScale})`; // Apply the zoom scale
+  });
 
   // DRAG HANDLERS
   function startDrag(y) {

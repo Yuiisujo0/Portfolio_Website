@@ -1,63 +1,56 @@
-/* main.js
-   Updated:
-   - Added a separate contact section (section5) in HTML.
-   - Improved underline logic so nav links map to their target sections (robust when you add extra sections).
-   - Keeps the faster fade/hide behavior for pic1 / pic1Back so they don't linger into the next sections.
-*/
+/* main.js */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // DOM elements
   const pic1 = document.getElementById("pic1");
   const pic1Back = document.getElementById("pic1Back");
   const kuching1 = document.getElementById("kuching1");
   const deanlist = document.getElementById("deanlist");
   const projectText = document.getElementById("projectText");
-
   const navbarLinks = document.querySelectorAll(".nav-link");
   const underline = document.querySelector(".nav-underline");
   const sections = document.querySelectorAll(".section");
-
   const section1 = document.querySelector(".section1");
   const section2 = document.querySelector(".section2");
   const section3 = document.querySelector(".section3");
   const section4 = document.querySelector(".section4"); // "more"
   const section5 = document.querySelector(".section5"); // contact
-
   const topLeftMotto = document.querySelector(".top-left-motto");
   const mainMotto = document.querySelector(".main-motto");
-
   const webAnimation = document.getElementById("webAnimation");
-
   
   let vw = window.innerWidth, vh = window.innerHeight;
+  let scaleCover = 1;
+  let latestScrollY = window.scrollY;
+  let ticking = false;
 
+  // Update section height based on viewport
   function updateSectionHeight() {
     if (section1) section1.style.height = `${vh}px`;
-    if (section3) section3.style.height = `${vh * 1.4}px`;
+    if (section3) section3.style.minHeight = `${vh * 1.2}px`;
   }
 
   window.addEventListener("resize", () => {
     vw = window.innerWidth; vh = window.innerHeight;
     updateSectionHeight();
     updateUnderline();
-
     if (pic1) {
       const n = nat(pic1);
       const sx = window.innerWidth / n.w, sy = window.innerHeight / n.h;
-      scaleCover = Math.max(sx, sy) ;
+      scaleCover = Math.max(sx, sy);
+      pic1.style.transform = `translate3d(-50%,-50%,0) scale(${scaleCover})`;
+      if (pic1Back) pic1Back.style.transform = `translate3d(-50%,-50%,0) scale(${scaleCover}) rotateY(180deg)`;
     }
   });
 
   updateSectionHeight();
 
-  // More robust underline logic:
-  // Instead of assuming a 1:1 mapping between .section and .nav-link,
-  // map each nav-link to the element referenced by its href (e.g. #about).
-  // That way adding new sections won't shift the nav indexing.
+  // Dynamic underline update based on section visibility
   function updateUnderline() {
     const centerY = window.scrollY + vh / 2;
     let activeLink = null;
 
-    // Find link whose target section contains viewport center
+    // Find link whose target section contains the center of the viewport
     for (const link of navbarLinks) {
       const href = link.getAttribute('href') || '';
       if (!href.startsWith('#')) continue;
@@ -72,8 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // If no exact match, pick the last link whose section top is <= centerY,
-    // otherwise default to the first link.
+    // If no exact match, pick the last link whose section top is <= centerY
     if (!activeLink) {
       let lastMatch = null;
       for (const link of navbarLinks) {
@@ -101,81 +93,83 @@ document.addEventListener('DOMContentLoaded', () => {
       underline.style.backgroundColor = (activeLink.getAttribute('href') === '#home') ? "white" : "#b7b4b4";
     }
   }
+
   window.addEventListener("scroll", updateUnderline, { passive: true });
   updateUnderline();
 
-  // safe natural dimensions
+  // Safe natural dimensions for scaling
   function nat(img, fw = 1600, fh = 900) {
     if (!img) return { w: fw, h: fh };
     return { w: img.naturalWidth || fw, h: img.naturalHeight || fh };
   }
 
-  // initial cover scale
-  let scaleCover = 1;
+  // Initial cover scale and position
   if (pic1) {
     const n = nat(pic1);
     const sx = vw / n.w, sy = vh / n.h;
-    const sc = Math.max(sx, sy);
-    scaleCover = sc;
-    pic1.style.transform = `translate3d(-50%,-50%,0) scale(${sc})`;
-    if (pic1Back) pic1Back.style.transform = `translate3d(-50%,-50%,0) scale(${sc}) rotateY(180deg)`;
+    scaleCover = Math.max(sx, sy);
+    pic1.style.transform = `translate3d(-50%,-50%,0) scale(${scaleCover})`;
+    if (pic1Back) pic1Back.style.transform = `translate3d(-50%,-50%,0) scale(${scaleCover}) rotateY(180deg)`;
   }
 
-  // constants
-  const scaleFinal = 0.30;
-  const finalZoomScale = 0.6;
+  // Constants for zoom and transform animations
+  const scaleFinal = 0.40;
+  const finalZoomScale = 0.63;
   const topStart = 65;
-  const topFinal2 = 70;
-  const topCenter3 = 50;
+  const topFinal2 = 65;
+  const topCenter3 = 53;
 
-  // fade threshold for section4 ("more") — images will start disappearing before the end of section3
-  const section4FadeStart = 1.25;
+  // Fade threshold for section4 ("more") — images start disappearing before section3 ends
+  const section4FadeStart = 0.87;
 
   let imagesHidden = false;
   let hideTimeoutId = null;
 
+  // Fade out fixed images quickly
   function fadeOutFixedImagesQuick() {
     if (imagesHidden) return;
     if (hideTimeoutId) { clearTimeout(hideTimeoutId); hideTimeoutId = null; }
 
-    [pic1, pic1Back, kuching1].forEach(el => {
+    [pic1, pic1Back, kuching1, deanlist].forEach(el => {
       if (!el) return;
       el.classList.add('quick-fade');
       el.classList.remove('hidden-after-fade');
-      el.style.willChange = 'opacity';
+      el.style.willChange = 'opacity, transform';
+      el.style.pointerEvents = 'none'; // prevent click/drag
     });
 
     hideTimeoutId = setTimeout(() => {
-      [pic1, pic1Back, kuching1].forEach(el => {
+      [pic1, pic1Back, kuching1, deanlist].forEach(el => {
         if (!el) return;
         el.classList.add('hidden-after-fade');
         el.setAttribute('aria-hidden', 'true');
+        el.style.display = 'none';  // completely remove from layout
       });
       imagesHidden = true;
       hideTimeoutId = null;
     }, 120);
   }
 
+  // Fade in fixed images quickly
   function fadeInFixedImagesQuick() {
     if (!imagesHidden && !hideTimeoutId) return;
     if (hideTimeoutId) { clearTimeout(hideTimeoutId); hideTimeoutId = null; }
 
-    [pic1, pic1Back, kuching1].forEach(el => {
+    [pic1, pic1Back, kuching1, deanlist].forEach(el => {
       if (!el) return;
+      el.style.display = '';  // restore display
       el.classList.remove('hidden-after-fade');
       el.removeAttribute('aria-hidden');
-      // force reflow
-      void el.offsetHeight;
+      void el.offsetHeight;  // force reflow
       el.classList.remove('quick-fade');
       el.style.willChange = 'transform, top, left, opacity';
+      el.style.pointerEvents = 'auto'; // restore interactivity
     });
 
     imagesHidden = false;
   }
 
-  let latestScrollY = window.scrollY;
-  let ticking = false;
-
+  // Scroll event handling
   window.addEventListener('scroll', () => {
     latestScrollY = window.scrollY;
     if (!ticking) {
@@ -195,11 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const sec3Rect = section3 ? section3.getBoundingClientRect() : { top: Infinity, height: 1 };
     const sec4Rect = section4 ? section4.getBoundingClientRect() : { top: Infinity };
 
-    // navbar color immediate
+    // Navbar color change on scroll
     if (section2 && scrollY < section2Top) navbarLinks.forEach(l => l.style.color = "#fff");
     else navbarLinks.forEach(l => l.style.color = "#b7b4b4");
 
-    // motto fade
+    // Motto fade effect
     const section1Height = section1 ? section1.offsetHeight : vh;
     const mottoProgress = Math.min(scrollY / (section1Height * 0.7), 1);
     if (mainMotto) mainMotto.style.opacity = `${1 - mottoProgress}`;
@@ -223,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const eased = p * p * (3 - 2 * p); // smoothstep
       const zoom = scaleFinal + (finalZoomScale - scaleFinal) * eased;
       const topMove = topFinal2 + (topCenter3 - topFinal2) * eased;
-      const shiftX3 = 10 * (1 - eased) +3;
+      const shiftX3 = 10 * (1 - eased) + (3 * eased);
       const rot = eased * 180;
 
       applyScale = zoom;
@@ -233,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
       applyBackRot = 180 + rot;
     }
 
-    // KUCHING / deanlist opacity
+    // KUCHING / deanlist opacity and placement
     let kuchingProgress = Math.min(Math.max(progress - 0.15, 0) / 0.4, 1);
     let section3Overlap = 1 - (sec3Rect.top / vh);
     let fadeOut = Math.max(1 - (section3Overlap - 0.3) / 0.4, 0);
@@ -259,9 +253,16 @@ document.addEventListener('DOMContentLoaded', () => {
       else icon1.classList.remove('visible');
     }
 
-    if (webAnimation) {
-      if (sec3Rect.top < vh * 0.8) webAnimation.classList.add("visible");
-      else webAnimation.classList.remove("visible");
+    const earth = document.getElementById('earth');
+    if (earth) {
+      if (sec3Rect.top < vh * 0.7) earth.classList.add('visible');
+      else earth.classList.remove('visible');
+    }
+
+    const quote = document.getElementById('quote');
+    if (quote) {
+      if (sec3Rect.top < vh * 0.8) quote.classList.add("visible");
+      else quote.classList.remove("visible");
     }
 
     // Fade pic1/pic1Back quickly when entering section4 (more)
@@ -285,9 +286,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (kuching1) {
       if (finalOpacity > 0.01 && !imagesHidden) {
         kuching1.style.opacity = `${finalOpacity}`;
-        kuching1.style.left = `${50 + 30 * kuchingProgress}%`;
+        kuching1.style.left = `${50 + 33 * kuchingProgress}%`;
         const rect = pic1 ? pic1.getBoundingClientRect() : { bottom: vh / 2 };
-        kuching1.style.top = `${rect.bottom - kuching1.offsetHeight}px`;
+        kuching1.style.top = `${rect.bottom - kuching1.offsetHeight * 0.95}px`;
       } else {
         kuching1.style.opacity = "0";
       }
@@ -299,15 +300,21 @@ document.addEventListener('DOMContentLoaded', () => {
       deanlist.style.transform = finalOpacity > 0 ? "translateY(0)" : "translateY(20px)";
     }
 
+    // arrow immediate
+    if (arrow) {
+      arrow.style.opacity = `${finalOpacity}`;
+      arrow.style.transform = finalOpacity > 0 ? "translateY(0)" : "translateY(20px)";
+    }
+
     updateUnderline();
   }
 
-  // initialization
+  // Handle images loading
   if (pic1) {
     pic1.addEventListener("load", () => {
       const n = nat(pic1);
       const sx = window.innerWidth / n.w, sy = window.innerHeight / n.h;
-      scaleCover = Math.max(sx, sy)* 1.05;
+      scaleCover = Math.max(sx, sy) * 1.05;
       latestScrollY = window.scrollY;
       if (!ticking) { ticking = true; requestAnimationFrame(processScroll); }
     });
@@ -316,4 +323,5 @@ document.addEventListener('DOMContentLoaded', () => {
     latestScrollY = window.scrollY;
     if (!ticking) { ticking = true; requestAnimationFrame(processScroll); }
   }
+
 });

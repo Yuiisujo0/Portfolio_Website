@@ -15,16 +15,7 @@
   <link rel="stylesheet" href="css/loader.css">
 </head>
 <body>
-
-    <!-- FULLSCREEN LOADER -->
-  <div id="loader" class="loader" role="status" aria-label="Loading">
-    <div id="canvasContainer" class="canvas-container" aria-hidden="true"></div>
-    <div id="loaderCounter" class="loader-counter">0%</div>
-  </div>
-
-  <!-- MAIN CONTENT (hidden until loader exits) -->
-  <main id="mainContent" class="site hidden" role="main">
-
+  
   <!-- Fixed header navbar -->
   <header class="navbar" aria-hidden="false">
     <nav class="nav" aria-label="Main navigation">
@@ -36,14 +27,12 @@
     </nav>
   </header>
 
-  <!-- Split Reveal mask animation -->
-    <div id="splitReveal" class="split-reveal" aria-hidden="true"></div>
-  
   <!-- Sections -->
   <div id="home" class="section section1">
     <div class="hero-home">
       <div class="top-left-motto">
-        A mind exploring realities through code, design, and motion.<br>
+        A mind exploring realities <br>
+        through code, design, and motion.<br>
         This is my evolving digital space.
       </div>
 
@@ -60,32 +49,33 @@
     <h1 class="about-title">ABOUT ME</h1>
 
     <!-- DEANLIST IMAGE -->
-    <img src="assets/images/deanlist.png" id="deanlist" alt="Deanlist">
+    <img src="assets/images/section2/Deanslist_01.png" id="deanlist" alt="Deanlist">
 
+    <!-- Arrow IMAGE -->
+    <img src="assets/images/section2/arrow_01.png" id="arrow" alt="Arrow">
+    
     <!-- DESCRIPTION TEXT -->
     <p class="about-description">
-      Between reality & imagination lies my workspace.<br>
-      A place where I code into art, and stories into interaction.<br>
-      I'm Angel Bong — a Multimedia Computing student from Kuching, Sarawak.<br>
-      Learning to design, animate, and build the worlds I imagine.
+      Between reality and imagination lies my workspace, where I transform ideas into intuitive experiences through design, animation, and code. I am Angel Bong, a Multimedia Computing student at UNIMAS, developing the skills to bring meaningful digital worlds to life.
     </p>
   </div>
 
   <div id="project" class="section section3">
-    <div id="projectText">PROJECT</div>
-    <img id="icon1" src="assets/images/icon1.jpg.webp" alt="Icon 1">
-    <video id="webAnimation" src="assets/animation/WebAnimation1.mp4" autoplay muted loop playsinline></video>
+    <div id="projectText">MY PROJECTS</div>
+    <img id="earth" src="assets/images/section3/earth_01.png" alt="Earth">
+    <img id="icon1" src="assets/images/section3/laptop.png" alt="Icon 1">
+    <img id="quote" src="assets/images/section3/quote_01.png" alt="quote">
   </div>
 
   <!-- Section 4: Carousel + Right Panel (integrated from your carosel.html) -->
   <div id="more" class="section section4">
     <div id="container">
       <div id="carousel" aria-label="Project carousel" role="region" tabindex="0">
-        <div class="slide"><div class="shadow-left"></div><div class="shadow-right"></div>1</div>
-        <div class="slide"><div class="shadow-left"></div><div class="shadow-right"></div>2</div>
-        <div class="slide"><div class="shadow-left"></div><div class="shadow-right"></div>3</div>
-        <div class="slide"><div class="shadow-left"></div><div class="shadow-right"></div>4</div>
-        <div class="slide"><div class="shadow-left"></div><div class="shadow-right"></div>5</div>
+        <div class="slide" style="background-image: url('assets/images/section4/uiux/background_05.png');"></div>
+        <div class="slide" style="background-image: url('assets/images/section4/database/database_01.png');"></div>
+        <div class="slide" style="background-image: url('assets/images/section4/dice/dice_01.png');"></div>
+        <div class="slide" style="background-image: url('assets/images/section4/java/java_01.png');"></div>
+        <div class="slide" style="background-image: url('assets/images/section4/art/ART_1.png');"></div>
       </div>
 
       <div id="right-panel" aria-live="polite">
@@ -97,49 +87,59 @@
           <img id="img3" alt="">
         </div>
 
-        <h2>PROJECT OVERVIEW</h2>
-        <p id="project-overview"></p>
+        <!-- For Project Description -->
+        <h2 class="project-title">PROJECT DESCRIPTION</h2>
+        <div id="project-description" class="scrollable-text"></div>
 
-        <h2>TYPE OF WORK</h2>
-        <p id="type-of-work"></p>
+        <!-- For Type of Work -->
+        <h2 class="work-title">TYPE OF WORK</h2>
+        <div id="type-of-work" class="single-line-text"></div>
       </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="image-modal" class="modal">
+    <div class="modal-content">
+      <img id="modal-image" src="" alt="Enlarged image">
+      <button class="close">&times;</button>
     </div>
   </div>
 
-  <!-- Contact section -->
+  <!-- Contact section (CLEANED UP STRUCTURE) -->
   <div id="contact" class="section section5 contact-section">
-  <div class="contact-top">
-    <div class="contact-right" role="region" aria-label="Contact information">
-      <a class="contact-link" href="tel:+601110254175">+60 11-10254175</a>
-      <a class="contact-link" href="mailto:angel@gmail.com">angel@gmail.com</a>
+    <div class="contact-top">
+      <div class="contact-right" role="region" aria-label="Contact information">
+        <a class="contact-link" href="tel:+60108569800">+60 10-8569800</a>
+        <a class="contact-link" href="mailto:angel@gmail.com">angel@gmail.com</a>
 
-      <div class="socials" aria-label="Social links">
-        <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
-        <a class="social-link" href="https://t.me/" target="_blank" rel="noopener noreferrer">TELEGRAM</a>
-        <a class="social-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+        <div class="socials" aria-label="Social links">
+          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+          <a class="social-link" href="https://t.me/" target="_blank" rel="noopener noreferrer">TELEGRAM</a>
+          <a class="social-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="contact-spacer" aria-hidden="true"></div>
-
-  <div class="contact-bottom">
+    <!-- This is the main content at the bottom of the flex column -->
     <div class="big-name">ANGEL BONG XIN TZE</div>
+
+    <!-- Absolute positioned elements (placed here for relative positioning to #contact) -->
+    <img src="assets/images/section1/logo2.png" alt="Logo2" class="logo2">
+    <img src="assets/images/section5/keyboard.png" alt="Keyboard" class="keyboard">
   </div>
-</div>
 
 <footer class="site-footer" role="contentinfo">© All right reserved. 2025 JeanCheahMingSan</footer>
 
   <!-- Images (fixed) -->
-  <img src="assets/images/pic1.png" id="pic1" alt="Main">
-  <img src="assets/images/purple1.jpg" id="pic1Back" alt="Back">
-  <img src="assets/images/kuching1.png" id="kuching1" alt="Kuching">
+  <img src="assets/images/section1/pic1.png" id="pic1" alt="Main">
+  <img src="assets/images/section3/my_project_1.png" id="pic1Back" alt="Back">
+  <img src="assets/images/section2/sarawak_01.png" id="kuching1" alt="Kuching">
 
   <!-- Right-side persistent border + logo (uses assets/images/border_1.png and assets/images/logo1.svg) -->
   <div id="right-stationary" aria-hidden="false">
-    <img src="assets/images/border_1.png" id="right-border" alt="Decorative right border">
+    <img src="assets/images/section1/Border_1.png" id="right-border" alt="Decorative right border">
     <a href="#home" id="right-logo-link" aria-label="Go to home">
-      <img src="assets/images/logo2.png" id="right-logo" alt="Site logo">
+      <img src="assets/images/section1/logo2.png" id="right-logo" alt="Site logo">
     </a>
   </div>
 

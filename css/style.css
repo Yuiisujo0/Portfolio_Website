@@ -1,4 +1,4 @@
-/* Reset and base */
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -70,11 +70,11 @@ body {
 
 .section1 { background-color: #fff; height: 100vh; }
 .section2 { background-color: #fff; min-height: 150vh; }
-.section3 { background-color: #fff; position: relative; }
+.section3 { background-color: #ffffff; min-height: 120vh; }
 
 /* section4 - "More" (project continuation)
    Increased min-height to give the carousel more vertical space */
-.section4 { background-color: #f5f5f5; min-height: 130vh; padding: 80px 40px; color:#222; }
+.section4 { background-color: #ffffff; min-height: 120vh; padding: 80px 40px; color:#222; }
 
 @media (max-width: 1024px) { .section2 { min-height: 180vh; } }
 @media (max-width: 600px) { .section2 { min-height: 200vh; } }
@@ -91,14 +91,14 @@ body {
 /* TOP-LEFT MOTTO */
 .hero-home .top-left-motto {
   position: absolute;
-  top: calc(var(--nav-height) + 12px);
-  left: 50px;
+  top: calc(var(--nav-height) + 20px);
+  left: 135px;
   z-index: 61;
   opacity: 0.98;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   max-width: 360px;
-  color: #2f2f2f;
+  color: #eeeeee;
   line-height: 1.35;
   text-shadow: 0 6px 18px rgba(0,0,0,0.45);
   pointer-events: none;
@@ -156,11 +156,11 @@ body {
 /* ABOUT ME Title */
 .about-title {
   position: fixed;
-  top: 65px;
-  left: 80px;
+  top: 80px;
+  left: 140px;
   font-family: 'Kanit', sans-serif;
-  font-weight: 800;
-  font-size: 90px;
+  font-weight: 600;
+  font-size: 50px;
   color: #b7b4b4;
   z-index: 20;
   letter-spacing: 3px;
@@ -178,10 +178,10 @@ body {
 /* DESCRIPTION TEXT BELOW DEANLIST */
 .about-description {
   position: fixed;
-  top: 470px;
-  left: 80px;
-  max-width: 600px;
-  font-size: 20px;
+  top: 510px;
+  left: 150px;
+  max-width: 450px;
+  font-size: 15px;
   line-height: 1.55;
   color: #000;
   font-weight: 500;
@@ -263,9 +263,9 @@ body {
 /* Logo link */
 #right-logo-link {
   position: absolute;
-  left: 16px;
+  left: 28px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%)scale(0.45);
   z-index: 100;
   pointer-events: auto;
 }
@@ -275,7 +275,6 @@ body {
   width: 64px;
   height: auto;
   display: block;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.45));
   background: transparent;
 }
 
@@ -289,7 +288,7 @@ body {
   left: 100%;
   width: 27vw;
   opacity: 0;
-  transform: translateX(-45%);
+  transform: translateX(-45%)scale(0.9);
   z-index: 9;
   transition: opacity 0.3s ease;
 }
@@ -297,9 +296,21 @@ body {
 /* deanlist */
 #deanlist {
   position: fixed;
-  top: 200px;
-  left: 80px;
-  width: 230px;
+  top: 180px;
+  left: 150px;
+  width: 350px;
+  opacity: 0;
+  transform: translateY(20px)scale(2);
+  z-index: 8;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* arrow */
+#arrow {
+  position: fixed;
+  top: 460px;
+  left: 150px;
+  width: 50px;
   opacity: 0;
   transform: translateY(20px);
   z-index: 8;
@@ -310,27 +321,59 @@ body {
 #icon1 {
   position: absolute;
   width: 170px;
-  bottom: 11%;
+  bottom: 0%;
   right: 8%;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(30px)scale(1);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 #icon1.visible {
   opacity: 1;
-  transform: translateY(-200%);
+  transform: translateY(-240%)scale(1.7);
+}
+
+/* icon */
+#quote {
+  position: absolute;
+  width: 170px;
+  bottom: -1%;
+  right: 8%;
+  opacity: 0;
+  transform: translateY(30px)scale(1);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+#quote.visible {
+  opacity: 1;
+  transform: translateY(-240%)scale(1);
+}
+
+/* icon */
+#earth {
+  position: absolute;
+  width: 170px;
+  top: 50%;      /* vertical center */
+  left: 10%;      /* left side */
+  transform: translateY(-50%); /* center the image vertically */
+  opacity: 0;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+#earth.visible {
+  opacity: 1;
+  transform: translateY(-60%)scale(0.8);
 }
 
 /* Section 3 helper */
 #projectText {
   position: absolute;
-  left: 171px;
+  left: 186px;
   top: 50%;
   transform: translateY(-50%) rotate(-90deg) scaleY(1.0);
   font-family: 'Kanit', sans-serif;
-  font-weight: 700;
-  font-size: 110px;
+  font-weight: 800;
+  font-size: 58px;
   color: rgb(178, 178, 178);
   opacity: 0;
   transition: opacity 1s ease-out, transform 1s ease-out;
@@ -340,23 +383,6 @@ body {
 #projectText.visible {
   opacity: 1;
   transform: translate(-20%, -160%) rotate(-90deg) scaleY(1.5);
-}
-
-#webAnimation {
-  position: absolute;
-  top: 76px;
-  right: 60px;
-  width: 320px;
-  max-width: 40vw;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-  z-index: 25;
-}
-
-#webAnimation.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* small helper: keep same responsive motto spacing */
@@ -403,7 +429,7 @@ body {
   padding-top: 40px;       /* move content down a bit so it's not squeezed at top */
   box-sizing: border-box;
   align-items: stretch;
-  min-height: 650px;      /* gives the section some vertical room on desktop */
+  min-height: 550px;      /* gives the section some vertical room on desktop */
 }
 
 /* LEFT CAROUSEL */
@@ -412,11 +438,12 @@ body {
   perspective: 1500px;
   overflow: visible;      /* allow slides to translate in 3D */
   position: relative;
+  left: 3%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: grab;
-  min-height: 620px;      /* desktop height for the carousel area */
+  min-height: 650px;      /* desktop height for the carousel area */
 }
 
 #more #carousel.dragging { cursor: grabbing; }
@@ -428,6 +455,8 @@ body {
   max-width: 600px;       /* allow slightly wider slides on large screens */
   aspect-ratio: 5/3;
   background: #555;
+  background-size: cover; /* make sure image covers the entire slide */
+  background-position: center center; /* center the image */
   border-radius: 10px;
   top: 50%;
   left: 50%;
@@ -461,7 +490,8 @@ body {
   border-radius: 20px;
   padding: 20px;
   color: #fff;
-  min-height: 620px;     /* match carousel min-height so columns align on desktop */
+  min-height: 580px;     /* match carousel min-height so columns align on desktop */
+  max-height: 580px; 
   height: auto;          /* lets panel grow if content is taller */
   overflow-y: auto;
   display: flex;
@@ -477,12 +507,163 @@ body {
   gap: 12px;
 }
 
+/* Ensure all images in the row have the same height and maintain aspect ratio */
 #more #image-row img {
   width: 32%;
-  height: 200px;
-  object-fit: cover;
+  height: 200px;  /* Fixed height */
+  object-fit: cover;  /* This ensures the image covers the area without distortion */
   border-radius: 10px;
   background: #333;
+}
+
+/* Right panel styling */
+#right-panel {
+  padding: 20px;
+  background-color: #222;
+  color: white;
+  min-height: 600px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Styling for the Type of Work title */
+#right-panel .project-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;         /* Larger font size for the title */
+  font-weight: 600;          /* Semi-bold font for emphasis */
+  color: #f1f1f1;           /* Light color to stand out on dark background */
+  margin-bottom: 0px;      /* Space below the title */
+  width: 65%;
+  text-transform: uppercase;/* Uppercase letters for a bold look */
+  letter-spacing: 1px;      /* Slight letter spacing for readability */
+  border-bottom: 2px solid #f1f1f1;  /* Subtle bottom border */
+  padding-bottom: 0px;      /* Space between text and border */
+}
+
+/* Styling for project description (scrollable box) */
+#right-panel .scrollable-text {
+  width: 65%;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #444;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  height: 160px; /* Height for the scrollable description box */
+  max-height: 160px; /* Optional: ensure it doesn't grow too large */
+  overflow-y: auto; /* Allow vertical scrolling */
+  white-space: normal; /* Allow text to wrap */
+  box-sizing: border-box;
+  pointer-events: auto; /* Allow user interaction (scrolling) */
+  position: relative;   /* Add relative positioning */
+  bottom: 2%;          /* Push the content up by 10% of its container height */
+}
+
+/* Styling for the Type of Work title */
+#right-panel .work-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;         /* Larger font size for the title */
+  font-weight: 600;          /* Semi-bold font for emphasis */
+  color: #f1f1f1;           /* Light color to stand out on dark background */
+  margin-bottom: -5px;      /* Space below the title */
+  width: 65%;
+  text-transform: uppercase;/* Uppercase letters for a bold look */
+  letter-spacing: 1px;      /* Slight letter spacing for readability */
+  border-bottom: 2px solid #f1f1f1;  /* Subtle bottom border */
+  padding-bottom: 0px;      /* Space between text and border */
+}
+
+/* Styling for type of work description (single-line) */
+#right-panel .single-line-text {
+  width: 65%;
+  padding: 10px;
+  font-size: 1.1rem; /* Slightly larger text */
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #444;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  height: 40px; /* Fixed height for the one-line description box */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap; /* Keep text on one line */
+  text-overflow: ellipsis; /* Truncate with ellipsis if text is too long */
+  box-sizing: border-box;
+  pointer-events: none; /* Make it non-editable */
+}
+
+/* Optional: Heading styling */
+#right-panel h2 {
+  margin-bottom: 7px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #f1f1f1;
+}
+
+/* Modal container */
+.modal {
+  display: none;  /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Prevent overflow */
+}
+
+/* Modal content wrapper */
+.modal-content {
+  position: relative;
+  width: 80vw; /* Fixed width for the modal */
+  height: 80vh; /* Fixed height for the modal */
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Prevent image overflow */
+  background-color: transparent; /* Optional, can add a background if needed */
+  border-radius: 10px; /* Optional, rounded corners for the modal */
+}
+
+/* Image inside modal - Make images fill the container with consistent height */
+.modal-content img {
+  width: 100%;        /* Ensure image width takes up the full container width */
+  height: 100%;       /* Image height will be fixed to the container height */
+  object-fit: contain; /* Ensures image fits within the container */
+  cursor: zoom-out;   /* Add cursor for zoom-out effect */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for zoom effect */
+}
+
+/* Close button for modal */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #f1f1f1;
+  text-decoration: none;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
 }
 
 /* ---------- Responsive: stack and reduce heights on smaller screens ---------- */
@@ -525,18 +706,22 @@ body {
   #more #image-row img { height: 100px; }
 }
 
-/* Section 5 — Contact (flex-based, robust layout) */
+/* Section 5 — Contact (flex-based, robust layout)
+   NOTE: padding reduced and layout tweaks below to avoid large empty bottom space */
 #contact,
 .section5.contact-section,
 .contact-section {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* keeps big name at the bottom naturally */
-  min-height: 100vh;
-  padding: 80px 40px; /* top/right/left; bottom space managed by layout */
+  justify-content: flex-start; /* don't force large space between children */
+  /* FIX: Removed min-height: 100vh; to allow content to define height */
+  padding: 40px 40px; /* reduced bottom padding to reduce empty whitespace */
   box-sizing: border-box;
   background: #fff;
   color: #222;
+  /* Added position: relative to properly anchor absolute elements */
+  position: relative;
+  gap: 20px;
 }
 
 /* top row that contains the right-side contact block */
@@ -544,30 +729,36 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  /* ensure it starts below fixed navbar */
+  /* Ensures it starts below fixed navbar */
   margin-top: calc(var(--nav-height, 72px) + 8px);
+  /* Prevent this element from stretching the parent vertically */
+  flex: 0 0 auto;
 }
 
 /* contact block aligned to the right */
 .contact-right {
   max-width: 420px;
   text-align: right;
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: 8px;
   align-items: flex-end;
 }
 
-/* phone/email */
+/* phone/email link style */
 .contact-link {
   color: #111;
   font-weight: 800;
   text-decoration: none;
-  font-size: clamp(20px, 3vw, 36px); /* larger responsive */
+  font-size: clamp(20px, 3vw, 36px); /* Larger responsive font */
   line-height: 1.02;
 }
 .contact-link:hover,
-.contact-link:focus { text-decoration: underline; color: #000; outline: none; }
+.contact-link:focus {
+  text-decoration: underline;
+  color: #000;
+  outline: none;
+}
 
 /* social links right row */
 .socials {
@@ -584,58 +775,105 @@ body {
   font-weight: 700;
   font-size: 13px;
 }
-.social-link:hover, .social-link:focus { background:#000; }
-
-/* spacer grows to push the bottom block to the footer area */
-.contact-spacer { flex: 1 1 auto; }
-
-/* bottom area: big name centered and naturally above footer */
-.contact-bottom {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 36px; /* spacing above footer */
+.social-link:hover, .social-link:focus {
+  background: #000;
 }
 
-/* one single large line for the full name (wraps on small screens) */
+/* Single large line for the full name */
 .big-name {
-  font-family: 'Kanit', sans-serif;
-  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
   text-transform: uppercase;
-  transform: scaleY(1.25); /* 1.0 = normal, 1.25 = taller */
-  transform-origin: center; /* optional: preserves symmetry */
   color: #222;
   line-height: 0.92;
   white-space: nowrap;
-  font-size: clamp(48px, 10vw, 140px);
+  font-size: clamp(25px, 5vw, 35px);
   letter-spacing: 1px;
+  /* FIX: Remove position: relative and the top offset.
+   * margin-top: auto pushes this element to the bottom when its parent is a flex column.
+   * Use normal flow so the contact section's height is determined by content.
+   */
+  margin-top: 0;
 }
 
-/* footer (must be after #contact in HTML) */
+/* Positioning for logo2 image (centered) */
+.logo2 {
+  position: absolute;
+  top: 50%; 	/* Vertically center it relative to the #contact section */
+  left: 50%; 	/* Horizontally center it */
+  transform: translate(-50%, -50%); /* Adjust to exactly center */
+  width: 150px; 
+  height: auto;
+}
+
+/* Positioning for keyboard image (bottom-left) */
+.keyboard {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 120px;
+  height: auto;
+}
+
+/* Footer (Assumes this is a sibling, not a child, of #contact)
+   If footer is accidentally inside the contact container it can stretch the parent.
+   Force a modest margin instead of `auto` to avoid huge whitespace. */
 .site-footer {
   background: #fff;
   color: #666;
+  position: relative;
+  margin-top: 24px; /* replaced `auto` with fixed small gap so it never creates massive space */
   text-align: center;
   font-size: 14px;
   padding: 18px 8px;
-  border-top: 1px solid rgba(0,0,0,0.06);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  z-index: 1;
+}
+
+/* If the footer is placed *inside* the contact container, ensure it doesn't stretch the contact area */
+.contact-section .site-footer,
+#contact .site-footer {
+  margin-top: 24px;
+  align-self: stretch;
 }
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
-  .contact-top { margin-top: 12px; justify-content: center; }
-  .contact-right { align-items: center; text-align: center; max-width: 100%; }
-  .contact-link { font-size: clamp(16px, 4vw, 22px); }
-  .socials { justify-content: center; }
+  .contact-top {
+    margin-top: 12px;
+    justify-content: center; /* Center contact block */
+  }
+  .contact-right {
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+  .contact-link {
+    font-size: clamp(16px, 4vw, 22px); /* Smaller font on smaller screens */
+  }
+  .socials {
+    justify-content: center; /* Center social icons */
+  }
 
-  /* allow name to wrap on phones and reduce scale */
-  .big-name { white-space: normal; font-size: clamp(28px, 10vw, 72px); }
+  /* Allow name to wrap on phones and reduce scale */
+  .big-name {
+    white-space: normal;
+    font-size: clamp(28px, 10vw, 72px);
+    margin-top: 0;
+  }
 
-  /* reduce bottom padding */
-  .contact-bottom { padding-bottom: 20px; }
+  /* Reduce bottom padding on smaller screens */
+  .contact-bottom {
+    padding-bottom: 20px;
+  }
 }
 
 @media (max-width: 420px) {
-  .big-name { font-size: clamp(24px, 12vw, 46px); }
-  .social-link { font-size: 12px; padding: 6px 8px; }
+  .big-name {
+    font-size: clamp(24px, 12vw, 46px); /* Adjust for very small screens */
+  }
+  .social-link {
+    font-size: 12px;
+    padding: 6px 8px; /* Smaller padding */
+  }
 }
