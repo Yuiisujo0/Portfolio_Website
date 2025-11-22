@@ -26,38 +26,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const slideInfo = [
     {
         name: "Autonomous Rapid Transit (ART) Mobile App [Map]",
-        images: ["assets/images/section4/uiux/uiux1.png", "assets/images/section4/uiux/uiux1.png", "assets/images/section4/uiux/uiux1.png"],
+        images: ["assets/images/webp/section4/uiux/uiux1.webp", "assets/images/webp/section4/uiux/uiux1.webp", "assets/images/webp/section4/uiux/uiux1.webp"],
         overview: "· Designed an ART mobile app prototype applying UI/UX design methods.\n\n· Improved the initial concept into a more functional and user-friendly interface using Figma and iterative prototyping",
         typeOfWork: "UI/UX, Frontend Development",
-        backgroundImage: "assets/images/section4/uiux/background_05.png" // Add background image for the right panel
+        backgroundImage: "assets/images/webp/section4/uiux/background_05.webp" // Add background image for the right panel
     },
     {
         name: "ZoomRentals Database System Using MySQL",
-        images: ["assets/images/section4/database/database1.png", "assets/images/section4/database/database2.png", "assets/images/section4/database/database3.png"],
+        images: ["assets/images/webp/section4/database/database1.webp", "assets/images/webp/section4/database/database2.webp", "assets/images/webp/section4/database/database3.webp"],
         overview: "· Draw the Crow’s Foot Entity Relationship Diagram (ERD) to represent the structure and relationship among the entities virtually.\n\n· Developed a MySQL database and managed data using command-line operations to support the system requirements.",
         typeOfWork: "MySQL, Database",
-        backgroundImage: "assets/images/section4/database/background_04.png" // Add background image for the right panel
+        backgroundImage: "assets/images/webp/section4/database/background_04.webp" // Add background image for the right panel
     },
     {
         name: "DICE COMPETITION",
-        images: ["assets/images/section4/dice/dice_1.png", "assets/images/section4/dice/dice_2.png"],
+        images: ["assets/images/webp/section4/dice/dice_1.webp", "assets/images/webp/section4/dice/dice_2.webp"],
         overview: "· Designed an interactive user interface prototype in Figma, focusing on intuitive navigation and visual consistency.\n\n· Developed and implemented the application’s user interface (UI) in Unity, collaborating with team members on AR features.\n\n· Silver Award in AR/VR category of Digital Innovation Creativepreneur (DICE) 3.0 at Persada Johor International Convention Centre, Johor Bahru",
         typeOfWork: "Creative Coding, Interactive Art",
-        backgroundImage: "assets/images/section4/dice/background_03.png" // Add background image for the right panel
+        backgroundImage: "assets/images/webp/section4/dice/background_03.webp" // Add background image for the right panel
     },
     {
         name: "Mental Health Quiz Application",
-        images: ["assets/images/section4/java/java1.png", "assets/images/section4/java/java2.png", "assets/images/section4/java/java3.png"],
+        images: ["assets/images/webp/section4/java/java1.webp", "assets/images/webp/section4/java/java2.webp", "assets/images/webp/section4/java/java3.webp"],
         overview: "· Created the home page + quiz part for the application, include multiple-choice, true/false and fill-in the blank questions.\n\n· Designed and developed a Java-based application using object-oriented programming principles with a user-friendly interface.",
         typeOfWork: "Leaning Module, Quiz",
-        backgroundImage: "assets/images/section4/java/background_06.png" // Add background image for the right panel
+        backgroundImage: "assets/images/webp/section4/java/background_06.webp" // Add background image for the right panel
     },
     {
         name: "Autonomous Rapid Transit (ART) Mobile App [Booking]",
-        images: ["assets/images/section4/art/art1.png", "assets/images/section4/art/art2.png", "assets/images/section4/art/art3.png"],
+        images: ["assets/images/webp/section4/art/art1.webp", "assets/images/webp/section4/art/art2.webp", "assets/images/webp/section4/art/art3.webp"],
         overview: "· Designed an ART mobile app prototype applying Human Computer Interaction (HCI) principles using Figma.\n\n· Turning the initial concept into a more functional and user-friendly interface using Figma.",
         typeOfWork: "Mobile UI, App Redesign",
-        backgroundImage: "assets/images/section4/art/background_07.png" // Add background image for the right panel
+        backgroundImage: "assets/images/webp/section4/art/background_07.webp" // Add background image for the right panel
     }
   ];
 
