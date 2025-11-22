@@ -12,158 +12,144 @@
 
   <!-- External stylesheet -->
   <link rel="stylesheet" href="css/style.css">
-  
   <!-- loader styles (required for the fullscreen loader and .site.hidden controls) -->
   <link rel="stylesheet" href="css/loader.css">
 </head>
 <body>
+  
+  <!-- Fixed header navbar -->
+  <header class="navbar" aria-hidden="false">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#home" class="nav-link active">HOME</a>
+      <a href="#about" class="nav-link">ABOUT ME</a>
+      <a href="#project" class="nav-link">PROJECT</a>
+      <a href="#contact" class="nav-link">CONTACT</a>
+      <span class="nav-underline"></span>
+    </nav>
+  </header>
 
-  <!-- FULLSCREEN LOADER (must be present and before main content) -->
-  <div id="loader" class="loader" role="status" aria-label="Loading">
-    <div id="canvasContainer" class="canvas-container" aria-hidden="true"></div>
-    <div id="loaderCounter" class="loader-counter">0%</div>
+  <!-- Sections -->
+  <div id="home" class="section section1">
+    <div class="hero-home">
+      <div class="top-left-motto">
+        A mind exploring realities <br>
+        through code, design, and motion.<br>
+        This is my evolving digital space.
+      </div>
+
+      <div class="main-motto" aria-label="Site Motto">
+        <span>EXPLORE.</span>
+        <span>CREATE.</span>
+        <span>REIMAGINE.</span>
+      </div>
+    </div>
   </div>
 
-  <!-- MAIN SITE (hidden until loader removes .hidden) -->
-  <main id="mainContent" class="site hidden" role="main">
+  <div id="about" class="section section2">
+    <!-- ABOUT ME TITLE -->
+    <h1 class="about-title">ABOUT ME</h1>
 
-    <!-- Fixed header navbar -->
-    <header class="navbar" aria-hidden="false">
-      <nav class="nav" aria-label="Main navigation">
-        <a href="#home" class="nav-link active">HOME</a>
-        <a href="#about" class="nav-link">ABOUT ME</a>
-        <a href="#project" class="nav-link">PROJECT</a>
-        <a href="#contact" class="nav-link">CONTACT</a>
-        <span class="nav-underline"></span>
-      </nav>
-    </header>
+    <!-- DEANLIST IMAGE -->
+    <img src="assets/images/section2/Deanslist_01.png" id="deanlist" alt="Deanlist">
 
-    <!-- Sections -->
-    <div id="home" class="section section1">
-      <div class="hero-home">
-        <div class="top-left-motto">
-          A mind exploring realities <br>
-          through code, design, and motion.<br>
-          This is my evolving digital space.
+    <!-- Arrow IMAGE -->
+    <img src="assets/images/section2/arrow_01.png" id="arrow" alt="Arrow">
+    
+    <!-- DESCRIPTION TEXT -->
+    <p class="about-description">
+      Between reality and imagination lies my workspace, where I transform ideas into intuitive experiences through design, animation, and code. I am Angel Bong, a Multimedia Computing student at UNIMAS, developing the skills to bring meaningful digital worlds to life.
+    </p>
+  </div>
+
+  <div id="project" class="section section3">
+    <div id="projectText">MY PROJECTS</div>
+    <img id="earth" src="assets/images/section3/earth_01.png" alt="Earth">
+    <img id="icon1" src="assets/images/section3/laptop.png" alt="Icon 1">
+    <img id="quote" src="assets/images/section3/quote_01.png" alt="quote">
+  </div>
+
+  <!-- Section 4: Carousel + Right Panel (integrated from your carosel.html) -->
+  <div id="more" class="section section4">
+    <div id="container">
+      <div id="carousel" aria-label="Project carousel" role="region" tabindex="0">
+        <div class="slide" style="background-image: url('assets/images/section4/uiux/UI_UX_01.png');"></div>
+        <div class="slide" style="background-image: url('assets/images/section4/database/database_01.png');"></div>
+        <div class="slide" style="background-image: url('assets/images/section4/dice/dice_01.png');"></div>
+        <div class="slide" style="background-image: url('assets/images/section4/java/java_01.png');"></div>
+        <div class="slide" style="background-image: url('assets/images/section4/art/ART_1.png');"></div>
+      </div>
+
+      <div id="right-panel" aria-live="polite">
+        <h1 id="project-name"></h1>
+
+        <div id="image-row">
+          <img id="img1" alt="">
+          <img id="img2" alt="">
+          <img id="img3" alt="">
         </div>
 
-        <div class="main-motto" aria-label="Site Motto">
-          <span>EXPLORE.</span>
-          <span>CREATE.</span>
-          <span>REIMAGINE.</span>
+        <!-- For Project Description -->
+        <h2 class="project-title">PROJECT DESCRIPTION</h2>
+        <div id="project-description" class="scrollable-text"></div>
+
+        <!-- For Type of Work -->
+        <h2 class="work-title">TYPE OF WORK</h2>
+        <div id="type-of-work" class="single-line-text"></div>
+      </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="image-modal" class="modal">
+    <div class="modal-content">
+      <img id="modal-image" src="" alt="Enlarged image">
+      <button class="close">&times;</button>
+    </div>
+  </div>
+
+  <!-- Contact section (CLEANED UP STRUCTURE) -->
+  <div id="contact" class="section section5 contact-section">
+    <div class="contact-top">
+      <div class="contact-right" role="region" aria-label="Contact information">
+        <a class="contact-link" href="tel:+60108569800">+60 10-8569800</a>
+        <a class="contact-link" href="mailto:angel@gmail.com">angel@gmail.com</a>
+
+        <div class="socials" aria-label="Social links">
+          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+          <a class="social-link" href="https://t.me/" target="_blank" rel="noopener noreferrer">TELEGRAM</a>
+          <a class="social-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
         </div>
       </div>
     </div>
 
-    <div id="about" class="section section2">
-      <!-- ABOUT ME TITLE -->
-      <h1 class="about-title">ABOUT ME</h1>
+    <!-- This is the main content at the bottom of the flex column -->
+    <div class="contact-title">CONTACT</div>
+    <div class="big-name">ANGEL BONG XIN TZE</div>
+    <div class="let-title">LET'S</div>
+    <div class="connect-title">CONNECT</div>
 
-      <!-- DEANLIST IMAGE -->
-      <img src="assets/images/section2/Deanslist_01.png" id="deanlist" alt="Deanlist">
+    <!-- Absolute positioned elements (placed here for relative positioning to #contact) -->
+    <img src="assets/images/section1/logo2.png" alt="Logo2" class="logo2">
+    <img src="assets/images/section5/keyboard.png" alt="Keyboard" class="keyboard">
+  </div>
 
-      <!-- Arrow IMAGE -->
-      <img src="assets/images/section2/arrow_01.png" id="arrow" alt="Arrow">
-      
-      <!-- DESCRIPTION TEXT -->
-      <p class="about-description">
-        Between reality and imagination lies my workspace, where I transform ideas into intuitive experiences through design, animation, and code. I am Angel Bong, a Multimedia Computing student at UNIMAS, developing the skills to bring meaningful digital worlds to life.
-      </p>
-    </div>
+<footer class="site-footer" role="contentinfo">© All right reserved. 2025 JeanCheahMingSan</footer>
 
-    <div id="project" class="section section3">
-      <div id="projectText">MY PROJECTS</div>
-      <img id="earth" src="assets/images/section3/earth_01.png" alt="Earth">
-      <img id="icon1" src="assets/images/section3/laptop.png" alt="Icon 1">
-      <img id="quote" src="assets/images/section3/quote_01.png" alt="quote">
-    </div>
+  <!-- Images (fixed) -->
+  <img src="assets/images/section1/pic1.png" id="pic1" alt="Main">
+  <img src="assets/images/section3/my_project_1.png" id="pic1Back" alt="Back">
+  <img src="assets/images/section2/sarawak_01.png" id="kuching1" alt="Kuching">
 
-    <!-- Section 4: Carousel + Right Panel (integrated from your carosel.html) -->
-    <div id="more" class="section section4">
-      <div id="container">
-        <div id="carousel" aria-label="Project carousel" role="region" tabindex="0">
-          <div class="slide" style="background-image: url('assets/images/section4/uiux/background_05.png');"></div>
-          <div class="slide" style="background-image: url('assets/images/section4/database/database_01.png');"></div>
-          <div class="slide" style="background-image: url('assets/images/section4/dice/dice_01.png');"></div>
-          <div class="slide" style="background-image: url('assets/images/section4/java/java_01.png');"></div>
-          <div class="slide" style="background-image: url('assets/images/section4/art/ART_1.png');"></div>
-        </div>
+  <!-- Right-side persistent border + logo (uses assets/images/border_1.png and assets/images/logo1.svg) -->
+  <div id="right-stationary" aria-hidden="false">
+    <img src="assets/images/section1/Border_1.png" id="right-border" alt="Decorative right border">
+    <a href="#home" id="right-logo-link" aria-label="Go to home">
+      <img src="assets/images/section1/logo2.png" id="right-logo" alt="Site logo">
+    </a>
+  </div>
 
-        <div id="right-panel" aria-live="polite">
-          <h1 id="project-name"></h1>
-
-          <div id="image-row">
-            <img id="img1" alt="">
-            <img id="img2" alt="">
-            <img id="img3" alt="">
-          </div>
-
-          <!-- For Project Description -->
-          <h2 class="project-title">PROJECT DESCRIPTION</h2>
-          <div id="project-description" class="scrollable-text"></div>
-
-          <!-- For Type of Work -->
-          <h2 class="work-title">TYPE OF WORK</h2>
-          <div id="type-of-work" class="single-line-text"></div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="image-modal" class="modal">
-      <div class="modal-content">
-        <img id="modal-image" src="" alt="Enlarged image">
-        <button class="close">&times;</button>
-      </div>
-    </div>
-
-    <!-- Contact section (CLEANED UP STRUCTURE) -->
-    <div id="contact" class="section section5 contact-section">
-      <div class="contact-top">
-        <div class="contact-right" role="region" aria-label="Contact information">
-          <a class="contact-link" href="tel:+60108569800">+60 10-8569800</a>
-          <a class="contact-link" href="mailto:angel@gmail.com">angel@gmail.com</a>
-
-          <div class="socials" aria-label="Social links">
-            <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
-            <a class="social-link" href="https://t.me/" target="_blank" rel="noopener noreferrer">TELEGRAM</a>
-            <a class="social-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- This is the main content at the bottom of the flex column -->
-      <div class="contact-title">CONTACT</div>
-      <div class="big-name">ANGEL BONG XIN TZE</div>
-      <div class="let-title">LET'S</div>
-      <div class="connect-title">CONNECT</div>
-
-      <!-- Absolute positioned elements (placed here for relative positioning to #contact) -->
-      <img src="assets/images/section1/logo2.png" alt="Logo2" class="logo2">
-      <img src="assets/images/section5/keyboard.png" alt="Keyboard" class="keyboard">
-    </div>
-
-  <footer class="site-footer" role="contentinfo">© All right reserved. 2025 JeanCheahMingSan</footer>
-
-    <!-- Images (fixed) -->
-    <img src="assets/images/section1/pic1.png" id="pic1" alt="Main">
-    <img src="assets/images/section3/my_project_1.png" id="pic1Back" alt="Back">
-    <img src="assets/images/section2/sarawak_01.png" id="kuching1" alt="Kuching">
-
-    <!-- Right-side persistent border + logo (uses assets/images/border_1.png and assets/images/logo1.svg) -->
-    <div id="right-stationary" aria-hidden="false">
-      <img src="assets/images/section1/Border_1.png" id="right-border" alt="Decorative right border">
-      <a href="#home" id="right-logo-link" aria-label="Go to home">
-        <img src="assets/images/section1/logo2.png" id="right-logo" alt="Site logo">
-      </a>
-    </div>
-
-  </main> <!-- end main.site.hidden -->
-
-  <!-- Scripts: include libs first, loader next, then your app scripts -->
-  <script src="js/lib/three.min.js" defer></script>
-  <script src="js/lib/gsap.min.js" defer></script>
-  <script src="js/loader.js" defer></script>
+  <!-- Scripts -->
   <script src="js/main.js" defer></script>
   <script src="js/carousel.js" defer></script>
+  <script src="js/loader.js" defer></script>
 </body>
 </html>
