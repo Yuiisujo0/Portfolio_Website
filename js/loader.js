@@ -8,9 +8,9 @@
   const counterEl = document.getElementById('loaderCounter');
   const canvasContainer = document.getElementById('canvasContainer');
   const mainContent = document.getElementById('mainContent');
-  const header = document.querySelector('.header');
-  const hero = document.querySelector('.hero');
-  const footer = document.querySelector('.footer');
+  const header = document.querySelector('.header') || document.querySelector('.navbar');
+  const hero   = document.querySelector('.hero')   || document.querySelector('.hero-home');
+  const footer = document.querySelector('.footer') || document.querySelector('footer');
 
   let scene, camera, renderer, group;
   let sphere1, sphere2;
