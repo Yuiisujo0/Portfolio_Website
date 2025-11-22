@@ -713,15 +713,14 @@ body {
 .contact-section {
   display: flex;
   flex-direction: column;
+  min-height: 90vh;
   justify-content: flex-start; /* don't force large space between children */
-  /* FIX: Removed min-height: 100vh; to allow content to define height */
-  padding: 40px 40px; /* reduced bottom padding to reduce empty whitespace */
   box-sizing: border-box;
   background: #fff;
   color: #222;
   /* Added position: relative to properly anchor absolute elements */
   position: relative;
-  gap: 20px;
+  gap: 5px;
 }
 
 /* top row that contains the right-side contact block */
@@ -780,28 +779,43 @@ body {
 }
 
 /* Single large line for the full name */
+.contact-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #c8c7c7;
+  line-height: 0.92;
+  white-space: nowrap;
+  font-size: clamp(55px, 10vw, 55px);
+  letter-spacing: 1px;
+  position: absolute;
+  top: 29%;
+  left: 22.45%;
+  z-index: 1;
+}
+
+/* Single large line for the full name */
 .big-name {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   text-transform: uppercase;
-  color: #222;
+  color: #8a8989;
   line-height: 0.92;
   white-space: nowrap;
-  font-size: clamp(25px, 5vw, 35px);
+  font-size: clamp(40px, 10vw, 40px);
   letter-spacing: 1px;
-  /* FIX: Remove position: relative and the top offset.
-   * margin-top: auto pushes this element to the bottom when its parent is a flex column.
-   * Use normal flow so the contact section's height is determined by content.
-   */
-  margin-top: 0;
+  position: absolute;
+  top: 37%;
+  left: 29%;
+  z-index: 1;
 }
 
 /* Positioning for logo2 image (centered) */
 .logo2 {
   position: absolute;
   top: 50%; 	/* Vertically center it relative to the #contact section */
-  left: 50%; 	/* Horizontally center it */
-  transform: translate(-50%, -50%); /* Adjust to exactly center */
+  left: 67%; 	/* Horizontally center it */
+  transform: translate(-70%, -30%) scale(0.5); /* Adjust to exactly center */
   width: 150px; 
   height: auto;
 }
@@ -809,10 +823,42 @@ body {
 /* Positioning for keyboard image (bottom-left) */
 .keyboard {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  width: 120px;
-  height: auto;
+  bottom: -5%;
+  left: 100px;
+  width: 800px;
+  height: 500px;
+}
+
+/* Single large line for the full name */
+.let-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #c3c3c3;
+  line-height: 0.92;
+  white-space: nowrap;
+  font-size: clamp(40px, 10vw, 40px);
+  letter-spacing: 1px;
+  position: absolute;
+  top: 63%;
+  left: 68%;
+  z-index: 1;
+}
+
+/* Single large line for the full name */
+.connect-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #c3c3c3;
+  line-height: 0.92;
+  white-space: nowrap;
+  font-size: clamp(45px, 7vw, 45px);
+  letter-spacing: 0.7px;
+  position: absolute;
+  top: 70%;
+  left: 68%;
+  z-index: 1;
 }
 
 /* Footer (Assumes this is a sibling, not a child, of #contact)
