@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const topLeftMotto = document.querySelector(".top-left-motto");
   const mainMotto = document.querySelector(".main-motto");
   const webAnimation = document.getElementById("webAnimation");
+  const arrow = document.getElementById("arrow");
   
   let vw = window.innerWidth, vh = window.innerHeight;
   let scaleCover = 1;
