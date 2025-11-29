@@ -3,32 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Angel Portfolio By JEAN CHEAH</title>
+  <title>Cinematic Scroll Animation v3 - Flip</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-  <!-- Loader stylesheet (load early so loader appears correctly) -->
-  <link rel="stylesheet" href="css/loader.css">
-
   <!-- External stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+  <!-- loader styles (required for the fullscreen loader and .site.hidden controls) -->
+  <link rel="stylesheet" href="css/loader.css">
 </head>
 <body>
-  <!-- FULLSCREEN LOADER (from your folder) -->
-  <div id="loader" class="loader" role="status" aria-label="Loading">
-    <div id="canvasContainer" class="canvas-container" aria-hidden="true"></div>
-    <div id="loaderCounter" class="loader-counter">0%</div>
-  </div>
 
-  <noscript>
-    <style>
-      /* If JS is disabled, hide the loader so content is accessible */
-      #loader { display: none !important; }
-    </style>
-  </noscript>
   
   <!-- Fixed header navbar -->
   <header class="navbar" aria-hidden="false">
@@ -160,15 +148,9 @@
     </a>
   </div>
 
-  <!-- Libraries required by the loader (must be present at these paths or replaced with CDN URLs) -->
-  <script src="js/lib/three.min.js"></script>
-  <script src="js/lib/gsap.min.js"></script>
-
-  <!-- Loader JS (removes the loader on window.load) -->
-  <script src="js/loader.js" defer></script>
-
   <!-- Scripts -->
   <script src="js/main.js" defer></script>
   <script src="js/carousel.js" defer></script>
+  <script src="js/loader.js" defer></script>
 </body>
 </html>
