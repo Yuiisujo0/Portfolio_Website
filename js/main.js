@@ -1,7 +1,14 @@
 /* main.js */
 
-document.addEventListener('DOMContentLoaded', () => {
-  // DOM elements
+/*
+  Compatibility wrapper:
+  - If the document is still loading, register the original init on DOMContentLoaded.
+  - If the document has already loaded (e.g. main.js injected after loader), call init() immediately.
+*/
+(function () {
+
+  function init() {
+    // DOM elements
   const pic1 = document.getElementById("pic1");
   const pic1Back = document.getElementById("pic1Back");
   const kuching1 = document.getElementById("kuching1");
@@ -347,4 +354,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!ticking) { ticking = true; requestAnimationFrame(processScroll); }
   }
 
-});
+} // end init
+
+  // Run init immediately if DOMContentLoaded already fired, otherwise wait
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    // Document already parsed — run init right away
+    init();
+  }
+
+})();
