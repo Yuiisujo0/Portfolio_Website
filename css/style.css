@@ -219,6 +219,15 @@ body {
   }
 }
 
+.loader ~ #pic1,
+.loader ~ #pic1Back,
+.loader ~ #kuching1,
+.loader ~ #deanlist {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Images (fixed) */
 #pic1, #pic1Back {
   position: fixed;
