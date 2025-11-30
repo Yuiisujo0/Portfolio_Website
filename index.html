@@ -12,10 +12,21 @@
 
   <!-- External stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/loader.css">
 
 </head>
 <body>
-  
+  <!-- Loader Screen -->
+  <div id="loader">
+    <div id="loader-content">
+      <!-- Canvas wrapper for Three.js -->
+      <div id="loader-canvas-wrapper"></div>
+      
+      <!-- Percentage counter below rings -->
+      <div id="loader-percentage">0%</div>
+    </div>
+  </div>
+
   <!-- Fixed header navbar -->
   <header class="navbar" aria-hidden="false">
     <nav class="nav" aria-label="Main navigation">
@@ -147,6 +158,10 @@
   </div>
 
   <!-- Scripts -->
+  <script src="js/lib/three.min.js"></script>
+  <script src="js/lib/gsap.min.js"></script>
+
+  <script src="js/loader.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/carousel.js" defer></script>
 </body>
