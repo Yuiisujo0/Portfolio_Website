@@ -17,8 +17,8 @@ body.loading {
   background: var(--bg);
   display: flex;
   flex-direction: column;
-  align-items: center;       /* horizontally center */
-  justify-content: center;   /* vertical center for rings only */
+  align-items: center;
+  justify-content: center; 
   z-index: var(--loader-z);
   pointer-events: auto;
 }
@@ -41,7 +41,11 @@ body.loading {
 
 /* Percentage counter below rings */
 #loader-percentage {
-  margin-top: 24px; /* space below rings */
+  position: absolute;
+  bottom: 40px;        /* adjust distance from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
   font-family: 'Bungee', 'Montserrat', system-ui, sans-serif;
   font-weight: 700;
   font-size: clamp(40px, 7vw, 88px);
@@ -50,7 +54,7 @@ body.loading {
   line-height: 1.1;
   user-select: none;
   text-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transform-origin: center center;
+  transform-origin: center;
 }
 
 /* Fade-out */

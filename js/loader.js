@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const canvasWrapper = document.getElementById('loader-canvas-wrapper');
   const loaderPercentage = document.getElementById('loader-percentage');
 
+   // Hide both until ready
+  loaderPercentage.style.opacity = 0;
+  canvasWrapper.style.opacity = 0;
+
   document.body.classList.add('loading');
 
   let width = window.innerWidth;
@@ -19,6 +23,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   canvasWrapper.appendChild(renderer.domElement);
+
+  // Fade-in rings + percentage together
+  gsap.to([loaderPercentage, canvasWrapper], {
+    opacity: 1,
+    duration: 0.4,
+    ease: "power2.out"
+  });
 
   // === Group for rings ===
   const group = new THREE.Group();
@@ -39,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // === Text textures ===
-  const titleText = "JEAN CHEAH MING SAN •";
+  const titleText = "ANGEL BONG XIN TZE •";
   const bandText = "CREATIVE THINKING • USER EXPERIENCE • UI MOTION • ";
 
   function createSingleWrapTexture(text, opts = {}) {
@@ -214,7 +225,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let percent = { value: 0 };
   gsap.to(percent, {
     value: 100,
-    duration: 2.5,
+    duration: 5,
     ease: 'power1.out',
     onUpdate: () => {
       const rounded = Math.floor(percent.value);
@@ -222,14 +233,52 @@ document.addEventListener('DOMContentLoaded', async () => {
       gsap.to(loaderPercentage, { scale: 1 + 0.03 * Math.sin(rounded/3), duration: 0.2, ease: 'power1.out' });
     },
     onComplete: () => {
-      const tl = gsap.timeline({ onComplete: () => {
-        loader.style.display = 'none';
-        document.body.classList.remove('loading');
-      }});
-      tl.to(loaderPercentage, { opacity: 0, duration: 0.4, ease: 'power2.out' });
-      tl.to(sphere1.position, { y: -10, rotationY: -Math.PI/4, duration: 1.2, ease: 'power4.in' }, '-=0.2');
-      tl.to(sphere2.position, { y: -10, rotationY: Math.PI/2, duration: 1.2, ease: 'power4.in' }, '-=1.1');
-      tl.to(loader, { opacity: 0, duration: 0.6, ease:'power2.inOut' }, '-=0.6');
+      const tl = gsap.timeline({
+        onComplete: () => {
+          loader.style.display = 'none';
+          document.body.classList.remove('loading');
+        }
+      });
+
+      // Fade out percentage first
+      tl.to(loaderPercentage, {
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power2.out'
+      });
+
+      // === Bottom ring falls FIRST ===
+      tl.to(sphere2.position, {
+        y: -10,
+        duration: 1.1,
+        ease: 'power4.in'
+      }, "-=0.05");
+
+      tl.to(sphere2.rotation, {
+        y: Math.PI / 2,
+        duration: 1.1,
+        ease: 'power4.in'
+      }, "<");
+
+      // === Top ring falls shortly AFTER (better timing: 0.25s later) ===
+      tl.to(sphere1.position, {
+        y: -10,
+        duration: 1.1,
+        ease: 'power4.in'
+      }, "-=0.85");  // ← key change (0.25s delay)
+
+      tl.to(sphere1.rotation, {
+        y: -Math.PI / 4,
+        duration: 1.1,
+        ease: 'power4.in'
+      }, "<");
+
+      // Fade loader
+      tl.to(loader, {
+        opacity: 0,
+        duration: 0.6,
+        ease: 'power2.inOut'
+      }, "-=0.5");
     }
   });
 
