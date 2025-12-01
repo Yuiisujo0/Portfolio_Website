@@ -755,7 +755,7 @@ body {
 
 /* phone/email link style */
 .contact-link {
-  color: #111;
+  color: #c28cd1;
   font-weight: 800;
   text-decoration: none;
   font-size: clamp(20px, 3vw, 36px); /* Larger responsive font */
@@ -764,7 +764,7 @@ body {
 .contact-link:hover,
 .contact-link:focus {
   text-decoration: underline;
-  color: #000;
+  color: #c28cd1;
   outline: none;
 }
 
@@ -777,7 +777,7 @@ body {
 .social-link {
   padding: 6px 10px;
   border-radius: 6px;
-  background: #111;
+  background: #7d7c7c;
   color: #fff;
   text-decoration: none;
   font-weight: 700;

@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const height = opts.height || 1024;
     const fontFamily = opts.fontFamily || "'Bungee', sans-serif";
     let fontSize = opts.fontSize || 220;
-    const color = opts.color || '#111';
+    const color = opts.color || '#c39ad7ff';
     const paddingPercent = opts.paddingPercent ?? 0.02;
     const squeezeFactor = opts.squeezeFactor ?? 1.0;
 
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const height = opts.height || 1024;
     const fontFamily = opts.fontFamily || "'Montserrat', sans-serif";
     let fontSize = opts.fontSize || 44;
-    const color = opts.color || '#111';
+    const color = opts.color || '#cdcbcbff';
     const gap = opts.gap ?? 80;
     const squeezeFactor = opts.squeezeFactor ?? 1.0;
 
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let percent = { value: 0 };
   gsap.to(percent, {
     value: 100,
-    duration: 5,
+    duration: 2.5,
     ease: 'power1.out',
     onUpdate: () => {
       const rounded = Math.floor(percent.value);

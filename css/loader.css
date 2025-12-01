@@ -1,6 +1,6 @@
 :root {
   --bg: #f7f7f7;
-  --text: #0b0b0b;
+  --text: #888888;
   --loader-z: 9999;
 }
 
@@ -46,7 +46,7 @@ body.loading {
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
-  font-family: 'Bungee', 'Montserrat', system-ui, sans-serif;
+  font-family: 'Montserrat', 'Montserrat', system-ui, sans-serif;
   font-weight: 700;
   font-size: clamp(40px, 7vw, 88px);
   color: var(--text);
