@@ -1,20 +1,21 @@
-/* loader.js - full-screen 3D loader with centered rings and bottom percentage */
+/* loader.js — rewritten, optimized, crisp-text + improved ring timing */
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const loader = document.getElementById('loader');
-  const canvasWrapper = document.getElementById('loader-canvas-wrapper');
-  const loaderPercentage = document.getElementById('loader-percentage');
+document.addEventListener("DOMContentLoaded", async () => {
+  const loader = document.getElementById("loader");
+  const canvasWrapper = document.getElementById("loader-canvas-wrapper");
+  const loaderPercentage = document.getElementById("loader-percentage");
 
-   // Hide both until ready
+  loaderPercentage.textContent = '0%';
   loaderPercentage.style.opacity = 0;
   canvasWrapper.style.opacity = 0;
-
-  document.body.classList.add('loading');
+  document.body.classList.add("loading");
 
   let width = window.innerWidth;
   let height = window.innerHeight;
 
-  // === THREE.js Setup ===
+  /* --------------------------------------------
+   * THREE.js Setup
+   * -------------------------------------------- */
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100);
   camera.position.set(0, 0, 6);
@@ -22,268 +23,277 @@ document.addEventListener('DOMContentLoaded', async () => {
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // After appending renderer
   canvasWrapper.appendChild(renderer.domElement);
 
-  // Fade-in rings + percentage together
+  // Fade in BOTH at the same time
   gsap.to([loaderPercentage, canvasWrapper], {
     opacity: 1,
-    duration: 0.4,
+    duration: 0.6,
     ease: "power2.out"
   });
 
-  // === Group for rings ===
   const group = new THREE.Group();
   group.rotation.x = 0.08;
   group.rotation.z = -0.25;
   scene.add(group);
 
-  // === Font loading ===
+  /* --------------------------------------------
+   * Font Loading
+   * -------------------------------------------- */
   try {
-    if (document.fonts && document.fonts.load) {
-      await document.fonts.load("1em 'Bungee', sans-serif");
-      await document.fonts.load("1em 'Montserrat', sans-serif");
+    if (document.fonts) {
+      await document.fonts.load("700 1em 'Montserrat'");
       await document.fonts.ready;
     }
-  } catch(e) {
-    console.warn('Font loading fallback', e);
-    await new Promise(r => setTimeout(r, 120));
+  } catch (e) {
+    console.warn("Font load fallback");
+    await new Promise(r => setTimeout(r, 200));
   }
 
-  // === Text textures ===
+  /* --------------------------------------------
+   * TEXTURE GENERATION (HIGH-RES & BOLD)
+   * -------------------------------------------- */
   const titleText = "ANGEL BONG XIN TZE •";
   const bandText = "CREATIVE THINKING • USER EXPERIENCE • UI MOTION • ";
 
   function createSingleWrapTexture(text, opts = {}) {
-    const width = opts.width || 2048;
-    const height = opts.height || 1024;
-    const fontFamily = opts.fontFamily || "'Bungee', sans-serif";
-    let fontSize = opts.fontSize || 220;
-    const color = opts.color || '#c39ad7ff';
+    const width = opts.width || 6144;      // 3× resolution
+    const height = opts.height || 3072;
+    const fontFamily = "'Montserrat', sans-serif";
+    let fontSize = opts.fontSize || 600;   // large for crisp bold
+    const color = opts.color || "#c39ad7ff";
     const paddingPercent = opts.paddingPercent ?? 0.02;
-    const squeezeFactor = opts.squeezeFactor ?? 1.0;
 
-    const tmp = document.createElement('canvas');
-    tmp.width = width;
-    tmp.height = height;
-    const ctx = tmp.getContext('2d');
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
 
     ctx.fillStyle = color;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.font = `${fontSize}px ${fontFamily}`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = `800 ${fontSize}px ${fontFamily}`; // BOLD
 
     const maxTextWidth = width * (1 - paddingPercent * 2);
     let measured = ctx.measureText(text).width;
+
     while (measured > maxTextWidth && fontSize > 8) {
-      fontSize = Math.max(8, Math.floor(fontSize * 0.92));
-      ctx.font = `${fontSize}px ${fontFamily}`;
+      fontSize = Math.floor(fontSize * 0.92);
+      ctx.font = `800 ${fontSize}px ${fontFamily}`;
       measured = ctx.measureText(text).width;
     }
 
     ctx.save();
     ctx.translate(width / 2, height / 2);
-    const hScale = (width * (1 - paddingPercent * 2)) / measured * squeezeFactor;
+    const hScale = maxTextWidth / measured;
     ctx.scale(hScale, 1);
     ctx.fillText(text, 0, 0);
     ctx.restore();
 
-    const tex = new THREE.CanvasTexture(tmp);
+    const tex = new THREE.CanvasTexture(canvas);
     tex.wrapS = THREE.ClampToEdgeWrapping;
     tex.wrapT = THREE.ClampToEdgeWrapping;
     tex.needsUpdate = true;
+
     return tex;
   }
 
   function createRepeatTextTexture(text, opts = {}) {
-    const width = opts.width || 2048;
-    const height = opts.height || 1024;
-    const fontFamily = opts.fontFamily || "'Montserrat', sans-serif";
-    let fontSize = opts.fontSize || 44;
-    const color = opts.color || '#cdcbcbff';
+    const width = opts.width || 4096;
+    const height = opts.height || 2048;
+    const fontFamily = "'Montserrat', sans-serif";
+    const fontSize = opts.fontSize || 90;
+    const color = opts.color || "#b4b4b4ff";
     const gap = opts.gap ?? 80;
-    const squeezeFactor = opts.squeezeFactor ?? 1.0;
 
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     ctx.fillStyle = color;
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'middle';
-    ctx.font = `${fontSize}px ${fontFamily}`;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.font = `600 ${fontSize}px ${fontFamily}`;
 
-    const sep = ' ';
-    let chunkWidth = ctx.measureText(text + sep).width + gap;
+    const chunkWidth = ctx.measureText(text).width + gap;
     const repeats = Math.ceil(width / chunkWidth) + 2;
 
     const centerY = height / 2;
     for (let i = 0; i < repeats; i++) {
-      ctx.fillText(text + sep, i * chunkWidth, centerY);
-    }
-
-    if (squeezeFactor !== 1) {
-      const out = document.createElement('canvas');
-      out.width = width;
-      out.height = height;
-      const outCtx = out.getContext('2d');
-      outCtx.setTransform(squeezeFactor, 0, 0, 1, 0, 0);
-      outCtx.drawImage(canvas, 0, 0);
-      outCtx.setTransform(1,0,0,1,0,0);
-      const tex = new THREE.CanvasTexture(out);
-      tex.wrapS = THREE.RepeatWrapping;
-      tex.wrapT = THREE.ClampToEdgeWrapping;
-      tex.repeat.set(1,1);
-      tex.needsUpdate = true;
-      return tex;
+      ctx.fillText(text, i * chunkWidth, centerY);
     }
 
     const tex = new THREE.CanvasTexture(canvas);
     tex.wrapS = THREE.RepeatWrapping;
     tex.wrapT = THREE.ClampToEdgeWrapping;
-    tex.repeat.set(1,1);
+    tex.repeat.set(1, 1);
     tex.needsUpdate = true;
+
     return tex;
   }
 
-  const tex1 = createSingleWrapTexture(titleText, { fontSize: 220 });
-  const tex2 = createRepeatTextTexture(bandText, { fontSize: 44 });
+  const texTop = createSingleWrapTexture(titleText);
+  const texBottom = createRepeatTextTexture(bandText);
 
-  // === Shader material ===
+  /* --------------------------------------------
+   * Materials + Spheres
+   * -------------------------------------------- */
   const baseMaterial = new THREE.ShaderMaterial({
     uniforms: { map: { value: null } },
-    vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+      }
+    `,
     fragmentShader: `
       uniform sampler2D map;
       varying vec2 vUv;
       void main() {
         vec4 texColor = texture2D(map, vUv);
-        if (texColor.a <= 0.0001) discard;
-        float alphaThreshold = 0.01;
-        float alphaFactor = smoothstep(alphaThreshold, alphaThreshold+0.04, texColor.a);
-        vec3 premultipliedRGB = texColor.rgb * alphaFactor;
-        gl_FragColor = vec4(premultipliedRGB, texColor.a*alphaFactor);
-      }`,
+        if (texColor.a < 0.0001) discard;
+        gl_FragColor = texColor;
+      }
+    `,
     transparent: true,
     side: THREE.DoubleSide
   });
 
-  // === Spheres ===
-  const geometry = new THREE.SphereGeometry(1, 64, 64);
-  const mat1 = baseMaterial.clone();
-  mat1.uniforms = THREE.UniformsUtils.clone(mat1.uniforms);
-  mat1.uniforms.map = { value: tex1 };
-  const sphere1 = new THREE.Mesh(geometry, mat1);
-  sphere1.position.y = 0.18;
-  group.add(sphere1);
+  const geo = new THREE.SphereGeometry(1.1, 64, 64);
 
-  const mat2 = baseMaterial.clone();
-  mat2.uniforms = THREE.UniformsUtils.clone(mat2.uniforms);
-  mat2.uniforms.map = { value: tex2 };
-  const sphere2 = new THREE.Mesh(geometry, mat2);
-  sphere2.position.y = -0.18;
-  group.add(sphere2);
+  const matTop = baseMaterial.clone();
+  matTop.uniforms.map.value = texTop;
+  const sphereTop = new THREE.Mesh(geo, matTop);
+  sphereTop.scale.y = 1.2;   // stretch vertically by 50%
+  sphereTop.position.y = 0.18;
+  group.add(sphereTop);
 
-  // === Lights ===
+  const matBottom = baseMaterial.clone();
+  matBottom.uniforms.map.value = texBottom;
+  const sphereBottom = new THREE.Mesh(geo, matBottom);
+  sphereBottom.scale.y = 1.2;  // same vertical stretch
+  sphereBottom.position.y = -0.18;
+  group.add(sphereBottom);
+
+  /* --------------------------------------------
+   * Lights
+   * -------------------------------------------- */
   scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-  const pointLight = new THREE.PointLight(0xffffff, 1);
-  pointLight.position.set(5,5,5);
-  scene.add(pointLight);
+  const light = new THREE.PointLight(0xffffff, 1);
+  light.position.set(5, 5, 5);
+  scene.add(light);
 
-  // === Mouse tilt ===
+  /* --------------------------------------------
+   * Mouse Tilt
+   * -------------------------------------------- */
   let mouseX = 0, mouseY = 0;
-  window.addEventListener('mousemove', (e) => {
+  window.addEventListener("mousemove", (e) => {
     mouseX = ((e.clientX / width) * 2 - 1) * 0.6;
     mouseY = ((e.clientY / height) * 2 - 1) * 0.6;
   });
 
-  // === Animate ===
-  let currentRot = { x:0, y:0 };
+  let currentRot = { x: 0, y: 0 };
+
   function animate() {
     requestAnimationFrame(animate);
+
     currentRot.x += (mouseY - currentRot.x) * 0.06;
     currentRot.y += (mouseX - currentRot.y) * 0.06;
 
-    const radius = 6;
-    const phi = Math.PI/2 - currentRot.x;
+    const r = 6;
+    const phi = Math.PI / 2 - currentRot.x;
     const theta = currentRot.y + Math.PI;
-    camera.position.x = radius * Math.sin(phi) * Math.cos(theta);
-    camera.position.y = radius * Math.cos(phi);
-    camera.position.z = radius * Math.sin(phi) * Math.sin(theta);
-    camera.lookAt(0,0,0);
 
-    const t = performance.now()/1000;
-    sphere1.rotation.y = -t*0.6;
-    sphere2.rotation.y = -t*1.0;
+    camera.position.set(
+      r * Math.sin(phi) * Math.cos(theta),
+      r * Math.cos(phi),
+      r * Math.sin(phi) * Math.sin(theta)
+    );
+    camera.lookAt(0, 0, 0);
+
+    const t = performance.now() / 1000;
+    sphereTop.rotation.y = -t * 0.6;
+    sphereBottom.rotation.y = -t * 1.0;
 
     renderer.render(scene, camera);
   }
-
   animate();
 
-  // === GSAP loader counter & exit ===
+  /* --------------------------------------------
+   * GSAP Percentage Counter + Exit Animation
+   * -------------------------------------------- */
   let percent = { value: 0 };
+
   gsap.to(percent, {
     value: 100,
-    duration: 2.5,
-    ease: 'power1.out',
+    duration: 7,
+    ease: "power1.out",
     onUpdate: () => {
-      const rounded = Math.floor(percent.value);
-      loaderPercentage.textContent = `${rounded}%`;
-      gsap.to(loaderPercentage, { scale: 1 + 0.03 * Math.sin(rounded/3), duration: 0.2, ease: 'power1.out' });
+      const p = Math.floor(percent.value);
+      loaderPercentage.textContent = `${p}%`;
+      gsap.to(loaderPercentage, {
+        scale: 1 + Math.sin(p / 3) * 0.03,
+        duration: 0.2,
+        ease: "power1.out"
+      });
     },
+
     onComplete: () => {
       const tl = gsap.timeline({
         onComplete: () => {
-          loader.style.display = 'none';
-          document.body.classList.remove('loading');
+          loader.remove();
+          document.body.classList.remove("loading");
         }
       });
 
-      // Fade out percentage first
       tl.to(loaderPercentage, {
         opacity: 0,
         duration: 0.4,
-        ease: 'power2.out'
+        ease: "power2.out"
       });
 
-      // === Bottom ring falls FIRST ===
-      tl.to(sphere2.position, {
+      // bottom ring falls first
+      tl.to(sphereBottom.position, {
         y: -10,
         duration: 1.1,
-        ease: 'power4.in'
+        ease: "power4.in"
       }, "-=0.05");
 
-      tl.to(sphere2.rotation, {
+      tl.to(sphereBottom.rotation, {
         y: Math.PI / 2,
         duration: 1.1,
-        ease: 'power4.in'
+        ease: "power4.in"
       }, "<");
 
-      // === Top ring falls shortly AFTER (better timing: 0.25s later) ===
-      tl.to(sphere1.position, {
+      // top ring falls slightly after
+      tl.to(sphereTop.position, {
         y: -10,
         duration: 1.1,
-        ease: 'power4.in'
-      }, "-=0.85");  // ← key change (0.25s delay)
+        ease: "power4.in"
+      }, "-=0.78");
 
-      tl.to(sphere1.rotation, {
+      tl.to(sphereTop.rotation, {
         y: -Math.PI / 4,
         duration: 1.1,
-        ease: 'power4.in'
+        ease: "power4.in"
       }, "<");
 
-      // Fade loader
+      // fade loader bg
       tl.to(loader, {
         opacity: 0,
         duration: 0.6,
-        ease: 'power2.inOut'
-      }, "-=0.5");
+        ease: "power2.inOut"
+      }, "-=0.4");
     }
   });
 
-  // === Handle resize ===
-  window.addEventListener('resize', () => {
+  /* --------------------------------------------
+   * Resize Handling
+   * -------------------------------------------- */
+  window.addEventListener("resize", () => {
     width = window.innerWidth;
     height = window.innerHeight;
     camera.aspect = width / height;

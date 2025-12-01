@@ -39,6 +39,10 @@ body.loading {
   pointer-events: none;
 }
 
+#loader-canvas-wrapper {
+  opacity: 0;          /* hidden by default */
+}
+
 /* Percentage counter below rings */
 #loader-percentage {
   position: absolute;

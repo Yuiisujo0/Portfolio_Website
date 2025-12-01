@@ -753,18 +753,37 @@ body {
   align-items: flex-end;
 }
 
-/* phone/email link style */
-.contact-link {
-  color: #c28cd1;
+/* Base link style */
+.phone-link,
+.email-link {
   font-weight: 800;
   text-decoration: none;
-  font-size: clamp(20px, 3vw, 36px); /* Larger responsive font */
+  font-size: clamp(20px, 3vw, 36px);
   line-height: 1.02;
+  transition: color 0.2s, text-decoration 0.2s;
 }
-.contact-link:hover,
-.contact-link:focus {
-  text-decoration: underline;
+
+/* Individual colors */
+.phone-link {
+  color: #b3b3b3;
+}
+
+.email-link {
   color: #c28cd1;
+}
+
+/* Hover / focus underline */
+.phone-link:hover,
+.phone-link:focus {
+  text-decoration: underline;
+  color: #b3b3b3; /* hover color same as original, can change if you want */
+  outline: none;
+}
+
+.email-link:hover,
+.email-link:focus {
+  text-decoration: underline;
+  color: #c28cd1; /* hover color same as original, can change if you want */
   outline: none;
 }
 

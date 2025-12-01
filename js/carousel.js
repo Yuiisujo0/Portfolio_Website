@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const MAX = slides.length - 1;
 
   // colors for right panel background
-  const colors = ["#e74c3c","#3498db","#2ecc71","#f1c40f","#9b59b6"];
+  const colors = ["transparent","transparent","transparent","transparent","transparent"];
 
   // INFO FOR EACH SLIDE - make sure these image files exist in assets/images/
   const slideInfo = [
