@@ -1,0 +1,145 @@
+/* HOME / HERO / GLOBAL FIXED IMAGES */
+
+/* Section 1 (home) */
+.section1 {
+  background-color: #fff;
+  height: 100vh;
+}
+
+/* HERO CONTAINER FOR MOTTO */
+.hero-home {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  z-index: 40;
+}
+
+/* TOP-LEFT MOTTO */
+.hero-home .top-left-motto {
+  position: absolute;
+  top: calc(var(--nav-height) + 20px);
+  left: 135px;
+  z-index: 61;
+  opacity: 0.98;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  max-width: 360px;
+  color: #eeeeee;
+  line-height: 1.35;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* MAIN MOTTO BIG STACKED TEXT */
+.main-motto {
+  position: absolute;
+  left: 65%;
+  transform: translateX(-50%) scaleY(1.15);
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 750;
+  font-size: clamp(60px, 12vw, 150px);
+  color: #fff8ff;
+  letter-spacing: 0.012em;
+  line-height: 0.75;
+  text-shadow: 0 8px 40px rgba(0,0,0,0.45);
+  pointer-events: none;
+  user-select: none;
+  z-index: 60;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.main-motto span { display: block; }
+
+.main-motto span:nth-child(1) { transform: translateX(2vw); }
+.main-motto span:nth-child(2) { transform: translateX(11vw); }
+.main-motto span:nth-child(3) { transform: translateX(-21vw); }
+
+/* RESPONSIVE MOTTO ADJUSTMENTS */
+@media (max-width: 1100px) {
+  .main-motto span:nth-child(2) { transform: translateX(4vw); }
+  .main-motto span:nth-child(3) { transform: translateX(-4vw); }
+  .main-motto { top: 32%; font-size: clamp(36px, 11vw, 92px); }
+}
+
+@media (max-width: 599px) {
+  .main-motto { top: 22%; font-size: clamp(24px, 16vw, 44px); }
+  .main-motto span:nth-child(2) { transform: translateX(2vw); }
+  .main-motto span:nth-child(3) { transform: translateX(-2vw); }
+
+  .hero-home .top-left-motto {
+    left: 12px;
+    top: calc(var(--nav-height) + 8px);
+    max-width: 82vw;
+    font-size: 13px;
+  }
+}
+
+/* Images (fixed) */
+#pic1, #pic1Back {
+  position: fixed;
+  top: 55%;
+  left: 47%;
+  transform: translate3d(-50%,-50%,0) scale(1);
+  z-index: 10;
+  will-change: transform, top, left, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: opacity .12s linear; /* fast fade */
+  opacity: 1;
+}
+
+#pic1Back {
+  z-index: 9;
+  transform: translate3d(-50%,-50%,0) scale(1) rotateY(180deg);
+}
+
+/* Right-side persistent border (full viewport) */
+#right-stationary {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Stretch the image to match exactly the viewport size (no cropping) */
+#right-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;   /* stretch horizontally */
+  height: 100vh;  /* stretch vertically (same as screen height) */
+  object-fit: fill;   /* ensures the whole image is visible */
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Logo link */
+#right-logo-link {
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%)scale(0.45);
+  z-index: 100;
+  pointer-events: auto;
+}
+
+/* Logo visual */
+#right-logo {
+  width: 64px;
+  height: auto;
+  display: block;
+  background: transparent;
+}
+
+/* Hide on mobile */
+@media (max-width: 900px) {
+  #right-stationary { display: none; }
+}

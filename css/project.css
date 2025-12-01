@@ -1,0 +1,68 @@
+/* PROJECT (section3) */
+.section3 { background-color: #ffffff; min-height: 120vh; }
+
+/* Section 3 helper */
+#projectText {
+  position: absolute;
+  left: 186px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg) scaleY(1.0);
+  font-family: 'Kanit', sans-serif;
+  font-weight: 800;
+  font-size: 58px;
+  color: rgb(178, 178, 178);
+  opacity: 0;
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  letter-spacing: 17px;
+}
+
+#projectText.visible {
+  opacity: 1;
+  transform: translate(-20%, -160%) rotate(-90deg) scaleY(1.5);
+}
+
+/* floating icons/images inside section 3 */
+#icon1 {
+  position: absolute;
+  width: 170px;
+  bottom: 0%;
+  right: 8%;
+  opacity: 0;
+  transform: translateY(30px)scale(1);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+#icon1.visible {
+  opacity: 1;
+  transform: translateY(-240%)scale(1.7);
+}
+
+#quote {
+  position: absolute;
+  width: 170px;
+  bottom: -1%;
+  right: 8%;
+  opacity: 0;
+  transform: translateY(30px)scale(1);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+#quote.visible {
+  opacity: 1;
+  transform: translateY(-240%)scale(1);
+}
+
+#earth {
+  position: absolute;
+  width: 170px;
+  top: 50%;      /* vertical center */
+  left: 10%;      /* left side */
+  transform: translateY(-50%); /* center the image vertically */
+  opacity: 0;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+#earth.visible {
+  opacity: 1;
+  transform: translateY(-60%)scale(0.8);
+}

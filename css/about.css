@@ -1,0 +1,117 @@
+/* ABOUT (section2) */
+.section2 { background-color: #fff; min-height: 150vh; }
+
+/* larger min-heights on smaller screens (keeps flow similar to original) */
+@media (max-width: 1024px) { .section2 { min-height: 180vh; } }
+@media (max-width: 600px) { .section2 { min-height: 200vh; } }
+
+/* ABOUT ME Title */
+.about-title {
+  position: fixed;
+  top: 80px;
+  left: 140px;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 600;
+  font-size: 50px;
+  color: #b7b4b4;
+  z-index: 20;
+  letter-spacing: 3px;
+  opacity: 0;
+  transform: translateY(-120px);
+  transition: opacity 0.45s ease-out, transform 0.45s cubic-bezier(.1,1.1,.1,1);
+}
+
+/* when animated into view */
+.about-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* DESCRIPTION TEXT BELOW DEANLIST */
+.about-description {
+  position: fixed;
+  top: 510px;
+  left: 150px;
+  max-width: 450px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #000;
+  font-weight: 500;
+  z-index: 20;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+}
+
+/* fade-in */
+.about-description.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .about-title {
+    font-size: 60px;
+    left: 40px;
+  }
+  .about-description {
+    right: 5vw;
+    max-width: 85vw;
+    bottom: 12vh;
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-title {
+    font-size: 42px;
+    top: 0px;
+    left: 20px;
+  }
+}
+
+/* loader interactions - when loader exists hide some elements until done */
+.loader ~ #pic1,
+.loader ~ #pic1Back,
+.loader ~ #kuching1,
+.loader ~ #deanlist {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* deanlist */
+#deanlist {
+  position: fixed;
+  top: 180px;
+  left: 150px;
+  width: 350px;
+  opacity: 0;
+  transform: translateY(20px)scale(2);
+  z-index: 8;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Arrow IMAGE */
+#arrow {
+  position: fixed;
+  top: 460px;
+  left: 150px;
+  width: 50px;
+  opacity: 0;
+  transform: translateY(20px);
+  z-index: 8;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Kuching image that sits off-screen until animated */
+#kuching1 {
+  position: fixed;
+  left: 100%;
+  width: 27vw;
+  opacity: 0;
+  transform: translateX(-45%)scale(0.9);
+  z-index: 9;
+  transition: opacity 0.3s ease;
+}

@@ -1,0 +1,51 @@
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  padding: 0 28px;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.nav {
+  display: flex;
+  gap: 46px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative; /* important for underline positioning */
+}
+
+.nav-link {
+  position: relative;
+  padding: calc((var(--nav-height) - 20px)/2) 0;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  opacity: 0.95;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.nav-link:hover { opacity: 1; }
+
+/* Sliding underline element */
+.nav-underline {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background-color: #b7b4b4;
+  border-radius: 2px;
+  transition: left 0.3s ease, width 0.3s ease;
+  z-index: 10;
+}

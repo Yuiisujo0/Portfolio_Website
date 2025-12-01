@@ -1,0 +1,35 @@
+/* Utilities / small helpers used across components */
+
+/* accessibility helper */
+.sr-only {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  border:0;
+}
+
+/* ---- QUICK FADE / HIDE CLASSES ---- */
+.quick-fade {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity .08s linear !important;
+}
+
+.hidden-after-fade {
+  visibility: hidden !important;
+}
+
+/* Loader-related selectors referencing elements that should be hidden while loader is active.
+   Note: Your loader.css handles the loader visuals, this just controls the page elements that wait on it. */
+.loader ~ #pic1,
+.loader ~ #pic1Back,
+.loader ~ #kuching1,
+.loader ~ #deanlist {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}

@@ -1,0 +1,272 @@
+/* SECTION 4 - "More" (carousel + right panel) */
+.section4 { background-color: #ffffff; min-height: 120vh; padding: 80px 40px; color:#222; }
+
+.more-title { font-family:'Kanit',sans-serif;font-size:48px;margin-bottom:24px;color:#333; }
+.more-desc { max-width:700px;color:#444;font-size:18px;line-height:1.6; }
+
+.contact-title { font-family:'Kanit',sans-serif;font-size:42px;margin-bottom:18px;color:#222; }
+.contact-desc { max-width:700px;color:#444;font-size:18px;line-height:1.6;margin-bottom:18px; }
+
+/* container */
+#more #container {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  padding-top: 40px;       /* move content down a bit so it's not squeezed at top */
+  box-sizing: border-box;
+  align-items: stretch;
+  min-height: 550px;      /* gives the section some vertical room on desktop */
+}
+
+/* LEFT CAROUSEL */
+#more #carousel {
+  flex: 1;
+  perspective: 1500px;
+  overflow: visible;      /* allow slides to translate in 3D */
+  position: relative;
+  left: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  min-height: 650px;      /* desktop height for the carousel area */
+}
+
+#more #carousel.dragging { cursor: grabbing; }
+
+/* SLIDES */
+#more .slide {
+  position: absolute;
+  width: 80%;
+  max-width: 600px;       /* allow slightly wider slides on large screens */
+  aspect-ratio: 5/3;
+  background: #555;
+  background-size: cover; /* make sure image covers the entire slide */
+  background-position: center center; /* center the image */
+  border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transition: transform 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+}
+
+/* subtle overlay shadows used for directional shading */
+#more .shadow-left,
+#more .shadow-right {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  pointer-events: none;
+  background: rgba(0,0,0,0.2);
+  opacity: 0;
+  transition: opacity 0.18s linear;
+}
+
+/* RIGHT PANEL (scoped to section4) */
+#more #right-panel {
+  flex: 2;
+  background: #222;
+  border-radius: 20px;
+  padding: 20px;
+  color: #fff;
+  min-height: 580px;     /* match carousel min-height so columns align on desktop */
+  max-height: 580px;
+  height: auto;          /* lets panel grow if content is taller */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  transition: background 0.3s;
+}
+
+/* image row inside panel */
+#more #image-row {
+  display: flex;
+  gap: 12px;
+}
+
+/* Ensure all images in the row have the same height and maintain aspect ratio */
+#more #image-row img {
+  width: 32%;
+  height: 200px;  /* Fixed height */
+  object-fit: cover;  /* This ensures the image covers the area without distortion */
+  border-radius: 10px;
+  background: #333;
+}
+
+/* Styling for the Type of Work title */
+#more #right-panel .project-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f1f1f1;
+  margin-bottom: 0px;
+  width: 65%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #f1f1f1;
+  padding-bottom: 0px;
+}
+
+/* Styling for project description (scrollable box) */
+#more #right-panel .scrollable-text {
+  width: 65%;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #444;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  height: 160px; /* Height for the scrollable description box */
+  max-height: 160px;
+  overflow-y: auto;
+  white-space: normal;
+  box-sizing: border-box;
+  pointer-events: auto;
+  position: relative;
+  bottom: 2%;
+}
+
+/* Styling for the Type of Work title */
+#more #right-panel .work-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f1f1f1;
+  margin-bottom: -5px;
+  width: 65%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #f1f1f1;
+  padding-bottom: 0px;
+}
+
+/* Styling for type of work description (single-line) */
+#more #right-panel .single-line-text {
+  width: 65%;
+  padding: 10px;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #444;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+/* Modal container */
+.modal {
+  display: none;  /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Prevent overflow */
+}
+
+/* Modal content wrapper */
+.modal-content {
+  position: relative;
+  width: 80vw; /* Fixed width for the modal */
+  height: 80vh; /* Fixed height for the modal */
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Prevent image overflow */
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+/* Image inside modal - Make images fill the container with consistent height */
+.modal-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: zoom-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Close button for modal */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #f1f1f1;
+  text-decoration: none;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+
+/* ---------- Responsive: stack and reduce heights on smaller screens ---------- */
+@media (max-width: 900px) {
+  #more #container {
+    flex-direction: column;
+    padding-top: 20px;
+    min-height: auto;
+    gap: 16px;
+  }
+
+  #more #carousel {
+    width: 100%;
+    min-height: 360px;   /* shorter carousel on small screens */
+    height: 360px;
+  }
+
+  #more #right-panel {
+    width: 100%;
+    min-height: auto;
+    padding: 16px;
+  }
+
+  #more .slide {
+    width: 90%;
+    max-width: 520px;
+    aspect-ratio: 5/3;
+    font-size: 1rem;
+  }
+
+  #more #image-row img {
+    height: 120px;
+    width: 32%;
+  }
+}
+
+/* extra small phones */
+@media (max-width: 420px) {
+  #more .slide { width: 94%; max-width: none; }
+  #more #image-row img { height: 100px; }
+}

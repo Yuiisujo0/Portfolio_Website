@@ -1,0 +1,17 @@
+/* Base / Reset / Layout */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root { --nav-height: 72px; }
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  overflow-x: hidden;
+  background-color: #333;
+}
+
+/* Generic section container used by all sections */
+.section {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
