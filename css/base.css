@@ -1,17 +1,61 @@
-/* Base / Reset / Layout */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* RESET ------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-:root { --nav-height: 72px; }
+:root {
+  --nav-height: 72px;
+}
 
+/* GLOBAL LAYOUT ------------------ */
 body {
   font-family: 'Noto Sans', sans-serif;
   overflow-x: hidden;
   background-color: #333;
+  line-height: 1.4;
 }
 
-/* Generic section container used by all sections */
 .section {
   width: 100%;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
+  padding-top: var(--nav-height);
+}
+
+#right-stationary {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#right-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: fill;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+#right-logo-link {
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%) scale(0.45);
+  z-index: 100;
+  pointer-events: auto;
+}
+
+#right-logo {
+  width: 64px;
+  height: auto;
+  display: block;
 }

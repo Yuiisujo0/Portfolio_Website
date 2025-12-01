@@ -1,145 +1,109 @@
-/* HOME / HERO / GLOBAL FIXED IMAGES */
-
-/* Section 1 (home) */
+/* ================================ */
+/* HOME SECTION BASE                 */
+/* ================================ */
 .section1 {
-  background-color: #fff;
-  height: 100vh;
+position: relative;
+background-color: #fff;
+height: 100vh;
+overflow: hidden;
 }
 
-/* HERO CONTAINER FOR MOTTO */
-.hero-home {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  z-index: 40;
-}
-
-/* TOP-LEFT MOTTO */
+/* ================================ */
+/* TOP LEFT MOTTO (stays top-left)  */
+/* ================================ */
 .hero-home .top-left-motto {
-  position: absolute;
-  top: calc(var(--nav-height) + 20px);
-  left: 135px;
-  z-index: 61;
-  opacity: 0.98;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  max-width: 360px;
-  color: #eeeeee;
-  line-height: 1.35;
-  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
-  pointer-events: none;
-  transition: opacity 0.4s ease;
+position: absolute;
+top: calc(var(--nav-height) + 2vh);
+left: 8vw; /* moved further right */
+z-index: 61;
+
+color: #eeeeee;
+font-family: 'Montserrat', sans-serif;
+font-weight: 500;
+max-width: 400px;
+line-height: 1.35;
+
+text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+pointer-events: none;
+
+font-size: clamp(16px, 1.2vw, 20px); 
 }
 
-/* MAIN MOTTO BIG STACKED TEXT */
-.main-motto {
-  position: absolute;
-  left: 65%;
-  transform: translateX(-50%) scaleY(1.15);
-  top: 40%;
-  width: 100%;
-  text-align: center;
-  font-family: 'Kanit', sans-serif;
-  font-weight: 750;
-  font-size: clamp(60px, 12vw, 150px);
-  color: #fff8ff;
-  letter-spacing: 0.012em;
-  line-height: 0.75;
-  text-shadow: 0 8px 40px rgba(0,0,0,0.45);
-  pointer-events: none;
-  user-select: none;
-  z-index: 60;
-  opacity: 1;
-  transition: opacity 0.6s ease;
-}
-
-.main-motto span { display: block; }
-
-.main-motto span:nth-child(1) { transform: translateX(2vw); }
-.main-motto span:nth-child(2) { transform: translateX(11vw); }
-.main-motto span:nth-child(3) { transform: translateX(-21vw); }
-
-/* RESPONSIVE MOTTO ADJUSTMENTS */
-@media (max-width: 1100px) {
-  .main-motto span:nth-child(2) { transform: translateX(4vw); }
-  .main-motto span:nth-child(3) { transform: translateX(-4vw); }
-  .main-motto { top: 32%; font-size: clamp(36px, 11vw, 92px); }
-}
-
+/* MOBILE adjustment */
 @media (max-width: 599px) {
-  .main-motto { top: 22%; font-size: clamp(24px, 16vw, 44px); }
-  .main-motto span:nth-child(2) { transform: translateX(2vw); }
-  .main-motto span:nth-child(3) { transform: translateX(-2vw); }
-
-  .hero-home .top-left-motto {
-    left: 12px;
-    top: calc(var(--nav-height) + 8px);
-    max-width: 82vw;
-    font-size: 13px;
-  }
+.hero-home .top-left-motto {
+left: 5vw; /* slightly right */
+top: calc(var(--nav-height) + 3vh);
+max-width: 82vw;
+font-size: 14px; /* bigger on mobile */
+}
 }
 
-/* Images (fixed) */
+/* ================================ */
+/* BOTTOM RIGHT MAIN MOTTO           */
+/* ================================ */
+.main-motto {
+position: absolute;
+bottom: 10vh;
+right: 5vw;
+
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+gap: 0.2vh;
+
+z-index: 60;
+pointer-events: none;
+
+font-family: 'Kanit', sans-serif;
+font-weight: 750;
+line-height: 0.8;
+
+text-shadow: 0 8px 40px rgba(0,0,0,0.45);
+}
+
+/* Responsive font scaling */
+.main-motto span {
+position: relative;
+font-size: clamp(48px, 10vw, 180px); /* increased maximum size */
+letter-spacing: 0.012em;
+}
+
+.word-explore { color: #fff9ff; margin-right: 1vw; }
+.word-create { color: #fff9ff; margin-right: -4vw; }
+.word-reimagine { color: #fff9ff; margin-right: 14vw; }
+
+/* MOBILE adjustment: hug the corner tighter */
+@media (max-width: 599px) {
+.main-motto {
+bottom: 4vh;
+right: 3vw;
+gap: 0.5vh;
+}
+
+.main-motto span {
+font-size: clamp(28px, 14vw, 70px);
+}
+
+.word-create { right: 1vw; }
+.word-reimagine { right: -0.5vw; }
+}
+
+/* PIC1 — BASE POSITION */
 #pic1, #pic1Back {
   position: fixed;
-  top: 55%;
-  left: 47%;
-  transform: translate3d(-50%,-50%,0) scale(1);
-  z-index: 10;
-  will-change: transform, top, left, opacity;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  transition: opacity .12s linear; /* fast fade */
-  opacity: 1;
-}
-
-#pic1Back {
-  z-index: 9;
-  transform: translate3d(-50%,-50%,0) scale(1) rotateY(180deg);
-}
-
-/* Right-side persistent border (full viewport) */
-#right-stationary {
-  position: fixed;
-  inset: 0;
-  z-index: 95;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-/* Stretch the image to match exactly the viewport size (no cropping) */
-#right-border {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;   /* stretch horizontally */
-  height: 100vh;  /* stretch vertically (same as screen height) */
-  object-fit: fill;   /* ensures the whole image is visible */
-  display: block;
-  pointer-events: none;
-  user-select: none;
-}
-
-/* Logo link */
-#right-logo-link {
-  position: absolute;
-  left: 28px;
   top: 50%;
-  transform: translateY(-50%)scale(0.45);
-  z-index: 100;
-  pointer-events: auto;
+  left: 47%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 10;
+
+  will-change: transform, top, left, opacity;
+  backface-visibility: hidden;
+  transition: none;
 }
 
-/* Logo visual */
-#right-logo {
-  width: 64px;
-  height: auto;
-  display: block;
-  background: transparent;
-}
-
-/* Hide on mobile */
-@media (max-width: 900px) {
-  #right-stationary { display: none; }
+#kuching1,
+#deanlist,
+#arrow {
+  transition: none;
 }

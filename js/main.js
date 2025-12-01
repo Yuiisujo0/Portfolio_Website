@@ -1,5 +1,4 @@
 /* main.js */
-
 document.addEventListener('DOMContentLoaded', () => {
   // DOM elements
   const pic1 = document.getElementById("pic1");
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pic1) {
       const n = nat(pic1);
       const sx = window.innerWidth / n.w, sy = window.innerHeight / n.h;
-      scaleCover = Math.max(sx, sy);
+      scaleCover = Math.max(sx, sy) * 1.5;
       pic1.style.transform = `translate3d(-50%,-50%,0) scale(${scaleCover})`;
       if (pic1Back) pic1Back.style.transform = `translate3d(-50%,-50%,0) scale(${scaleCover}) rotateY(180deg)`;
     }
@@ -130,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (pic1) {
     const n = nat(pic1);
     const sx = vw / n.w, sy = vh / n.h;
-    scaleCover = Math.max(sx, sy);
+    scaleCover = Math.max(sx, sy) * 1.5;
     pic1.style.transform = `translate3d(-50%,-50%,0) scale(${scaleCover})`;
     if (pic1Back) pic1Back.style.transform = `translate3d(-50%,-50%,0) scale(${scaleCover}) rotateY(180deg)`;
   }
