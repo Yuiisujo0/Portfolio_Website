@@ -19,6 +19,7 @@ body.loading {
   flex-direction: column;
   align-items: center;
   justify-content: center; 
+  background: linear-gradient(135deg, #f2f1f1, #ffffff); /* Example gradient */
   z-index: var(--loader-z);
   pointer-events: auto;
 }

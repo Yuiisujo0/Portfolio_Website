@@ -104,13 +104,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const height = opts.height || 2048;
     const fontFamily = "'Montserrat', sans-serif";
     const fontSize = opts.fontSize || 90;
-    const color = opts.color || "#b4b4b4ff";
+    const color = opts.color || "#dcd9d9ff";
     const gap = opts.gap ?? 80;
 
     const canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
     const ctx = canvas.getContext("2d");
+
+    // Clear fully transparent
+    ctx.clearRect(0, 0, width, height);
 
     ctx.fillStyle = color;
     ctx.textAlign = "left";
@@ -159,7 +162,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     `,
     transparent: true,
-    side: THREE.DoubleSide
+    side: THREE.DoubleSide,
+    alphaTest: 0.01 
   });
 
   const geo = new THREE.SphereGeometry(1.1, 64, 64);
@@ -168,14 +172,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   matTop.uniforms.map.value = texTop;
   const sphereTop = new THREE.Mesh(geo, matTop);
   sphereTop.scale.y = 1.2;   // stretch vertically by 50%
-  sphereTop.position.y = 0.18;
+  sphereTop.position.y = 0.2;
   group.add(sphereTop);
 
   const matBottom = baseMaterial.clone();
   matBottom.uniforms.map.value = texBottom;
   const sphereBottom = new THREE.Mesh(geo, matBottom);
   sphereBottom.scale.y = 1.2;  // same vertical stretch
-  sphereBottom.position.y = -0.18;
+  sphereBottom.position.y = -0.2;
   group.add(sphereBottom);
 
   /* --------------------------------------------

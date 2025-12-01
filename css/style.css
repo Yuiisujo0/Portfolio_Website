@@ -776,7 +776,7 @@ body {
 .phone-link:hover,
 .phone-link:focus {
   text-decoration: underline;
-  color: #b3b3b3; /* hover color same as original, can change if you want */
+  color: #7c7c7c; /* hover color same as original, can change if you want */
   outline: none;
 }
 
@@ -796,14 +796,14 @@ body {
 .social-link {
   padding: 6px 10px;
   border-radius: 6px;
-  background: #7d7c7c;
+  background: #b0afaf;
   color: #fff;
   text-decoration: none;
   font-weight: 700;
   font-size: 13px;
 }
 .social-link:hover, .social-link:focus {
-  background: #000;
+  background: #303030;
 }
 
 /* Single large line for the full name */
