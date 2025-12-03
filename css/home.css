@@ -2,15 +2,16 @@
 /* HOME SECTION BASE                 */
 /* ================================ */
 .section1 {
-position: relative;
-background-color: #fff;
-height: 100vh;
-overflow: hidden;
+  position: relative;
+  background-color: var(--bg);
+  min-height: 100vh;
+  overflow: hidden;
+  display: block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ================================ */
 /* TOP LEFT MOTTO (stays top-left)  */
-/* ================================ */
 .hero-home .top-left-motto {
 position: absolute;
 top: calc(var(--nav-height) + 2vh);
@@ -26,7 +27,7 @@ line-height: 1.35;
 text-shadow: 0 6px 18px rgba(0,0,0,0.45);
 pointer-events: none;
 
-font-size: clamp(16px, 1.2vw, 20px); 
+font-size: 14px;
 }
 
 /* MOBILE adjustment */

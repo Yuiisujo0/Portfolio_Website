@@ -1,77 +1,101 @@
-/* ABOUT (section2) */
-.section2 { background-color: #fff; min-height: 150vh; }
+/* =========================================================
+   ABOUT SECTION (SECTION 2)
+   Fully responsive – fluid spacing & viewport-based sizing
+   Keeps all animation class names for JS compatibility
+========================================================= */
 
-/* larger min-heights on smaller screens (keeps flow similar to original) */
-@media (max-width: 1024px) { .section2 { min-height: 180vh; } }
-@media (max-width: 600px) { .section2 { min-height: 200vh; } }
-
-/* ABOUT ME Title */
-.about-title {
-  position: fixed;
-  top: 80px;
-  left: 140px;
-  font-family: 'Kanit', sans-serif;
-  font-weight: 600;
-  font-size: 50px;
-  color: #b7b4b4;
-  z-index: 20;
-  letter-spacing: 3px;
-  opacity: 0;
-  transform: translateY(-120px);
-  transition: opacity 0.45s ease-out, transform 0.45s cubic-bezier(.1,1.1,.1,1);
+.section2 {
+  background-color: #fff;
+  min-height: 150vh;
 }
 
-/* when animated into view */
+/* Larger min-heights on smaller screens (keeps scroll flow) */
+@media (max-width: 1024px) { 
+  .section2 { min-height: 180vh; } 
+}
+@media (max-width: 600px) { 
+  .section2 { min-height: 200vh; } 
+}
+
+/* =========================================================
+   ABOUT TITLE (fixed, animated)
+========================================================= */
+.about-title {
+  position: fixed;
+  top: clamp(80px, 10vh, 140px);
+  left: clamp(20px, 10vw, 140px);
+
+  font-family: 'Kanit', sans-serif;
+  font-weight: 600;
+  font-size: clamp(32px, 5vw, 50px);
+
+  color: #b7b4b4;
+  letter-spacing: 0.2vw;
+
+  opacity: 0;
+  transform: translateY(-10vh);
+  transition: opacity 0.45s ease-out, transform 0.45s cubic-bezier(.1,1.1,.1,1);
+
+  z-index: 20;
+}
+
+/* JS toggles this */
 .about-title.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* DESCRIPTION TEXT BELOW DEANLIST */
+/* =========================================================
+   DESCRIPTION TEXT (under deanlist)
+========================================================= */
 .about-description {
   position: fixed;
-  top: 510px;
-  left: 150px;
-  max-width: 450px;
-  font-size: 15px;
+
+  top: clamp(420px, 65vh, 750px);
+  left: clamp(20px, 10vw, 150px);
+
+  max-width: clamp(250px, 40vw, 400px);
+
+  font-size: clamp(14px, 1.7vw, 16px);
   line-height: 1.55;
-  color: #000;
   font-weight: 500;
-  z-index: 20;
+  color: #000;
+
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+
+  overflow-wrap: break-word; /* prevent long words from overflowing */
+  z-index: 20;
 }
 
-/* fade-in */
 .about-description.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Responsive adjustments */
+/* Tablet & mobile repositioning */
 @media (max-width: 900px) {
-  .about-title {
-    font-size: 60px;
-    left: 40px;
-  }
   .about-description {
-    right: 5vw;
-    max-width: 85vw;
+    left: 8vw;
+    top: auto;
     bottom: 12vh;
-    font-size: 17px;
+    max-width: 85vw;
+    font-size: clamp(15px, 2.3vw, 17px);
   }
 }
 
 @media (max-width: 600px) {
   .about-title {
-    font-size: 42px;
-    top: 0px;
-    left: 20px;
+    top: clamp(10px, 4vh, 20px);
+    left: clamp(12px, 4vw, 20px);
+    font-size: clamp(26px, 7vw, 42px);
   }
 }
 
-/* loader interactions - when loader exists hide some elements until done */
+/* =========================================================
+   Loader interactions – hide images until JS reveals them
+========================================================= */
 .loader ~ #pic1,
 .loader ~ #pic1Back,
 .loader ~ #kuching1,
@@ -81,37 +105,55 @@
   pointer-events: none;
 }
 
-/* deanlist */
+/* =========================================================
+   DEANLIST IMAGE (fixed + animated by JS)
+========================================================= */
 #deanlist {
   position: fixed;
-  top: 180px;
-  left: 150px;
-  width: 350px;
+
+  top: clamp(150px, 25vh, 220px);
+  left: clamp(20px, 10vw, 150px);
+
+  width: clamp(180px, 28vw, 350px);
+
   opacity: 0;
-  transform: translateY(20px)scale(2);
-  z-index: 8;
+  transform: translateY(20px) scale(1.6);   /* slightly reduced scale to prevent overflow on phones */
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  z-index: 8;
 }
 
-/* Arrow IMAGE */
+/* =========================================================
+   ARROW IMAGE
+========================================================= */
 #arrow {
   position: fixed;
-  top: 460px;
-  left: 150px;
-  width: 50px;
+
+  top: clamp(420px, 60vh, 740px);
+  left: clamp(20px, 10vw, 150px);
+
+  width: clamp(28px, 6vw, 50px);
+
   opacity: 0;
   transform: translateY(20px);
-  z-index: 8;
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  z-index: 8;
 }
 
-/* Kuching image that sits off-screen until animated */
+/* =========================================================
+   KUCHING IMAGE (JS controls movement)
+========================================================= */
 #kuching1 {
   position: fixed;
+
   left: 100%;
-  width: 27vw;
+  width: clamp(120px, 27vw, 420px);
+
   opacity: 0;
-  transform: translateX(-45%)scale(0.9);
-  z-index: 9;
+  transform: translateX(-45%) scale(0.9);
+
   transition: opacity 0.3s ease;
+
+  z-index: 9;
 }
