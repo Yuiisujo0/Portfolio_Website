@@ -1,30 +1,11 @@
-/* RESET ------------------------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* --- Root variables for dynamic sizing & spacing --- */
 :root {
-  --nav-height: 72px;
+  --left-panel-width: 70px;
+  --left-panel-gap: 1.5rem;
+  --content-padding: 1rem;
 }
 
-/* GLOBAL LAYOUT ------------------ */
-body {
-  font-family: 'Noto Sans', sans-serif;
-  overflow-x: hidden;
-  background-color: #333;
-  line-height: 1.4;
-}
-
-.section {
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-  padding-top: var(--nav-height);
-}
-
+/* --- Right-side stationary border (decorative frame) --- */
 #right-stationary {
   position: fixed;
   inset: 0;
@@ -39,23 +20,117 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  object-fit: fill;
+  object-fit: fill; /* fill viewport, maintain aspect ratio */
   display: block;
   pointer-events: none;
   user-select: none;
 }
 
-#right-logo-link {
-  position: absolute;
-  left: 28px;
-  top: 50%;
-  transform: translateY(-50%) scale(0.45);
-  z-index: 100;
-  pointer-events: auto;
+/* --- Page Layout: left panel + content --- */
+.page-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
 }
 
-#right-logo {
-  width: 64px;
+/* --- Left Panel --- */
+.left-panel {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  margin-top: clamp(60px, 12vh, 100px);
+  width: var(--left-panel-width);
+  height: calc(100vh - clamp(60px, 12vh, 100px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--left-panel-gap);
+  padding: 1rem;
+  z-index: 120;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.0);
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.3s ease;
+}
+
+/* Left Logo */
+.left-logo {
+  width: clamp(20px, 3vw, 40px);
   height: auto;
   display: block;
+}
+
+/* --- Center Content Area --- */
+.content-area {
+  margin-left: var(--left-panel-width);
+  padding-top: var(--nav-height);
+  padding-inline: var(--content-padding);
+  margin-top: clamp(60px, 12vh, 100px);
+  width: calc(100% - var(--left-panel-width));
+  min-height: calc(100vh - clamp(60px, 12vh, 100px));
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+/* --- Navbar --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem 1rem; /* grows/shrinks with window height */
+  height: auto;
+  z-index: 200;
+}
+
+/* --- Hide old right logo if present --- */
+#right-logo-link {
+  display: none;
+}
+
+/* --- RESPONSIVE RULES --- */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  :root {
+    --left-panel-width: 50px;
+    --left-panel-gap: 1rem;
+  }
+
+  .content-area {
+    margin-left: var(--left-panel-width);
+    width: calc(100% - var(--left-panel-width));
+    padding-inline: 0.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .left-panel {
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+
+  .content-area {
+    margin-left: 0;
+    width: 100%;
+    padding-inline: 0.75rem;
+  }
+
+  #right-stationary {
+    display: none;
+  }
+}
+
+/* Small mobile tweaks */
+@media (max-width: 480px) {
+  :root {
+    --content-padding: 0.5rem;
+  }
+
+  .left-logo {
+    width: 20px;
+  }
 }

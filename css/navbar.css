@@ -4,18 +4,22 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: var(--nav-height);
+
   display: flex;
   align-items: center;
-  z-index: 100;
-  padding: 0 28px;
+  justify-content: center;
+
+  padding: clamp(16px, 3vh, 28px) clamp(16px, 3vw, 32px);
+  height: auto;
+
+  z-index: 200;
   background: transparent;
   box-sizing: border-box;
 }
 
 .nav {
   display: flex;
-  gap: 46px;
+  gap: clamp(24px, 4vw, 48px);
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -26,12 +30,15 @@
 
 .nav-link {
   position: relative;
-  padding: calc((var(--nav-height) - 20px)/2) 0;
   font-weight: 700;
   font-family: 'Montserrat', sans-serif;
-  opacity: 0.95;
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+
   color: #fff;
   text-decoration: none;
+  opacity: 0.95;
+
+  padding-block: 6px;
   transition: opacity 0.3s;
 }
 
@@ -40,7 +47,7 @@
 /* Sliding underline element */
 .nav-underline {
   position: absolute;
-  bottom: 12px;
+  bottom: 4px;
   left: 0;
   height: 3px;
   width: 0;
@@ -48,4 +55,26 @@
   border-radius: 2px;
   transition: left 0.3s ease, width 0.3s ease;
   z-index: 10;
+}
+
+/* TABLET BREAKPOINT */
+@media (max-width: 1024px) {
+  :root {
+    --nav-height: 64px; /* smaller navbar height on tablet */
+  }
+}
+
+/* MOBILE BREAKPOINT */
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 56px; /* even smaller navbar on mobile */
+  }
+
+  .nav {
+    gap: clamp(16px, 4vw, 32px);
+  }
+
+  .nav-link {
+    font-size: clamp(0.85rem, 3vw, 1rem);
+  }
 }
