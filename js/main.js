@@ -155,12 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // SECTION 1 → 2
     const progress = Math.min(scrollY / (sec2H * 0.7), 1);
-    const scaleSection2 = getScaleForSection(pic1, 0.45, 0.5);
+    const scaleSection2 = (vw < 600) ? 0.15 : getScaleForSection(pic1, 0.45, 0.5); // Force scale for mobile
+
     const scaleTarget = scaleCover - (scaleCover - scaleSection2) * progress;
     const topStart = (vw < 600) ? 50 : 65; // If it's a small screen, start at 50%
     const topFinal2 = (vw < 600) ? 50 : 65; // Similarly, adjust the final position for smaller screens
     const currentTopTarget = topStart + (topFinal2 - topStart) * progress;
-    const shiftXTarget = progress * 10;
+    const shiftXTarget = (vw < 600) ? progress * 25 : progress * 10; 
 
     let applyTop = currentTopTarget;
     let applyScale = scaleTarget;
@@ -172,11 +173,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sec3Rect.top < vh) {
       const p = 1 - (sec3Rect.top / vh);
       const eased = p * p * (3 - 2 * p);
-      const scaleSection3 = getScaleForSection(pic1, 0.75, 0.85);
+      const scaleSection3 = getScaleForSection(pic1, (vw < 600) ? 0.5 : 0.75, (vw < 600) ? 0.6 : 0.85);  
       const zoom = scaleTarget + (scaleSection3 - scaleTarget) * eased;
-      const topCenter3 = 53;
+      const topCenter3 = (vw < 600) ? 50 : 50;
       const topMove = topFinal2 + (topCenter3 - topFinal2) * eased;
-      const shiftX3 = 10 * (1 - eased) + (3 * eased);
+      const shiftX3 = (vw < 600) ? 25 * (1 - eased) + (3 * eased) : 10 * (1 - eased) + (3 * eased);  // Adjust for mobile shift
       const rot = eased * 180;
 
       applyScale = zoom;
@@ -221,19 +222,73 @@ document.addEventListener('DOMContentLoaded', () => {
     const shouldFade = sec4Rect.top < vh * section4FadeStart;
     if (shouldFade) fadeOutFixedImagesQuick();
     else fadeInFixedImagesQuick();
+    
+    if (vw < 600) { // For mobile
+        // Get the bottom of Section 2 and the top of Section 3
+        const sec2Bottom = section2 ? section2.getBoundingClientRect().bottom : 0;  // Bottom of Section 2
+        const sec3Top = section3 ? section3.getBoundingClientRect().top : vh;  // Top of Section 3
+
+        // Calculate the progress between Section 2 and Section 3
+        const sectionProgress = Math.min(Math.max((sec2Bottom - sec3Top) / (sec2H * 0.7), 0), 1); 
+
+        // Initial top position is 50% (at the bottom of Section 2), it should move upwards to 0% (center) as you scroll into Section 3
+        const initialTopPosition = 55; // Start at 50% of the viewport height (bottom of Section 2)
+        const verticalScrollEffect = sectionProgress * 50;  // Move 50% upwards as you scroll
+        applyTop = initialTopPosition - verticalScrollEffect;  // Apply the scroll effect to make the image rise
+
+        const scaleForMobile = 0.3;  // Scale down to 30% for mobile
+        const shiftXForMobile = 30;  // Move pic1 30% to the right
+
+        // Apply transformations specifically for mobile (scaling and positioning)
+        if (pic1 && !imagesHidden) {
+            pic1.style.transform = `scale(${scaleForMobile}) translate3d(calc(-50% + ${shiftXForMobile}vw), -50%, 0)`;
+            pic1.style.top = `${applyTop}%`;  // Apply the calculated top position to move pic1 vertically
+        }
+
+        if (pic1Back && !imagesHidden) {
+            pic1Back.style.transform = `scale(${scaleForMobile}) translate3d(calc(-50% + ${shiftXForMobile}vw), -50%, 0)`;
+            pic1Back.style.top = `${applyTop}%`;  // Apply same top position for pic1Back
+        }
+    }
+
+    // Apply transforms for Section 1 → Section 2 and Section 3 transitions
+    if (pic1 && !imagesHidden) {
+      pic1.style.transform = `translate3d(calc(-50% + ${applyShiftX}vw), -50%, 0) scale(${applyScale}) rotateY(${applyRot}deg)`;
+      pic1.style.top = `${applyTop}%`;  // Apply top position here
+    }
+    if (pic1Back && !imagesHidden) {
+      pic1Back.style.transform = `translate3d(calc(-50% + ${applyShiftX}vw), -50%, 0) scale(${applyScale}) rotateY(${applyBackRot}deg)`;
+      pic1Back.style.top = `${applyTop}%`;  // Apply top position for pic1Back as well
+    }
 
     // Apply transforms
     if (pic1 && !imagesHidden) pic1.style.transform = `translate3d(calc(-50% + ${applyShiftX}vw), -50%, 0) scale(${applyScale}) rotateY(${applyRot}deg)`;
     if (pic1Back && !imagesHidden) pic1Back.style.transform = `translate3d(calc(-50% + ${applyShiftX}vw), -50%, 0) scale(${applyScale}) rotateY(${applyBackRot}deg)`;
-    if (pic1) pic1.style.top = `${applyTop}%`; if (pic1Back) pic1Back.style.top = `${applyTop}%`;
 
+    if (pic1) pic1.style.top = `${applyTop}%`; 
+    if (pic1Back) pic1Back.style.top = `${applyTop}%`;
+
+    // KUCHING / deanlist
     if (kuching1) {
-      if (finalOpacity > 0 && !imagesHidden) {
-        kuching1.style.opacity = `${finalOpacity}`;
-        kuching1.style.left = `${50 + 33 * kuchingProgress}%`;
+      // Handle Kuching image positioning based on screen size
+      if (vw < 600) { // For Mobile
         const rect = pic1 ? pic1.getBoundingClientRect() : { bottom: vh / 2 };
-        kuching1.style.top = `${rect.bottom - kuching1.offsetHeight * 0.95}px`;
-      } else { kuching1.style.opacity = "0"; }
+        kuching1.style.opacity = `${finalOpacity}`;
+        kuching1.style.left = `50%`; // Center horizontally
+        kuching1.style.top = `${rect.bottom - kuching1.offsetHeight * 0.82}px`; // Adjust top (higher on the screen)
+        kuching1.style.transform = 'translateX(-73%) scale(0.65)'; // Increase size and center horizontally
+      } else if (vw < 900) { // For Tablet (optional tweak)
+        const rect = pic1 ? pic1.getBoundingClientRect() : { bottom: vh / 2 };
+        kuching1.style.opacity = `${finalOpacity}`;
+        kuching1.style.left = `50%`; // Center horizontally
+        kuching1.style.top = `${rect.bottom - kuching1.offsetHeight * 0.5}px`; // Adjust top position
+        kuching1.style.transform = 'translateX(-50%) scale(1)'; // Keep original size for tablet
+      } else { // For Desktop
+        kuching1.style.opacity = `${finalOpacity}`;
+        kuching1.style.left = `${50 + 33 * kuchingProgress}%`; // Default left position for desktop
+        const rect = pic1 ? pic1.getBoundingClientRect() : { bottom: vh / 2 };
+        kuching1.style.top = `${rect.bottom - kuching1.offsetHeight * 0.95}px`; // Adjust top position on desktop
+      }
     }
 
     if (deanlist) deanlist.style.opacity = `${finalOpacity}`;
@@ -244,12 +299,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- EVENT LISTENERS ---
+  let resizeTimeout;
   window.addEventListener("resize", () => {
-    vw = window.innerWidth; vh = window.innerHeight;
-    updateSectionHeight();
-    updateUnderline();
-    updateScales();
-    processScroll();
+    if (resizeTimeout) clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      vw = window.innerWidth;
+      vh = window.innerHeight;
+      updateSectionHeight();
+      updateUnderline();
+      updateScales();
+      processScroll();
+    }, 150); // Throttle resize event handling
   });
 
   window.addEventListener('scroll', () => {

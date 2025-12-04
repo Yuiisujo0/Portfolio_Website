@@ -47,7 +47,7 @@
 /* Sliding underline element */
 .nav-underline {
   position: absolute;
-  bottom: 4px;
+  bottom: 0px;
   left: 0;
   height: 3px;
   width: 0;

@@ -66,39 +66,6 @@
   transform: translateY(0);
 }
 
-/* Tablet & mobile repositioning */
-@media (max-width: 900px) {
-  .about-description {
-    left: 8vw;
-    top: auto;
-    bottom: 12vh;
-    max-width: 85vw;
-    font-size: clamp(15px, 2.3vw, 17px);
-  }
-}
-
-@media (max-width: 600px) {
-  .about-title {
-    top: clamp(10px, 4vh, 20px);
-    left: clamp(12px, 4vw, 20px);
-    font-size: clamp(26px, 7vw, 42px);
-  }
-  
-  /* Hide the deanlist image on mobile */
-  #deanlist {
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  #kuching1 {
-    left: 50%;   /* Center horizontally */
-    top: 10%;    /* Adjust top positioning */
-    width: 60vw; /* Make the image larger on mobile only */
-    transform: translateX(-50%); /* Center horizontally */
-  }
-}
-
 /* =========================================================
    Loader interactions – hide images until JS reveals them
 ========================================================= */
@@ -150,4 +117,63 @@
   transform: translateX(-45%) scale(0.9);
   transition: opacity 0.3s ease;
   z-index: 9;
+}
+
+
+/* Tablet & mobile repositioning */
+@media (max-width: 900px) {
+  .about-description {
+    left: 8vw;
+    top: auto;
+    bottom: 12vh;
+    max-width: 85vw;
+    font-size: clamp(15px, 2.3vw, 17px);
+  }
+}
+
+@media (max-width: 600px) {
+  .about-description {
+    left: 10vw;                 /* Adjusts horizontal position */
+    bottom: 6vh;              /* Moves the text up a bit */
+    max-width: 75vw;           /* Set the width of the text box to 70% of the viewport */
+    font-size: clamp(14px, 8vw, 16px);  /* Smaller font size for mobile */
+    line-height: 1.4;          /* Adjust line height for readability */
+    width: 75vw;               /* Ensure the width is controlled */
+  }
+
+  .about-title {
+    top: clamp(10px, 4vh, 20px);
+    left: clamp(12px, 4vw, 20px);
+    font-size: clamp(26px, 7vw, 42px);
+  }
+  
+  /* Hide the deanlist image on mobile */
+  #deanlist {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #kuching1 {
+    position: fixed;
+    left: 50%;               /* Center horizontally */
+    top: 5%;                 /* Move the image higher on mobile */
+    width: 80vw;             /* Increase size on mobile, 80% of viewport width */
+    height: auto;            /* Maintain aspect ratio */
+    transform: translateX(-50%) scale(1.5); /* Make the image 1.5x bigger on mobile */
+    opacity: 0;              /* Ensure the image is initially invisible */
+    transition: opacity 0.3s ease, top 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  }
+
+  /* Arrow image */
+  #arrow {
+    top: clamp(480px, 60vh, 820px);  /* Lower the arrow position on mobile */
+    left: clamp(20px, 10vw, 150px);
+    width: clamp(28px, 6vw, 50px);
+    opacity: 0;
+    transform: translateY(20px) scale(1.5);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    z-index: 8;
+  }
+
 }
