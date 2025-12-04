@@ -3,6 +3,12 @@
   --left-panel-width: 70px;
   --left-panel-gap: 1.5rem;
   --content-padding: 1rem;
+  --nav-height: 80px;
+}
+
+html {
+  scroll-behavior: smooth; /* Ensure smooth scrolling */
+  scroll-padding-top: var(--nav-height); /* Ensure content isn't hidden under the navbar */
 }
 
 /* --- Right-side stationary border (decorative frame) --- */
@@ -67,7 +73,7 @@
 /* --- Center Content Area --- */
 .content-area {
   margin-left: var(--left-panel-width);
-  padding-top: var(--nav-height);
+  padding-top: clamp(1rem, 3vh, 4rem);
   padding-inline: var(--content-padding);
   margin-top: clamp(60px, 12vh, 100px);
   width: calc(100% - var(--left-panel-width));
@@ -99,6 +105,7 @@
 /* Tablet */
 @media (max-width: 1024px) {
   :root {
+    --nav-height: 64px;
     --left-panel-width: 50px;
     --left-panel-gap: 1rem;
   }
@@ -112,6 +119,10 @@
 
 /* Mobile */
 @media (max-width: 768px) {
+  :root {
+    --nav-height: 56px; /* Adjust navbar height for mobile */
+  }
+
   .left-panel {
     transform: translateX(-100%);
     pointer-events: none;
@@ -139,5 +150,31 @@
 
   .left-logo {
     width: 20px;
+  }
+}
+
+/* --- Tablet: 769px - 1024px --- */
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* Keep left panel visible, just slightly reduce width if needed */
+  .left-panel {
+    width: var(--left-panel-width); /* same as desktop */
+    gap: var(--left-panel-gap);     /* same as desktop */
+    padding: 1rem;                  /* same as desktop */
+  }
+
+  .content-area {
+    margin-left: var(--left-panel-width); /* same as desktop */
+    width: calc(100% - var(--left-panel-width));
+    padding-inline: var(--content-padding); /* same as desktop */
+    margin-top: clamp(60px, 12vh, 100px);  /* same as desktop */
+  }
+
+  .left-logo {
+    width: clamp(16px, 2vw, 28px); /* same as desktop */
+  }
+
+  /* Keep right stationary border visible */
+  #right-stationary {
+    display: block;
   }
 }

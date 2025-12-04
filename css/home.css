@@ -9,6 +9,8 @@
   display: block;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-padding-top: var(--nav-height);
+  scroll-margin-top: var(--nav-height);
 }
 
 /* ================================ */
@@ -16,11 +18,10 @@
 /* ================================ */
 .hero-home .top-left-motto {
   position: absolute;
-  top: calc(var(--nav-height) + clamp(2vh, 3vh, 5vh));
   left: clamp(0.5vw, 2.5vw, 4vw);
   z-index: 61;
 
-  color: #eeeeee;
+  color: #ffffff;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   max-width: clamp(250px, 40vw, 400px);
@@ -32,22 +33,12 @@
   font-size: clamp(12px, 1.2vw, 16px);
 }
 
-/* MOBILE adjustment */
-@media (max-width: 599px) {
-  .hero-home .top-left-motto {
-    top: clamp(0vh, 0.5vh, 1vh);
-    left: clamp(2vw, 3vw, 4vw); /* slightly left for balance */
-    max-width: 80vw;
-    font-size: clamp(14px, 4vw, 16px);
-  }
-}
-
 /* ================================ */
 /* BOTTOM RIGHT MAIN MOTTO           */
 /* ================================ */
 .main-motto {
   position: absolute;
-  bottom: clamp(16vh, 20vh, 24vh);
+  bottom: clamp(20vh, 24vh, 28vh);
   right: clamp(3vw, 5vw, 6vw);
 
   display: flex;
@@ -76,8 +67,36 @@
 .word-create  { color: #fff9ff; margin-right: clamp(-4vw, -3vw, -2vw); }
 .word-reimagine { color: #fff9ff; margin-right: clamp(10vw, 12vw, 14vw); }
 
+/* ================================ */
+/* PIC1 — BASE POSITION (dynamic)    */
+/* ================================ */
+#pic1, #pic1Back {
+  position: fixed;
+  top: 50%;
+  left: 50%; /* can also be slightly offset if needed */
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 10;
+
+  will-change: transform, top, left, opacity;
+  backface-visibility: hidden;
+  transition: none;
+}
+
+#kuching1,
+#deanlist,
+#arrow {
+  transition: none;
+}
+
 /* MOBILE adjustments */
-@media (max-width: 599px) {
+@media (max-width: 600px) {
+  .hero-home .top-left-motto {
+    top: clamp(0vh, 0.5vh, 1vh);
+    left: clamp(2vw, 3vw, 4vw); /* slightly left for balance */
+    max-width: 80vw;
+    font-size: clamp(14px, 4vw, 16px);
+  }
+
   .main-motto {
     bottom: clamp(15vh, 18vh, 22vh);
     right: clamp(2vw, 3vw, 4vw);
@@ -98,25 +117,4 @@
     left: 50%;                  /* stay horizontally centered */
     transform: translateX(-50%) scale(clamp(0.8, 1vw, 1)); /* remove vertical translate */
   }
-}
-
-/* ================================ */
-/* PIC1 — BASE POSITION (dynamic)    */
-/* ================================ */
-#pic1, #pic1Back {
-  position: fixed;
-  top: 50%;
-  left: 50%; /* can also be slightly offset if needed */
-  transform: translate(-50%, -50%) scale(1);
-  z-index: 10;
-
-  will-change: transform, top, left, opacity;
-  backface-visibility: hidden;
-  transition: none;
-}
-
-#kuching1,
-#deanlist,
-#arrow {
-  transition: none;
 }

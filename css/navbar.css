@@ -10,7 +10,7 @@
   justify-content: center;
 
   padding: clamp(16px, 3vh, 28px) clamp(16px, 3vw, 32px);
-  height: auto;
+  height: var(--nav-height);
 
   z-index: 200;
   background: transparent;

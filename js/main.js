@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sec2Rect = section2 ? section2.getBoundingClientRect() : { top: Infinity, height: 1 };
     const sec3Rect = section3 ? section3.getBoundingClientRect() : { top: Infinity, height: 1 };
     const sec4Rect = section4 ? section4.getBoundingClientRect() : { top: Infinity };
-
+    
     // Navbar color
     if (section2 && scrollY < section2.offsetTop) navbarLinks.forEach(l => l.style.color = "#fff");
     else navbarLinks.forEach(l => l.style.color = "#b7b4b4");
@@ -157,8 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const progress = Math.min(scrollY / (sec2H * 0.7), 1);
     const scaleSection2 = getScaleForSection(pic1, 0.45, 0.5);
     const scaleTarget = scaleCover - (scaleCover - scaleSection2) * progress;
-    const topStart = 65;
-    const topFinal2 = 65;
+    const topStart = (vw < 600) ? 50 : 65; // If it's a small screen, start at 50%
+    const topFinal2 = (vw < 600) ? 50 : 65; // Similarly, adjust the final position for smaller screens
     const currentTopTarget = topStart + (topFinal2 - topStart) * progress;
     const shiftXTarget = progress * 10;
 
@@ -167,12 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let applyShiftX = shiftXTarget;
     let applyRot = 0;
     let applyBackRot = 180;
-
-    // --- MOBILE ADJUSTMENT ---
-    if (vw <= 768) {
-      // Move pic1 higher on mobile
-      applyTop = currentTopTarget - 15; // 15% higher; tweak as needed
-    }
 
     // SECTION 3 zoom/flip dynamically
     if (sec3Rect.top < vh) {
@@ -245,8 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (deanlist) deanlist.style.opacity = `${finalOpacity}`;
     if (deanlist) deanlist.style.transform = finalOpacity > 0 ? "translateY(0)" : "translateY(20px)";
     if (arrow) { arrow.style.opacity = `${finalOpacity}`; arrow.style.transform = finalOpacity > 0 ? "translateY(0)" : "translateY(20px)"; }
-
-
 
     updateUnderline();
   }
