@@ -168,6 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let applyRot = 0;
     let applyBackRot = 180;
 
+    // --- MOBILE ADJUSTMENT ---
+    if (vw <= 768) {
+      // Move pic1 higher on mobile
+      applyTop = currentTopTarget - 15; // 15% higher; tweak as needed
+    }
+
     // SECTION 3 zoom/flip dynamically
     if (sec3Rect.top < vh) {
       const p = 1 - (sec3Rect.top / vh);
@@ -239,6 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (deanlist) deanlist.style.opacity = `${finalOpacity}`;
     if (deanlist) deanlist.style.transform = finalOpacity > 0 ? "translateY(0)" : "translateY(20px)";
     if (arrow) { arrow.style.opacity = `${finalOpacity}`; arrow.style.transform = finalOpacity > 0 ? "translateY(0)" : "translateY(20px)"; }
+
+
 
     updateUnderline();
   }

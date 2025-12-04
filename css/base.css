@@ -38,11 +38,11 @@
   position: fixed;
   top: var(--nav-height);
   left: 0;
-  margin-top: clamp(60px, 12vh, 100px);
   width: var(--left-panel-width);
   height: calc(100vh - clamp(60px, 12vh, 100px));
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: var(--left-panel-gap);
   padding: 1rem;
@@ -55,9 +55,13 @@
 
 /* Left Logo */
 .left-logo {
-  width: clamp(20px, 3vw, 40px);
+  width: clamp(16px, 2vw, 28px);
   height: auto;
   display: block;
+  transform: translate(
+    clamp(4px, 0.6vw, 12px),   /* more to the right */
+    clamp(14px, 3vh, 34px)    /* more downward    */
+  );
 }
 
 /* --- Center Content Area --- */
@@ -113,10 +117,13 @@
     pointer-events: none;
   }
 
+  /* Content area adjustments */
   .content-area {
-    margin-left: 0;
+    margin-left: 0;                /* remove leftover left panel space */
     width: 100%;
-    padding-inline: 0.75rem;
+    padding-inline: 0.75rem;       /* maintain some horizontal padding */
+    margin-top: var(--nav-height); /* start just below navbar */
+    padding-top: clamp(0px, 1vh, 5px); /* minimal padding for breathing room */
   }
 
   #right-stationary {
