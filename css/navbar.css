@@ -113,3 +113,54 @@
     font-size: 16px;
   }
 }
+
+/* ---------- FORCE NAVBAR HEIGHT to match --nav-height ---------- */
+/* Ensures computed navbar height always equals the CSS var used by sections */
+.navbar {
+  height: var(--nav-height) !important;
+  min-height: var(--nav-height) !important;
+  line-height: var(--nav-height) !important;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Remove extra vertical padding that can make navbar taller than --nav-height */
+.navbar,
+.navbar * {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ---------- Make sure nav-height adapts on mobile (adjustable) ---------- */
+@media (max-width: 480px) {
+  :root { --nav-height: 56px; } /* change 56px to your measured mobile navbar height */
+
+  /* Strongly enforce About title to sit below the navbar on mobile */
+  .about-title {
+    top: calc(var(--nav-height) + 12px) !important;
+    left: 10px !important;
+  }
+
+  .about-description {
+    top: calc(var(--nav-height) + 220px) !important;
+    left: 10px !important;
+  }
+
+  #deanlist { top: calc(var(--nav-height) + 60px) !important; }
+  #arrow   { top: calc(var(--nav-height) + 270px) !important; }
+}
+
+/* Tablet breakpoint - keep consistent */
+@media (min-width: 481px) and (max-width: 810px) {
+  :root { --nav-height: 64px; } /* tweak if needed */
+  .about-title { top: calc(var(--nav-height) + 18px) !important; }
+}
+
+/* Desktop fallback */
+@media (min-width: 811px) {
+  :root { --nav-height: 72px; }
+  .about-title { top: calc(var(--nav-height) + 20px) !important; }
+}
