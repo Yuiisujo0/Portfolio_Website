@@ -49,7 +49,7 @@
   font-size: clamp(12px, 1.7vw, 16px);
   line-height: 1.55;
   font-weight: 500;
-  color: #000;
+  color: #161616;
 
   opacity: 0;
   transform: translateY(20px);
