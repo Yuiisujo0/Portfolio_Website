@@ -13,6 +13,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   let width = window.innerWidth;
   let height = window.innerHeight;
 
+  // Skip loader if mobile
+  if (window.innerWidth <= 768) {
+    if (loader) loader.remove();
+    document.body.classList.remove("loading");
+    return; // exit loader script
+  }
+
   /* --------------------------------------------
    * THREE.js Setup
    * -------------------------------------------- */
