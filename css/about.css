@@ -5,6 +5,7 @@
 ========================================================= */
 
 .section2 {
+  position: relative;
   background-color: #fff;
   min-height: 150vh;
 }
@@ -175,5 +176,4 @@
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     z-index: 8;
   }
-
 }

@@ -11,6 +11,12 @@ html {
   scroll-padding-top: var(--nav-height); /* Ensure content isn't hidden under the navbar */
 }
 
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 60px; /* You can tweak this for mobile, usually a bit smaller */
+  }
+}
+
 /* --- Right-side stationary border (decorative frame) --- */
 #right-stationary {
   position: fixed;
@@ -120,7 +126,7 @@ html {
 /* Mobile */
 @media (max-width: 768px) {
   :root {
-    --nav-height: 56px; /* Adjust navbar height for mobile */
+    --nav-height: 70px; /* Adjust navbar height for mobile */
   }
 
   .left-panel {
@@ -133,7 +139,6 @@ html {
     margin-left: 0;                /* remove leftover left panel space */
     width: 100%;
     padding-inline: 0.75rem;       /* maintain some horizontal padding */
-    margin-top: var(--nav-height); /* start just below navbar */
     padding-top: clamp(0px, 1vh, 5px); /* minimal padding for breathing room */
   }
 

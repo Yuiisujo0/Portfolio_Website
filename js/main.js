@@ -239,16 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const scaleForMobile = 0.3;  // Scale down to 30% for mobile
         const shiftXForMobile = 30;  // Move pic1 30% to the right
 
-        // Apply transformations specifically for mobile (scaling and positioning)
-        if (pic1 && !imagesHidden) {
-            pic1.style.transform = `scale(${scaleForMobile}) translate3d(calc(-50% + ${shiftXForMobile}vw), -50%, 0)`;
-            pic1.style.top = `${applyTop}%`;  // Apply the calculated top position to move pic1 vertically
-        }
-
-        if (pic1Back && !imagesHidden) {
-            pic1Back.style.transform = `scale(${scaleForMobile}) translate3d(calc(-50% + ${shiftXForMobile}vw), -50%, 0)`;
-            pic1Back.style.top = `${applyTop}%`;  // Apply same top position for pic1Back
-        }
     }
 
     // Apply transforms for Section 1 → Section 2 and Section 3 transitions
