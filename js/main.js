@@ -187,22 +187,33 @@ document.addEventListener('DOMContentLoaded', () => {
     let applyBackRot = 180;
 
     // SECTION 3 zoom/flip dynamically
-    if (sec3Rect.top < vh) {
-      const p = 1 - (sec3Rect.top / vh);
-      const eased = p * p * (3 - 2 * p);
-      const scaleSection3 = getScaleForSection(pic1, 0.75, 0.85);
-      const zoom = scaleTarget + (scaleSection3 - scaleTarget) * eased;
-      const topCenter3 = 53;
-      const topMove = topFinal2 + (topCenter3 - topFinal2) * eased;
-      const shiftX3 = 10 * (1 - eased) + (3 * eased);
-      const rot = eased * 180;
+if (sec3Rect.top < vh) {
+  const p = 1 - (sec3Rect.top / vh);
+  const eased = p * p * (3 - 2 * p);
 
-      applyScale = zoom;
-      applyTop = topMove;
-      applyShiftX = shiftX3;
-      applyRot = rot;
-      applyBackRot = 180 + rot;
-    }
+  // Detect mobile
+  const isMobile = window.innerWidth <= 600; // adjust breakpoint if needed
+
+  // Get scale range for the section
+  // Make the final scale smaller on mobile
+  const minScale = isMobile ? 0.65 : 0.75; // smaller on mobile
+  const maxScale = isMobile ? 0.75 : 0.85; // smaller on mobile
+  const scaleSection3 = getScaleForSection(pic1, minScale, maxScale);
+
+  const zoom = scaleTarget + (scaleSection3 - scaleTarget) * eased;
+
+  const topCenter3 = 53;
+  const topMove = topFinal2 + (topCenter3 - topFinal2) * eased;
+
+  const shiftX3 = 10 * (1 - eased) + (3 * eased);
+  const rot = eased * 180;
+
+  applyScale = zoom;
+  applyTop = topMove;
+  applyShiftX = shiftX3;
+  applyRot = rot;
+  applyBackRot = 180 + rot;
+}
 
     // KUCHING / deanlist
     let kuchingProgress = Math.min(Math.max(progress - 0.15, 0) / 0.4, 1);
