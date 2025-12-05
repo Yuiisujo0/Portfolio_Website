@@ -9,16 +9,16 @@
 /* ---------------- PROJECT TITLE ---------------- */
 #projectText {
   position: absolute;
-  top: clamp(40%, 50%, 55%);        /* dynamically between 40% and 55% of viewport */
-  left: clamp(20%, 23.5%, 30%);     /* dynamically between 20% and 30% */
+  top: clamp(40%, 50%, 55%);
+  left: clamp(20%, 23.5%, 30%);
   transform: translate(-50%, -50%) rotate(-90deg);
   font-family: 'Kanit', sans-serif;
   font-weight: 800;
-  font-size: clamp(24px, 5vw, 65px);
+  font-size: clamp(18px, 3vw, 40px);
   letter-spacing: clamp(4px, 1.4vw, 15px);
   color: rgb(178,178,178);
   opacity: 0;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 /* ---------------- EARTH ---------------- */
@@ -29,7 +29,7 @@
   width: clamp(80px, 9vw, 190px);
   transform: translate(-50%, -50%);
   opacity: 0;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 /* ---------------- ICON ---------------- */
@@ -39,7 +39,7 @@
   right: clamp(8%, 10%, 12%);
   width: clamp(80px, 8vw, 140px);
   opacity: 0;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 /* ---------------- QUOTE ---------------- */
@@ -49,5 +49,83 @@
   right: clamp(12%, 15%, 18%);
   width: clamp(80px, 8vw, 140px);
   opacity: 0;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* ---------------- MEDIA QUERIES ---------------- */
+
+/* Mobile: up to 600px */
+@media screen and (max-width: 600px) {
+  #projectText {
+    top: 20%;
+    left: 25%;
+    font-size: 24px;
+    letter-spacing: 4px;
+    transform: translate(-50%, -50%) rotate(90deg); /* rotated 90 degrees */
+  }
+  #earth {
+    top: 55%;
+    left: 18%;
+    width: 90px;
+  }
+  #icon1 {
+    top: 60%;
+    right: 10%;
+    width: 80px;
+  }
+  #quote {
+    top: 25%;
+    right: 15%;
+    width: 80px;
+  }
+}
+
+/* Tablet: 601px – 1024px */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  #projectText {
+    top: 50%;
+    left: 23%;
+    font-size: 36px;
+    letter-spacing: 8px;
+  }
+  #earth {
+    top: 55%;
+    left: 17%;
+    width: 120px;
+  }
+  #icon1 {
+    top: 60%;
+    right: 10%;
+    width: 110px;
+  }
+  #quote {
+    top: 25%;
+    right: 15%;
+    width: 110px;
+  }
+}
+
+/* Desktop: 1025px and up */
+@media screen and (min-width: 1025px) {
+  #projectText {
+    top: 47%;
+    left: 27%;
+    font-size: 3.5vw;
+    letter-spacing: 1.4vw;
+  }
+  #earth {
+    top: 53%;
+    left: 20%;
+    width: 10vw;
+  }
+  #icon1 {
+    top: 60%;
+    right: 4%;
+    width: 15vw;
+  }
+  #quote {
+    top: 25%;
+    right: 5%;
+    width: 13vw;
+  }
 }

@@ -159,8 +159,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const scaleTarget = scaleCover - (scaleCover - scaleSection2) * progress;
     const topStart = 65;
     const topFinal2 = 65;
-    const currentTopTarget = topStart + (topFinal2 - topStart) * progress;
-    const shiftXTarget = progress * 10;
+
+    // Mobile offsets
+    let mobileYOffset = 0; // vertical shift
+    let mobileXOffset = 0; // horizontal shift
+    if (vw < 600) {
+      mobileYOffset = 7;    // move down by 7%
+      mobileXOffset = -33;  // move right by 33%
+    }
+
+    // Smoothly interpolate mobile offsets over progress
+    let topOffset = 0;
+    let shiftXOffset = 0;
+    if (vw < 600) {
+      // Only interpolate while in section 2 scroll
+      topOffset = mobileYOffset * progress;
+      shiftXOffset = mobileXOffset * progress;
+    }
+
+    let currentTopTarget = topStart + (topFinal2 - topStart) * progress + topOffset;
+    let shiftXTarget = progress * 10 + shiftXOffset;
 
     let applyTop = currentTopTarget;
     let applyScale = scaleTarget;
@@ -230,10 +248,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (kuching1) {
       if (finalOpacity > 0 && !imagesHidden) {
         kuching1.style.opacity = `${finalOpacity}`;
-        kuching1.style.left = `${50 + 33 * kuchingProgress}%`;
+
         const rect = pic1 ? pic1.getBoundingClientRect() : { bottom: vh / 2 };
         kuching1.style.top = `${rect.bottom - kuching1.offsetHeight * 0.95}px`;
-      } else { kuching1.style.opacity = "0"; }
+
+        // Mobile vs desktop X position
+        let leftValue;
+        if (vw < 600) {
+          // Mobile: smaller movement
+          leftValue = 50 + 18 * kuchingProgress; // adjust 18 as needed
+        } else {
+          // Desktop: original movement
+          leftValue = 50 + 33 * kuchingProgress;
+        }
+        kuching1.style.left = `${leftValue}%`;
+
+      } else {
+        kuching1.style.opacity = "0";
+      }
     }
 
     if (deanlist) deanlist.style.opacity = `${finalOpacity}`;
