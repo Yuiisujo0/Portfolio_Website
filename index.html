@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-  <!-- Modular stylesheets (split for clarity & maintainability) -->
+  <!-- Desktop stylesheets -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/home.css">
@@ -19,13 +19,14 @@
   <link rel="stylesheet" href="css/more.css">
   <link rel="stylesheet" href="css/contact.css">
   <link rel="stylesheet" href="css/utils.css">
-
-  <!-- Loader stylesheet (unchanged) -->
   <link rel="stylesheet" href="css/loader.css">
+  <link rel="stylesheet" href="css/mobile.css" media="(max-width: 900px)">
 
+  <!-- Mobile overrides -->
+  <link rel="stylesheet" href="css/mobile.css" media="(max-width: 900px)">
 </head>
 <body>
-  <!-- Loader Screen -->
+  <!-- Loader Screen (optional) -->
   <!--<div id="loader">
     <div id="loader-rings">
       <div id="loader-canvas-wrapper"></div>
@@ -44,22 +45,21 @@
     </nav>
   </header>
 
-  <!-- NEW PAGE LAYOUT: left panel + center content -->
+  <!-- Main page layout -->
   <div class="page-layout">
 
-    <!-- LEFT PANEL (fixed) -->
+    <!-- LEFT PANEL (fixed for desktop, hidden on mobile via mobile.css) -->
     <aside class="left-panel" aria-label="Left panel">
       <a href="#home" class="left-logo-link" aria-label="Go to home">
         <img src="assets/images/webp/section1/logo_01.webp" class="left-logo" alt="Site logo">
       </a>
-      <!-- optional left items (audio, console, social icons) can be added here -->
     </aside>
 
-    <!-- CENTER CONTENT: all your existing sections moved inside here -->
-    <div class="content-area">
+    <!-- CENTER CONTENT -->
+    <main class="content-area">
 
-      <!-- Sections -->
-      <div id="home" class="section section1">
+      <!-- Home Section -->
+      <section id="home" class="section section1">
         <div class="hero-home">
           <div class="top-left-motto">
             A mind exploring realities <br>
@@ -73,34 +73,34 @@
             <span class="word-reimagine">REIMAGINE.</span>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div id="about" class="section section2">
-        <div class="about-anchor"></div>
-        <!-- ABOUT ME TITLE -->
+      <!-- About Section -->
+      <section id="about" class="section section2">
         <h1 class="about-title">ABOUT ME</h1>
 
-        <!-- DEANLIST IMAGE -->
+        <!-- Deanlist Image -->
         <img src="assets/images/webp/section2/Deanslist_01.webp" id="deanlist" alt="Deanlist">
 
-        <!-- Arrow IMAGE -->
+        <!-- Arrow Image -->
         <img src="assets/images/webp/section2/arrow_01.webp" id="arrow" alt="Arrow">
-        
-        <!-- DESCRIPTION TEXT -->
+
+        <!-- Description Text -->
         <p class="about-description">
           Between reality and imagination lies my workspace, where I transform ideas into intuitive experiences through design, animation, and code. I am Angel Bong, a Multimedia Computing student at UNIMAS, developing the skills to bring meaningful digital worlds to life.
         </p>
-      </div>
+      </section>
 
-      <div id="project" class="section section3">
+      <!-- Project Section -->
+      <section id="project" class="section section3">
         <div id="projectText">MY PROJECTS</div>
         <img id="earth" src="assets/images/webp/section3/earth_01.webp" alt="Earth">
         <img id="icon1" src="assets/images/webp/section3/laptop.webp" alt="Icon 1">
-        <img id="quote" src="assets/images/webp/section3/quote_01.webp" alt="quote">
-      </div>
+        <img id="quote" src="assets/images/webp/section3/quote_01.webp" alt="Quote">
+      </section>
 
-      <!-- Section 4: Carousel + Right Panel (integrated from your carosel.html) -->
-      <div id="more" class="section section4">
+      <!-- Section 4: Carousel + Right Panel -->
+      <section id="more" class="section section4">
         <div id="container">
           <div id="carousel" aria-label="Project carousel" role="region" tabindex="0">
             <div class="slide" style="background-image: url('assets/images/webp/section4/uiux/UI_UX_01.webp');"></div>
@@ -119,18 +119,16 @@
               <img id="img3" alt="">
             </div>
 
-            <!-- For Project Description -->
             <h2 class="project-title">PROJECT DESCRIPTION</h2>
             <div id="project-description" class="scrollable-text"></div>
 
-            <!-- For Type of Work -->
             <h2 class="work-title">TYPE OF WORK</h2>
             <div id="type-of-work" class="single-line-text"></div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Modal -->
+      <!-- Image Modal -->
       <div id="image-modal" class="modal">
         <div class="modal-content">
           <img id="modal-image" src="" alt="Enlarged image">
@@ -138,15 +136,15 @@
         </div>
       </div>
 
-      <!-- Contact section (CLEANED UP STRUCTURE) -->
-      <div id="contact" class="section section5 contact-section">
+      <!-- Contact Section -->
+      <section id="contact" class="section section5 contact-section">
         <div class="contact-top">
           <div class="contact-right" role="region" aria-label="Contact information">
             <a class="phone-link" href="tel:+60108569800">+60 10-8569800</a>
             <a class="email-link" href="mailto:angel@gmail.com">angel@gmail.com</a>
 
             <div class="socials" aria-label="Social links">
-              <a class="social-link" href="https://www.instagram.com/x.tze12?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+              <a class="social-link" href="https://www.instagram.com/x.tze12" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
               <a class="social-link" href="https://t.me/@XinTze03" target="_blank" rel="noopener noreferrer">TELEGRAM</a>
               <a class="social-link" href="https://www.linkedin.com/in/angel-bong-14598a2a2/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
               <a class="social-link" href="assets/resume.pdf" target="_blank" rel="noopener noreferrer">RESUME</a>
@@ -154,40 +152,40 @@
           </div>
         </div>
 
-        <!-- This is the main content at the bottom of the flex column -->
         <div class="contact-title">CONTACT</div>
         <div class="big-name">ANGEL BONG XIN TZE</div>
         <div class="let-title">LET'S</div>
         <div class="connect-title">CONNECT</div>
 
-        <!-- Absolute positioned elements (placed here for relative positioning to #contact) -->
         <img src="assets/images/webp/section1/logo_01.webp" alt="Logo2" class="logo2">
         <img src="assets/images/webp/section5/keyboard.webp" alt="Keyboard" class="keyboard">
-      </div>
+      </section>
 
-      <footer class="site-footer" role="contentinfo">© All right reserved. 2025 JeanCheahMingSan</footer>
+      <!-- Footer -->
+      <footer class="site-footer" role="contentinfo">
+        © All right reserved. 2025 JeanCheahMingSan
+      </footer>
 
-      <!-- Images (fixed) kept inside content-area so they participate in layout as before -->
+      <!-- Fixed Images -->
       <img src="assets/images/webp/section1/pic1.webp" id="pic1" alt="Main">
       <img src="assets/images/webp/section3/my_project_1.webp" id="pic1Back" alt="Back">
       <img src="assets/images/webp/section2/sarawak_01.webp" id="kuching1" alt="Kuching">
 
-    </div> <!-- /.content-area -->
+    </main> <!-- /.content-area -->
 
   </div> <!-- /.page-layout -->
 
-  <!-- Right-side persistent border (full-screen decorative frame) -->
+  <!-- Right-side persistent border -->
   <div id="right-stationary" aria-hidden="false">
     <img src="assets/images/webp/section1/border_01c.webp" id="right-border" alt="Decorative right border">
-    <!-- logo removed from here intentionally; left-panel contains the logo now -->
   </div>
 
   <!-- Scripts -->
   <script src="js/lib/three.min.js"></script>
   <script src="js/lib/gsap.min.js"></script>
-
   <script src="js/loader.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/carousel.js" defer></script>
+  <script src="js/mobile.js" defer></script>
 </body>
 </html>
