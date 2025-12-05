@@ -53,7 +53,7 @@
 /* RESPONSIVE MEDIA QUERIES */
 
 /* MOBILE: 360px - 390px */
-@media (max-width: 390px) {
+@media (max-width: 480px) {
   .navbar {
     padding: 0 8px;
   }
@@ -63,13 +63,13 @@
   }
 
   .nav-link {
-    font-size: 11px; /* smaller text for mobile */
+    font-size: 10px; /* smaller text for mobile */
     padding: calc((var(--nav-height) - 14px)/2) 0; /* reduce vertical padding */
   }
 }
 
 /* SMALL TABLETS: 391px - 600px */
-@media (min-width: 391px) and (max-width: 600px) {
+@media (min-width: 480px) and (max-width: 600px) {
   .navbar {
     padding: 0 12px;
   }
