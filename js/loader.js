@@ -13,29 +13,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   let width = window.innerWidth;
   let height = window.innerHeight;
 
-  const isMobile = window.innerWidth <= 768;
-
-  if (isMobile) {
-    // Show mobile layout immediately
-    document.getElementById('mobile-container').style.display = 'block';
-    
-    // Hide desktop sections and fixed elements
-    document.querySelectorAll('.section1, .section2, .section3, .section4, .section5')
-      .forEach(el => el.style.display = 'none');
-    const rightStationary = document.getElementById('right-stationary');
-    if (rightStationary) rightStationary.style.display = 'none';
-    const navbar = document.querySelector('.navbar');
-    if (navbar) navbar.style.display = 'none';
-
-    // Remove loader completely
-    const loader = document.getElementById("loader");
-    if (loader) loader.remove();
-    document.body.classList.remove("loading");
-
-    // Exit early: skip all THREE.js loader code
-    return;
-  }
-
   /* --------------------------------------------
    * THREE.js Setup
    * -------------------------------------------- */
