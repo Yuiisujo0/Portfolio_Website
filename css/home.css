@@ -11,90 +11,68 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ================================ */
 /* TOP LEFT MOTTO (stays top-left)  */
+/* ================================ */
 .hero-home .top-left-motto {
-position: absolute;
-top: calc(var(--nav-height) + 2vh);
-left: 8vw; /* moved further right */
-z-index: 61;
+  position: absolute;
+  top: calc(var(--nav-height) + 2vh);
+  left: 5vw;
+  z-index: 61;
 
-color: #eeeeee;
-font-family: 'Montserrat', sans-serif;
-font-weight: 500;
-max-width: 400px;
-line-height: 1.35;
+  color: #eeeeee;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  max-width: 400px;
+  line-height: 1.35;
 
-text-shadow: 0 6px 18px rgba(0,0,0,0.45);
-pointer-events: none;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  pointer-events: none;
 
-font-size: 14px;
-}
-
-/* MOBILE adjustment */
-@media (max-width: 599px) {
-.hero-home .top-left-motto {
-left: 5vw; /* slightly right */
-top: calc(var(--nav-height) + 3vh);
-max-width: 82vw;
-font-size: 14px; /* bigger on mobile */
-}
+  font-size: clamp(12px, 3vw, 16px); /* scales on mobile */
 }
 
 /* ================================ */
 /* BOTTOM RIGHT MAIN MOTTO           */
 /* ================================ */
 .main-motto {
-position: absolute;
-bottom: 10vh;
-right: 5vw;
+  position: absolute;
+  bottom: 10vh;
+  right: 5vw;
 
-display: flex;
-flex-direction: column;
-align-items: flex-end;
-gap: 0.2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2vh;
 
-z-index: 60;
-pointer-events: none;
+  z-index: 60;
+  pointer-events: none;
 
-font-family: 'Kanit', sans-serif;
-font-weight: 750;
-line-height: 0.8;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 750;
+  line-height: 0.8;
 
-text-shadow: 0 8px 40px rgba(0,0,0,0.45);
+  text-shadow: 0 8px 40px rgba(0,0,0,0.45);
 }
 
-/* Responsive font scaling */
+/* Responsive font scaling for main motto */
 .main-motto span {
-position: relative;
-font-size: clamp(48px, 10vw, 180px); /* increased maximum size */
-letter-spacing: 0.012em;
+  position: relative;
+  font-size: clamp(32px, 10vw, 120px);
+  letter-spacing: 0.012em;
 }
 
 .word-explore { color: #fff9ff; margin-right: 1vw; }
 .word-create { color: #fff9ff; margin-right: -4vw; }
 .word-reimagine { color: #fff9ff; margin-right: 14vw; }
 
-/* MOBILE adjustment: hug the corner tighter */
-@media (max-width: 599px) {
-.main-motto {
-bottom: 4vh;
-right: 3vw;
-gap: 0.5vh;
-}
-
-.main-motto span {
-font-size: clamp(28px, 14vw, 70px);
-}
-
-.word-create { right: 1vw; }
-.word-reimagine { right: -0.5vw; }
-}
-
-/* PIC1 — BASE POSITION */
+/* ================================ */
+/* FIXED BACKGROUND IMAGES           */
+/* ================================ */
 #pic1, #pic1Back {
   position: fixed;
   top: 50%;
-  left: 47%;
+  left: 50%;
   transform: translate(-50%, -50%) scale(1);
   z-index: 10;
 
@@ -107,4 +85,63 @@ font-size: clamp(28px, 14vw, 70px);
 #deanlist,
 #arrow {
   transition: none;
+}
+
+/* ================================ */
+/* RESPONSIVE MEDIA QUERIES          */
+/* ================================ */
+
+/* MOBILE: up to 480px */
+@media (max-width: 480px) {
+  .hero-home .top-left-motto {
+    left: 4vw;
+    max-width: 90%;
+    font-size: clamp(10px, 4vw, 14px);
+  }
+
+  .main-motto {
+    bottom: 8vh;
+    right: 3vw;
+    gap: 0.5vh;
+  }
+
+  .main-motto span {
+    font-size: clamp(24px, 12vw, 60px);
+  }
+}
+
+/* TABLETS: 481px - 810px */
+@media (min-width: 481px) and (max-width: 810px) {
+  .hero-home .top-left-motto {
+    left: 5vw;
+    max-width: 70%;
+    font-size: clamp(12px, 2.5vw, 16px);
+  }
+
+  .main-motto {
+    bottom: 10vh;
+    right: 4vw;
+  }
+
+  .main-motto span {
+    font-size: clamp(32px, 8vw, 80px);
+  }
+}
+
+/* DESKTOP/LAPTOP: 811px and up */
+@media (min-width: 811px) {
+  .hero-home .top-left-motto {
+    left: 8vw;
+    max-width: 400px;
+    font-size: 14px;
+  }
+
+  .main-motto {
+    bottom: 10vh;
+    right: 5vw;
+  }
+
+  .main-motto span {
+    font-size: clamp(48px, 10vw, 180px);
+  }
 }
