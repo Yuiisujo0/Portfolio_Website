@@ -1,32 +1,22 @@
-/* mobile.js - mobile-specific scroll and scaling logic */
+// mobile.js
 document.addEventListener('DOMContentLoaded', () => {
-  const pic1 = document.getElementById("pic1");
-  const pic1Back = document.getElementById("pic1Back");
-  const kuching1 = document.getElementById("kuching1");
-  const deanlist = document.getElementById("deanlist");
-  const arrow = document.getElementById("arrow");
-  const vh = window.innerHeight;
+  const mobileBreakpoint = 768; // px
+  if (window.innerWidth <= mobileBreakpoint) {
+    // Add mobile layout class
+    document.body.classList.add('mobile-layout');
 
-  function processMobileScroll() {
-    const scrollY = window.scrollY;
+    // Show mobile container
+    const mobileContainer = document.getElementById('mobile-container');
+    if (mobileContainer) mobileContainer.style.display = 'block';
 
-    const baseTop = 50; // start vertical position %
-    const shiftAmount = Math.min(scrollY / vh * 50, 50); // max 50% upwards
+    // Hide desktop sections
+    document.querySelectorAll('.section1, .section2, .section3, .section4, .section5')
+      .forEach(el => el.style.display = 'none');
 
-    if (pic1) pic1.style.top = `${baseTop - shiftAmount}%`;
-    if (pic1Back) pic1Back.style.top = `${baseTop - shiftAmount}%`;
-
-    // kuching1 fade in
-    const kuchingOpacity = Math.min(scrollY / (vh * 0.5), 1);
-    if (kuching1) {
-      kuching1.style.opacity = kuchingOpacity;
-      kuching1.style.transform = 'translate(-50%, -50%) scale(0.65)';
-    }
-
-    if (deanlist) deanlist.style.opacity = kuchingOpacity;
-    if (arrow) arrow.style.opacity = kuchingOpacity;
+    // Hide fixed elements
+    const rightStationary = document.getElementById('right-stationary');
+    if (rightStationary) rightStationary.style.display = 'none';
+    const navbar = document.querySelector('.navbar');
+    if (navbar) navbar.style.display = 'none';
   }
-
-  window.addEventListener('scroll', processMobileScroll, { passive: true });
-  processMobileScroll(); // initial call
 });

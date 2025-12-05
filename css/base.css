@@ -1,23 +1,30 @@
-/* --- Root variables for dynamic sizing & spacing --- */
+/* RESET ------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
-  --left-panel-width: 70px;
-  --left-panel-gap: 1.5rem;
-  --content-padding: 1rem;
-  --nav-height: 80px;
+  --nav-height: 72px;
 }
 
-html {
-  scroll-behavior: smooth; /* Ensure smooth scrolling */
-  scroll-padding-top: var(--nav-height); /* Ensure content isn't hidden under the navbar */
+/* GLOBAL LAYOUT ------------------ */
+body {
+  font-family: 'Noto Sans', sans-serif;
+  overflow-x: hidden;
+  background-color: #333;
+  line-height: 1.4;
 }
 
-@media (max-width: 768px) {
-  html {
-    scroll-padding-top: 60px; /* You can tweak this for mobile, usually a bit smaller */
-  }
+.section {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--nav-height);
 }
 
-/* --- Right-side stationary border (decorative frame) --- */
 #right-stationary {
   position: fixed;
   inset: 0;
@@ -32,155 +39,23 @@ html {
   left: 0;
   width: 100vw;
   height: 100vh;
-  object-fit: fill; /* fill viewport, maintain aspect ratio */
+  object-fit: fill;
   display: block;
   pointer-events: none;
   user-select: none;
 }
 
-/* --- Page Layout: left panel + content --- */
-.page-layout {
-  display: block;
-  width: 100%;
-  min-height: 100vh;
-}
-
-/* --- Left Panel --- */
-.left-panel {
-  position: fixed;
-  top: var(--nav-height);
-  left: 0;
-  width: var(--left-panel-width);
-  height: calc(100vh - clamp(60px, 12vh, 100px));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--left-panel-gap);
-  padding: 1rem;
-  z-index: 120;
-  pointer-events: auto;
-  background: rgba(0, 0, 0, 0.0);
-  border-right: 1px solid rgba(255, 255, 255, 0.04);
-  transition: all 0.3s ease;
-}
-
-/* Left Logo */
-.left-logo {
-  width: clamp(16px, 2vw, 28px);
-  height: auto;
-  display: block;
-  transform: translate(
-    clamp(4px, 0.6vw, 12px),   /* more to the right */
-    clamp(14px, 3vh, 34px)    /* more downward    */
-  );
-}
-
-/* --- Center Content Area --- */
-.content-area {
-  margin-left: var(--left-panel-width);
-  padding-top: clamp(1rem, 3vh, 4rem);
-  padding-inline: var(--content-padding);
-  margin-top: clamp(60px, 12vh, 100px);
-  width: calc(100% - var(--left-panel-width));
-  min-height: calc(100vh - clamp(60px, 12vh, 100px));
-  position: relative;
-  z-index: 10;
-  pointer-events: auto;
-  transition: all 0.3s ease;
-}
-
-/* --- Navbar --- */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 0.75rem 1rem; /* grows/shrinks with window height */
-  height: auto;
-  z-index: 200;
-}
-
-/* --- Hide old right logo if present --- */
 #right-logo-link {
-  display: none;
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%) scale(0.45);
+  z-index: 100;
+  pointer-events: auto;
 }
 
-/* --- RESPONSIVE RULES --- */
-
-/* Tablet */
-@media (max-width: 1024px) {
-  :root {
-    --nav-height: 64px;
-    --left-panel-width: 50px;
-    --left-panel-gap: 1rem;
-  }
-
-  .content-area {
-    margin-left: var(--left-panel-width);
-    width: calc(100% - var(--left-panel-width));
-    padding-inline: 0.5rem;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  :root {
-    --nav-height: 70px; /* Adjust navbar height for mobile */
-  }
-
-  .left-panel {
-    transform: translateX(-100%);
-    pointer-events: none;
-    display: none;
-  }
-
-  /* Content area adjustments */
-  .content-area {
-    margin-left: 0;                /* remove leftover left panel space */
-    width: 100%;
-    padding-inline: 0.75rem;       /* maintain some horizontal padding */
-    padding-top: clamp(0px, 1vh, 5px); /* minimal padding for breathing room */
-  }
-
-  #right-stationary {
-    display: none;
-  }
-}
-
-/* Small mobile tweaks */
-@media (max-width: 480px) {
-  :root {
-    --content-padding: 0.5rem;
-  }
-
-  .left-logo {
-    width: 20px;
-  }
-}
-
-/* --- Tablet: 769px - 1024px --- */
-@media (max-width: 1024px) and (min-width: 769px) {
-  /* Keep left panel visible, just slightly reduce width if needed */
-  .left-panel {
-    width: var(--left-panel-width); /* same as desktop */
-    gap: var(--left-panel-gap);     /* same as desktop */
-    padding: 1rem;                  /* same as desktop */
-  }
-
-  .content-area {
-    margin-left: var(--left-panel-width); /* same as desktop */
-    width: calc(100% - var(--left-panel-width));
-    padding-inline: var(--content-padding); /* same as desktop */
-    margin-top: clamp(60px, 12vh, 100px);  /* same as desktop */
-  }
-
-  .left-logo {
-    width: clamp(16px, 2vw, 28px); /* same as desktop */
-  }
-
-  /* Keep right stationary border visible */
-  #right-stationary {
-    display: block;
-  }
+#right-logo {
+  width: 64px;
+  height: auto;
+  display: block;
 }

@@ -5,7 +5,6 @@
 ========================================================= */
 
 .section2 {
-  position: relative;
   background-color: #fff;
   min-height: 150vh;
 }
@@ -25,14 +24,18 @@
   position: fixed;
   top: clamp(80px, 10vh, 140px);
   left: clamp(20px, 10vw, 140px);
+
   font-family: 'Kanit', sans-serif;
   font-weight: 600;
   font-size: clamp(32px, 5vw, 50px);
+
   color: #b7b4b4;
   letter-spacing: 0.2vw;
+
   opacity: 0;
   transform: translateY(-10vh);
   transition: opacity 0.45s ease-out, transform 0.45s cubic-bezier(.1,1.1,.1,1);
+
   z-index: 20;
 }
 
@@ -47,17 +50,21 @@
 ========================================================= */
 .about-description {
   position: fixed;
+
   top: clamp(420px, 65vh, 750px);
   left: clamp(20px, 10vw, 150px);
+
   max-width: clamp(250px, 40vw, 400px);
-  font-family: 'Montserrat', sans-serif;
+
   font-size: clamp(14px, 1.7vw, 16px);
   line-height: 1.55;
   font-weight: 500;
   color: #000;
+
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+
   overflow-wrap: break-word; /* prevent long words from overflowing */
   z-index: 20;
 }
@@ -65,6 +72,25 @@
 .about-description.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Tablet & mobile repositioning */
+@media (max-width: 900px) {
+  .about-description {
+    left: 8vw;
+    top: auto;
+    bottom: 12vh;
+    max-width: 85vw;
+    font-size: clamp(15px, 2.3vw, 17px);
+  }
+}
+
+@media (max-width: 600px) {
+  .about-title {
+    top: clamp(10px, 4vh, 20px);
+    left: clamp(12px, 4vw, 20px);
+    font-size: clamp(26px, 7vw, 42px);
+  }
 }
 
 /* =========================================================
@@ -84,12 +110,16 @@
 ========================================================= */
 #deanlist {
   position: fixed;
+
   top: clamp(150px, 25vh, 220px);
   left: clamp(20px, 10vw, 150px);
+
   width: clamp(180px, 28vw, 350px);
+
   opacity: 0;
   transform: translateY(20px) scale(1.6);   /* slightly reduced scale to prevent overflow on phones */
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
   z-index: 8;
 }
 
@@ -98,12 +128,16 @@
 ========================================================= */
 #arrow {
   position: fixed;
+
   top: clamp(420px, 60vh, 740px);
   left: clamp(20px, 10vw, 150px);
+
   width: clamp(28px, 6vw, 50px);
+
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
   z-index: 8;
 }
 
@@ -112,68 +146,14 @@
 ========================================================= */
 #kuching1 {
   position: fixed;
+
   left: 100%;
   width: clamp(120px, 27vw, 420px);
+
   opacity: 0;
   transform: translateX(-45%) scale(0.9);
+
   transition: opacity 0.3s ease;
+
   z-index: 9;
-}
-
-
-/* Tablet & mobile repositioning */
-@media (max-width: 900px) {
-  .about-description {
-    left: 8vw;
-    top: auto;
-    bottom: 12vh;
-    max-width: 85vw;
-    font-size: clamp(15px, 2.3vw, 17px);
-  }
-}
-
-@media (max-width: 600px) {
-  .about-description {
-    left: 10vw;                 /* Adjusts horizontal position */
-    bottom: 6vh;              /* Moves the text up a bit */
-    max-width: 75vw;           /* Set the width of the text box to 70% of the viewport */
-    font-size: clamp(14px, 8vw, 16px);  /* Smaller font size for mobile */
-    line-height: 1.4;          /* Adjust line height for readability */
-    width: 75vw;               /* Ensure the width is controlled */
-  }
-
-  .about-title {
-    top: clamp(10px, 4vh, 20px);
-    left: clamp(12px, 4vw, 20px);
-    font-size: clamp(26px, 7vw, 42px);
-  }
-  
-  /* Hide the deanlist image on mobile */
-  #deanlist {
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  #kuching1 {
-    position: fixed;
-    left: 50%;               /* Center horizontally */
-    top: 5%;                 /* Move the image higher on mobile */
-    width: 80vw;             /* Increase size on mobile, 80% of viewport width */
-    height: auto;            /* Maintain aspect ratio */
-    transform: translateX(-50%) scale(1.5); /* Make the image 1.5x bigger on mobile */
-    opacity: 0;              /* Ensure the image is initially invisible */
-    transition: opacity 0.3s ease, top 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-  }
-
-  /* Arrow image */
-  #arrow {
-    top: clamp(480px, 60vh, 820px);  /* Lower the arrow position on mobile */
-    left: clamp(20px, 10vw, 150px);
-    width: clamp(28px, 6vw, 50px);
-    opacity: 0;
-    transform: translateY(20px) scale(1.5);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    z-index: 8;
-  }
 }
