@@ -4,7 +4,7 @@
 .more-title { font-family:'Kanit',sans-serif;font-size:48px;margin-bottom:24px;color:#333; }
 .more-desc { max-width:700px;color:#444;font-size:18px;line-height:1.6; }
 
-.contact-title { font-family:'Kanit',sans-serif;font-size:42px;margin-bottom:1px;margin-left:-100px;color:#222; }
+.contact-title { font-family:'Kanit',sans-serif;font-size:42px;margin-bottom:1px;color:#222; }
 .contact-desc { max-width:700px;color:#444;font-size:18px;line-height:1.6;margin-bottom:18px; }
 
 /* container */
@@ -318,6 +318,8 @@
 
 /* DESKTOP: 1025px and up */
 @media screen and (min-width: 1025px) {
+  .contact-title { font-family:'Kanit',sans-serif;font-size:42px;margin-bottom:1px;margin-left:-100px;color:#222; }
+  
   #more #container {
     flex-direction: row;
     gap: 20px;
