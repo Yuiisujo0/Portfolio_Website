@@ -78,14 +78,15 @@ body {
 }
 
 /* Mobile */
-@media (max-width: 300px) {
+@media (max-width: 599px) {
   #right-logo-link {
     transform: translateY(-50%) scale(0.3);
     left: 10px;
   }
 
   #right-border {
-    display: none; /* optional to reduce clutter */
+    display: none !important; /* force override */
+    visibility: hidden;       /* extra safety */
   }
 
   body {

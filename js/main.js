@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pic1) {
       const n = nat(pic1);
       const sx = vw / n.w, sy = vh / n.h;
-      scaleCover = Math.max(sx, sy) * 1.2;
+      scaleCover = Math.max(sx, sy) * 1.3;
       pic1.style.transform = `translate3d(-50%,-50%,0) scale(${scaleCover})`;
       if (pic1Back) pic1Back.style.transform = `translate3d(-50%,-50%,0) scale(${scaleCover}) rotateY(180deg)`;
     }
