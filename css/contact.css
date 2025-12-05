@@ -13,16 +13,16 @@
   gap: 5px;
 }
 
-/* top row that contains the right-side contact block */
+/* ---------- Layout Row ---------- */
 .contact-top {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  margin-top: calc(var(--nav-height, 72px) + 8px);
+  margin-top: calc(var(--nav-height, 72px) + 24px);
   flex: 0 0 auto;
 }
 
-/* contact block aligned to the right */
+/* ---------- Contact Block ---------- */
 .contact-right {
   max-width: 420px;
   text-align: right;
@@ -32,7 +32,7 @@
   align-items: flex-end;
 }
 
-/* Base link style */
+/* ---------- Base Link style ---------- */
 .phone-link,
 .email-link {
   font-weight: 800;
@@ -42,26 +42,20 @@
   transition: color 0.2s, text-decoration 0.2s;
 }
 
-/* Individual colors */
 .phone-link { color: #b3b3b3; }
 .email-link { color: #c28cd1; }
-
-/* Hover / focus underline */
-.phone-link:hover,
-.phone-link:focus {
+.phone-link:hover, .phone-link:focus {
   text-decoration: underline;
   color: #7c7c7c;
   outline: none;
 }
-
-.email-link:hover,
-.email-link:focus {
+.email-link:hover, .email-link:focus {
   text-decoration: underline;
   color: #c28cd1;
   outline: none;
 }
 
-/* social links right row */
+/* ---------- Socials ---------- */
 .socials { display: flex; gap: 10px; margin-top: 8px; }
 .social-link {
   padding: 6px 10px;
@@ -74,95 +68,85 @@
 }
 .social-link:hover, .social-link:focus { background: #303030; }
 
-/* Single large line for the full name */
+/* ------------------ TITLES BLOCK - MAKE IT FLEX FOR RESPONSIVE ----------------- */
+.contact-titles-block {
+  /* New wrapper: Add this around .contact-title, .big-name, .let-title, .connect-title in HTML! */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* left on desktop, center for mobile/tablet later */
+  gap: 10px;
+  margin: calc(var(--nav-height, 72px) + 60px) 0 0 0px;  /* margin left on desktop, tweak for mobile */
+  position: relative;
+  z-index: 1;
+}
+
+.contact-left {
+  flex: 0 0 auto;    /* don’t stretch */
+  max-width: 500px;  /* limit width */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
 .contact-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   text-transform: uppercase;
   color: #c8c7c7;
-  line-height: 0.92;
-  white-space: nowrap;
-  font-size: clamp(55px, 10vw, 55px);
+  line-height: 1;
+  font-size: clamp(32px, 7vw, 55px);
   letter-spacing: 1px;
-  position: absolute;
-  top: 29%;
-  left: 22.45%;
-  z-index: 1;
 }
-
-/* Single large line for the full name */
 .big-name {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   text-transform: uppercase;
   color: #8a8989;
-  line-height: 0.92;
-  white-space: nowrap;
-  font-size: clamp(40px, 10vw, 40px);
+  line-height: 1;
+  font-size: clamp(24px, 6vw, 40px);
   letter-spacing: 1px;
-  position: absolute;
-  top: 37%;
-  left: 29%;
   z-index: 1;
 }
+.let-title,
+.connect-title {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.let-title {
+  font-weight: 500;
+  color: #c3c3c3;
+  font-size: clamp(18px, 4vw, 40px);
+}
+.connect-title {
+  font-weight: 800;
+  color: #c3c3c3;
+  font-size: clamp(20px, 5vw, 45px);
+}
 
-/* Positioning for logo2 image (centered) */
+/* ---------- Images ---------- */
 .logo2 {
-  position: absolute;
-  top: 50%;
-  left: 67%;
-  transform: translate(-70%, -30%) scale(0.5);
-  width: 150px;
+  display: block;
+  margin: 32px auto 0 auto;
+  width: clamp(80px, 18vw, 150px);
+  height: auto;
+}
+.keyboard {
+  display: block;
+  margin: 36px auto 0 auto;
+  width: clamp(180px, 50vw, 800px);
+  max-width: 100%;
   height: auto;
 }
 
-/* Positioning for keyboard image (bottom-left) */
-.keyboard {
-  position: absolute;
-  bottom: -5%;
-  left: 100px;
-  width: 800px;
-  height: 500px;
-}
-
-/* Single large line for the full name */
-.let-title {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  text-transform: uppercase;
-  color: #c3c3c3;
-  line-height: 0.92;
-  white-space: nowrap;
-  font-size: clamp(40px, 10vw, 40px);
-  letter-spacing: 1px;
-  position: absolute;
-  top: 63%;
-  left: 68%;
-  z-index: 1;
-}
-
-/* Single large line for the full name */
-.connect-title {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #c3c3c3;
-  line-height: 0.92;
-  white-space: nowrap;
-  font-size: clamp(45px, 7vw, 45px);
-  letter-spacing: 0.7px;
-  position: absolute;
-  top: 70%;
-  left: 68%;
-  z-index: 1;
-}
-
-/* Footer */
+/* ---------- Footer ---------- */
 .site-footer {
   background: #fff;
   color: #666;
   position: relative;
-  margin-top: 24px;
   text-align: center;
   font-size: 14px;
   padding: 18px 8px;
@@ -170,48 +154,187 @@
   z-index: 1;
 }
 
-/* If the footer is placed *inside* the contact container, ensure it doesn't stretch the contact area */
 .contact-section .site-footer,
 #contact .site-footer {
-  margin-top: 24px;
   align-self: stretch;
 }
 
-/* Responsive adjustments */
-@media (max-width: 900px) {
-  .contact-top {
-    margin-top: 12px;
-    justify-content: center;
+/* ---------------- MEDIA QUERIES ---------------- */
+/* MOBILE: up to 600px */
+@media screen and (max-width: 600px) {
+  #contact {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    justify-items: center;
+    row-gap: 8px;
+    padding-top: calc(var(--nav-height, 72px) + 20px); /* navbar + spacing */
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
   }
+
+  /* Visual order */
+  .contact-visuals .contact-title { grid-row: 1; }
+  .contact-visuals .big-name { grid-row: 2; }
+  .contact-visuals .keyboard { grid-row: 3; }
+  .contact-visuals .let-title { grid-row: 4; }
+  .contact-visuals .connect-title { grid-row: 5; }
+  .contact-top { grid-row: 6; margin-top: 12px;} 
+  .contact-visuals .logo2 { grid-row: 7; margin-top: 12px;}
+
+  /* Children participate in grid */
+  .contact-visuals {
+    display: contents;
+  }
+
+  /* Text alignment and spacing */
   .contact-right {
-    align-items: center;
     text-align: center;
-    max-width: 100%;
-  }
-  .contact-link {
-    font-size: clamp(16px, 4vw, 22px);
-  }
-  .socials {
-    justify-content: center;
+    align-items: center;
+    gap: 6px;
   }
 
-  .big-name {
-    white-space: normal;
-    font-size: clamp(28px, 10vw, 72px);
-    margin-top: 0;
-  }
+  /* Flexible font sizes and spacing */
+  .contact-title { font-size: clamp(20px, 6vw, 28px); }
+  .big-name { font-size: clamp(16px, 5vw, 24px); }
+  .let-title, .connect-title { font-size: clamp(14px, 4vw, 20px); }
 
-  .contact-bottom {
-    padding-bottom: 20px;
+  /* Images responsive */
+  .keyboard { width: clamp(140px, 50vw, 200px); margin: 0 auto; }
+  .logo2 { width: clamp(30px, 10vw, 50px); margin: 10 auto; }
+
+  /* Links */
+  .phone-link, .email-link {
+    font-size: clamp(14px, 4vw, 18px);
+    display: block;
   }
+  .social-link { font-size: clamp(10px, 3vw, 12px); padding: 4px 8px; }
+
+  /* Socials wrapping */
+  .socials { flex-wrap: wrap; justify-content: center; gap: 6px; }
 }
 
-@media (max-width: 420px) {
-  .big-name {
-    font-size: clamp(24px, 12vw, 46px);
+/* TABLET: 601px – 1024px */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  #contact {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    justify-items: center;
+    row-gap: 18px;
+    padding: 0 32px;
+    box-sizing: border-box;
   }
-  .social-link {
-    font-size: 12px;
-    padding: 6px 8px;
+
+  .contact-title { font-size: clamp(28px, 6vw, 36px); }
+  .big-name { font-size: clamp(22px, 5vw, 32px); }
+  .let-title, .connect-title { font-size: clamp(18px, 4vw, 24px); }
+
+  .keyboard { width: clamp(250px, 50vw, 400px); }
+  .logo2 { width: clamp(80px, 20vw, 120px); }
+
+  .phone-link, .email-link { font-size: clamp(16px, 3.5vw, 20px); }
+  .social-link { font-size: clamp(11px, 3vw, 14px); }
+}
+
+/* DESKTOP: 1025px and up */
+@media screen and (min-width: 1025px) {
+  #contact {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: calc(var(--nav-height, 72px) + 40px) 80px 80px 80px;
+    gap: 10px;
+    box-sizing: border-box;
+  }
+
+  /* LEFT COLUMN */
+  .contact-left {
+    flex: 0 0 60%;     
+    max-width: none;     
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    align-items: flex-end;
+    margin-left: 50px;    /* remove internal left margin */
+    box-sizing: border-box; /* ensure width respects padding */
+  }
+
+  .title-wrap {
+    transform: translateX(-15px) translateY(70px);
+  }
+
+  /* Keyboard image */
+  .contact-left .keyboard {
+    width: clamp(550px, 50vw, 900px);  /* smaller max width to prevent overflow */
+    margin-left: auto;   /* pushes image to the right within flex column */
+    margin-right: 0;                       /* align left with titles */
+    margin-top: -20px; 
+    height: auto;
+  }
+
+  /* RIGHT COLUMN */
+  .contact-right-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column; /* stack contact info on top, LET'S CONNECT on bottom */
+    gap: 30px;
+    flex: 0 0 40%;
+    align-items: flex-start;
+    text-align: right;
+  }
+
+  /* Contact info on top */
+  .contact-right {
+    display: flex;
+    margin-left: 25px;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* LET'S CONNECT container now horizontal */
+  .let-connect {
+    display: flex;
+    flex-direction: row; /* logo left, text right */
+    align-items: center; /* vertically center text with logo */
+    gap: 12px; /* spacing between logo and text */
+    justify-content: flex-start;
+    margin-top: 60px;  
+  }
+
+  .let-connect .logo2 {
+    width: clamp(40px, 6vw, 60px); /* adjust size as needed */
+    margin: 0; /* remove top margin */
+    height: auto;
+  }
+
+  .let-connect .connect-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* left-align text next to logo */
+    text-align: left;
+  }
+
+  /* Optional: adjust font size for desktop */
+  .let-title { font-size: clamp(20px, 2vw, 28px); }
+  .connect-title { font-size: clamp(20px, 2vw, 28px); }
+
+  /* Socials */
+  .socials {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .logo2 {
+    width: clamp(55px, 13vw, 85px); /* smaller logo */
+    margin: 0; /* align with right column */
+    height: auto;
   }
 }

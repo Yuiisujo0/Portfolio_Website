@@ -57,26 +57,28 @@
 /* Mobile: up to 600px */
 @media screen and (max-width: 600px) {
   #projectText {
-    top: 20%;
-    left: 25%;
+    top: 24%;
+    left: 30%;
     font-size: 24px;
     letter-spacing: 4px;
-    transform: translate(-50%, -50%) rotate(90deg); /* rotated 90 degrees */
+    transform: translate(-50%, -50%) rotate(0deg)!important; /* rotated 90 degrees */
   }
   #earth {
     top: 55%;
     left: 18%;
     width: 90px;
+    display: none;
   }
   #icon1 {
     top: 60%;
     right: 10%;
     width: 80px;
+    display: none;
   }
   #quote {
-    top: 25%;
-    right: 15%;
-    width: 80px;
+    top: 18%;
+    right: 10%;
+    width: 90px;
   }
 }
 

@@ -4,7 +4,7 @@
 .more-title { font-family:'Kanit',sans-serif;font-size:48px;margin-bottom:24px;color:#333; }
 .more-desc { max-width:700px;color:#444;font-size:18px;line-height:1.6; }
 
-.contact-title { font-family:'Kanit',sans-serif;font-size:42px;margin-bottom:18px;color:#222; }
+.contact-title { font-family:'Kanit',sans-serif;font-size:42px;margin-bottom:1px;margin-left:-100px;color:#222; }
 .contact-desc { max-width:700px;color:#444;font-size:18px;line-height:1.6;margin-bottom:18px; }
 
 /* container */
@@ -231,42 +231,108 @@
   border-radius: 50%;
 }
 
-/* ---------- Responsive: stack and reduce heights on smaller screens ---------- */
-@media (max-width: 900px) {
+/* ---------------- MEDIA QUERIES ---------------- */
+
+/* MOBILE: up to 600px */
+@media screen and (max-width: 600px) {
   #more #container {
-    flex-direction: column;
-    padding-top: 20px;
-    min-height: auto;
-    gap: 16px;
+    flex-direction: column; /* stacked layout */
+    gap: 20px;
   }
 
   #more #carousel {
     width: 100%;
-    min-height: 360px;   /* shorter carousel on small screens */
-    height: 360px;
+    min-height: 250px; /* slightly smaller to fit mobile */
+    overflow-x: scroll; /* allow horizontal swipe if needed */
   }
 
   #more #right-panel {
     width: 100%;
     min-height: auto;
-    padding: 16px;
+    max-height: none;
+    padding: 15px;
   }
 
-  #more .slide {
-    width: 90%;
-    max-width: 520px;
-    aspect-ratio: 5/3;
-    font-size: 1rem;
+  #more #image-row {
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
   #more #image-row img {
+    width: 48%;
+    height: 100px; /* smaller images for mobile */
+  }
+
+  /* Reduce font sizes for mobile */
+  .more-title {
+    font-size: 24px;
+  }
+
+  .more-desc,
+  .contact-desc {
+    font-size: 14px;
+  }
+
+  #more #right-panel .project-title,
+  #more #right-panel .work-title {
+    font-size: 1rem;
+    width: 90%; /* increase width on mobile */
+  }
+
+  #more #right-panel .scrollable-text,
+  #more #right-panel .single-line-text {
+    width: 90%;        /* wider for mobile */
+    font-size: 0.90rem; /* smaller font for better fit */
+    height: 40px;      /* keep height consistent */
+  }
+
+  #more #right-panel .scrollable-text {
     height: 120px;
-    width: 32%;
   }
 }
 
-/* extra small phones */
-@media (max-width: 420px) {
-  #more .slide { width: 94%; max-width: none; }
-  #more #image-row img { height: 100px; }
+/* TABLET: 601px – 1024px */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  #more #container {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  #more #carousel {
+    min-height: 450px;
+  }
+
+  #more #right-panel {
+    min-height: 450px;
+    max-height: none;
+    padding: 20px;
+  }
+
+  #more #image-row img {
+    width: 32%;
+    height: 150px;
+  }
+}
+
+/* DESKTOP: 1025px and up */
+@media screen and (min-width: 1025px) {
+  #more #container {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  #more #carousel {
+    min-height: 650px;
+  }
+
+  #more #right-panel {
+    min-height: 580px;
+    max-height: 580px;
+    padding: 20px;
+  }
+
+  #more #image-row img {
+    width: 32%;
+    height: 200px;
+  }
 }
