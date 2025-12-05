@@ -1,20 +1,11 @@
 /* =========================================================
    ABOUT SECTION (SECTION 2)
-   Fully responsive – fluid spacing & viewport-based sizing
-   Keeps all animation class names for JS compatibility
 ========================================================= */
-
 .section2 {
   background-color: #fff;
   min-height: 150vh;
-}
-
-/* Larger min-heights on smaller screens (keeps scroll flow) */
-@media (max-width: 1024px) { 
-  .section2 { min-height: 180vh; } 
-}
-@media (max-width: 600px) { 
-  .section2 { min-height: 200vh; } 
+  position: relative;
+  overflow-x: hidden;
 }
 
 /* =========================================================
@@ -22,12 +13,12 @@
 ========================================================= */
 .about-title {
   position: fixed;
-  top: clamp(80px, 10vh, 140px);
-  left: clamp(20px, 10vw, 140px);
+  top: clamp(60px, 10vh, 140px);
+  left: clamp(15px, 8vw, 140px);
 
   font-family: 'Kanit', sans-serif;
   font-weight: 600;
-  font-size: clamp(32px, 5vw, 50px);
+  font-size: clamp(28px, 5vw, 50px);
 
   color: #b7b4b4;
   letter-spacing: 0.2vw;
@@ -39,7 +30,6 @@
   z-index: 20;
 }
 
-/* JS toggles this */
 .about-title.visible {
   opacity: 1;
   transform: translateY(0);
@@ -51,12 +41,12 @@
 .about-description {
   position: fixed;
 
-  top: clamp(420px, 65vh, 750px);
-  left: clamp(20px, 10vw, 150px);
+  top: clamp(380px, 60vh, 750px);
+  left: clamp(15px, 8vw, 150px);
 
-  max-width: clamp(250px, 40vw, 400px);
+  max-width: clamp(220px, 45vw, 400px);
 
-  font-size: clamp(14px, 1.7vw, 16px);
+  font-size: clamp(12px, 1.7vw, 16px);
   line-height: 1.55;
   font-weight: 500;
   color: #000;
@@ -65,32 +55,13 @@
   transform: translateY(20px);
   transition: opacity 0.45s ease-out, transform 0.45s ease-out;
 
-  overflow-wrap: break-word; /* prevent long words from overflowing */
+  overflow-wrap: break-word;
   z-index: 20;
 }
 
 .about-description.visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Tablet & mobile repositioning */
-@media (max-width: 900px) {
-  .about-description {
-    left: 8vw;
-    top: auto;
-    bottom: 12vh;
-    max-width: 85vw;
-    font-size: clamp(15px, 2.3vw, 17px);
-  }
-}
-
-@media (max-width: 600px) {
-  .about-title {
-    top: clamp(10px, 4vh, 20px);
-    left: clamp(12px, 4vw, 20px);
-    font-size: clamp(26px, 7vw, 42px);
-  }
 }
 
 /* =========================================================
@@ -111,13 +82,13 @@
 #deanlist {
   position: fixed;
 
-  top: clamp(150px, 25vh, 220px);
-  left: clamp(20px, 10vw, 150px);
+  top: clamp(120px, 25vh, 220px);
+  left: clamp(15px, 8vw, 150px);
 
-  width: clamp(180px, 28vw, 350px);
+  width: clamp(150px, 28vw, 350px);
 
   opacity: 0;
-  transform: translateY(20px) scale(1.6);   /* slightly reduced scale to prevent overflow on phones */
+  transform: translateY(20px) scale(1.4);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 
   z-index: 8;
@@ -129,10 +100,10 @@
 #arrow {
   position: fixed;
 
-  top: clamp(420px, 60vh, 740px);
-  left: clamp(20px, 10vw, 150px);
+  top: clamp(380px, 60vh, 740px);
+  left: clamp(15px, 8vw, 150px);
 
-  width: clamp(28px, 6vw, 50px);
+  width: clamp(24px, 6vw, 50px);
 
   opacity: 0;
   transform: translateY(20px);
@@ -148,7 +119,7 @@
   position: fixed;
 
   left: 100%;
-  width: clamp(120px, 27vw, 420px);
+  width: clamp(100px, 27vw, 420px);
 
   opacity: 0;
   transform: translateX(-45%) scale(0.9);
@@ -156,4 +127,104 @@
   transition: opacity 0.3s ease;
 
   z-index: 9;
+}
+
+/* =========================================================
+   RESPONSIVE MEDIA QUERIES
+========================================================= */
+
+/* MOBILE: up to 480px */
+@media (max-width: 480px) {
+  .about-title {
+    top: 50px;
+    left: 10px;
+    font-size: clamp(22px, 6vw, 32px);
+  }
+
+  .about-description {
+    top: 45vh;
+    left: 8px;
+    max-width: 90%;
+    font-size: clamp(11px, 3vw, 14px);
+  }
+
+  #deanlist {
+    top: 20vh;
+    left: 5vw;
+    width: clamp(120px, 35vw, 250px);
+  }
+
+  #arrow {
+    top: 55vh;
+    left: 5vw;
+    width: clamp(20px, 8vw, 40px);
+  }
+
+  #kuching1 {
+    width: clamp(80px, 40vw, 200px);
+  }
+}
+
+/* TABLET: 481px - 810px */
+@media (min-width: 481px) and (max-width: 810px) {
+  .about-title {
+    top: 80px;
+    left: 5vw;
+    font-size: clamp(28px, 5vw, 42px);
+  }
+
+  .about-description {
+    top: 60vh;
+    left: 5vw;
+    max-width: 70%;
+    font-size: clamp(12px, 2.5vw, 16px);
+  }
+
+  #deanlist {
+    top: 22vh;
+    left: 6vw;
+    width: clamp(150px, 30vw, 300px);
+  }
+
+  #arrow {
+    top: 62vh;
+    left: 6vw;
+    width: clamp(24px, 6vw, 45px);
+  }
+
+  #kuching1 {
+    width: clamp(100px, 30vw, 350px);
+  }
+}
+
+/* DESKTOP: 811px and up */
+@media (min-width: 811px) {
+  .about-title {
+    top: clamp(80px, 10vh, 140px);
+    left: clamp(20px, 10vw, 140px);
+    font-size: clamp(32px, 5vw, 50px);
+  }
+
+  .about-description {
+    top: clamp(420px, 65vh, 750px);
+    left: clamp(20px, 10vw, 150px);
+    max-width: clamp(250px, 40vw, 400px);
+    font-size: clamp(14px, 1.7vw, 16px);
+  }
+
+  #deanlist {
+    top: clamp(150px, 25vh, 220px);
+    left: clamp(20px, 10vw, 150px);
+    width: clamp(180px, 28vw, 350px);
+  }
+
+  #arrow {
+    top: clamp(420px, 60vh, 740px);
+    left: clamp(20px, 10vw, 150px);
+    width: clamp(28px, 6vw, 50px);
+  }
+
+  #kuching1 {
+    width: clamp(120px, 27vw, 420px);
+  }
 }

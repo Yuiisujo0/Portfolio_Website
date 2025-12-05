@@ -85,6 +85,10 @@ body {
     display: none;
   }
 
+  #right-logo {
+    display: none;
+  }
+
   #right-logo-link {
     left: 10px;
     transform: translateY(-50%) scale(0.35);
