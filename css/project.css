@@ -9,8 +9,8 @@
 /* ---------------- PROJECT TITLE ---------------- */
 #projectText {
   position: absolute;
-  top: 50%;           /* vertical center as base */
-  left: 23.5%;          /* more to the right */
+  top: clamp(40%, 50%, 55%);        /* dynamically between 40% and 55% of viewport */
+  left: clamp(20%, 23.5%, 30%);     /* dynamically between 20% and 30% */
   transform: translate(-50%, -50%) rotate(-90deg);
   font-family: 'Kanit', sans-serif;
   font-weight: 800;
@@ -24,8 +24,8 @@
 /* ---------------- EARTH ---------------- */
 #earth {
   position: absolute;
-  top: 55%;           /* slightly lower */
-  left: 17%;          /* more to the left */
+  top: clamp(50%, 55%, 60%);
+  left: clamp(15%, 17%, 20%);
   width: clamp(80px, 9vw, 190px);
   transform: translate(-50%, -50%);
   opacity: 0;
@@ -35,8 +35,8 @@
 /* ---------------- ICON ---------------- */
 #icon1 {
   position: absolute;
-  top: 60%;           /* higher up */
-  right: 10%;         /* to the right */
+  top: clamp(55%, 60%, 65%);
+  right: clamp(8%, 10%, 12%);
   width: clamp(80px, 8vw, 140px);
   opacity: 0;
   transition: opacity 0.5s ease-out;
@@ -45,8 +45,8 @@
 /* ---------------- QUOTE ---------------- */
 #quote {
   position: absolute;
-  top: 25%;           /* higher up */
-  right: 15%;         /* slightly left than icon */
+  top: clamp(20%, 25%, 30%);
+  right: clamp(12%, 15%, 18%);
   width: clamp(80px, 8vw, 140px);
   opacity: 0;
   transition: opacity 0.5s ease-out;
