@@ -40,7 +40,7 @@ html {
 
 /* --- Page Layout: left panel + content --- */
 .page-layout {
-  display: flex;
+  display: block;
   width: 100%;
   min-height: 100vh;
 }
@@ -132,6 +132,7 @@ html {
   .left-panel {
     transform: translateX(-100%);
     pointer-events: none;
+    display: none;
   }
 
   /* Content area adjustments */
