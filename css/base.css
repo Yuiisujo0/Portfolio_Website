@@ -78,7 +78,7 @@ body {
 }
 
 /* Mobile */
-@media (max-width: 599px) {
+@media (max-width: 300px) {
   #right-logo-link {
     transform: translateY(-50%) scale(0.3);
     left: 10px;
