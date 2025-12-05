@@ -1,15 +1,18 @@
-/* RESET ------------------------- */
+/* RESET --------------------------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* GLOBAL VARIABLES ---------------- */
 :root {
   --nav-height: 72px;
+  --max-content-width: 1200px;
+  --section-padding: 20px;
 }
 
-/* GLOBAL LAYOUT ------------------ */
+/* GLOBAL LAYOUT ------------------- */
 body {
   font-family: 'Noto Sans', sans-serif;
   overflow-x: hidden;
@@ -17,14 +20,20 @@ body {
   line-height: 1.4;
 }
 
+/* SECTION STYLING ----------------- */
 .section {
   width: 100%;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
   padding-top: var(--nav-height);
+  padding-left: var(--section-padding);
+  padding-right: var(--section-padding);
+  margin: 0 auto;
+  max-width: var(--max-content-width);
 }
 
+/* RIGHT STATIONARY ELEMENTS -------- */
 #right-stationary {
   position: fixed;
   inset: 0;
@@ -33,6 +42,7 @@ body {
   overflow: hidden;
 }
 
+/* Decorative right border */
 #right-border {
   position: absolute;
   top: 0;
@@ -45,6 +55,7 @@ body {
   user-select: none;
 }
 
+/* Right logo */
 #right-logo-link {
   position: absolute;
   left: 28px;
@@ -60,36 +71,48 @@ body {
   display: block;
 }
 
-/* Tablet */
-@media (max-width: 1023px) {
-  #right-logo-link {
-    transform: translateY(-50%) scale(0.35);
-    left: 15px;
+/* RESPONSIVE MEDIA QUERIES --------- */
+
+/* MOBILE: 360px - 390px */
+@media (max-width: 390px) {
+  .section {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
+  /* Hide right border for mobile */
   #right-border {
-    width: 80vw;
-    height: auto;
+    display: none;
   }
 
-  body {
-    line-height: 1.3;
+  #right-logo-link {
+    left: 10px;
+    transform: translateY(-50%) scale(0.35);
   }
 }
 
-/* Mobile */
-@media (max-width: 599px) {
+/* TABLETS: 768px - 810px */
+@media (min-width: 391px) and (max-width: 810px) {
+  .section {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   #right-logo-link {
-    transform: translateY(-50%) scale(0.3);
-    left: 10px;
+    left: 20px;
+    transform: translateY(-50%) scale(0.4);
+  }
+}
+
+/* DESKTOP/LAPTOP: 811px and up */
+@media (min-width: 811px) {
+  .section {
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
-  #right-border {
-    display: none !important; /* force override */
-    visibility: hidden;       /* extra safety */
-  }
-
-  body {
-    line-height: 1.2;
+  #right-logo-link {
+    left: 28px;
+    transform: translateY(-50%) scale(0.45);
   }
 }

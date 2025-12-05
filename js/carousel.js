@@ -226,6 +226,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }, {passive:true});
   window.addEventListener("touchend", endDrag);
 
+  // TAP / CLICK TO SHIFT TO PANEL
+  slides.forEach((slide, index) => {
+    slide.addEventListener('click', () => {
+      progress = index;
+      render();
+    });
+  });
+
   // MOMENTUM
   function momentum() {
     if (Math.abs(velocity) < 0.2) {
