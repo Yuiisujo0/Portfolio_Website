@@ -75,6 +75,10 @@ body {
 
 /* MOBILE: 360px - 390px */
 @media (max-width: 480px) {
+  :root {
+    --nav-height: 55px; /* adjust depending on your mobile navbar */
+  }
+  
   .section {
     padding-left: 10px;
     padding-right: 10px;

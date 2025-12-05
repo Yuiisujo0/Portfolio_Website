@@ -136,26 +136,26 @@
 /* MOBILE: up to 480px */
 @media (max-width: 480px) {
   .about-title {
-    top: 50px;
+    top: calc(var(--nav-height) + 20px);
     left: 10px;
     font-size: clamp(22px, 6vw, 32px);
   }
 
   .about-description {
-    top: 45vh;
+    top: calc(var(--nav-height) + 300px);
     left: 8px;
     max-width: 90%;
     font-size: clamp(11px, 3vw, 14px);
   }
 
   #deanlist {
-    top: 20vh;
+    top: calc(var(--nav-height) + 80px);
     left: 5vw;
     width: clamp(120px, 35vw, 250px);
   }
 
   #arrow {
-    top: 55vh;
+    top: calc(var(--nav-height) + 330px);
     left: 5vw;
     width: clamp(20px, 8vw, 40px);
   }
